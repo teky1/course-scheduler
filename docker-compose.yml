@@ -11,6 +11,17 @@ services:
     networks:
       - routing-network
     command: ["-i", "data/college-park.osm.pbf", "-c", "data/config.yml"]
+  
+  distance-service:
+    build:
+      context: ./services/distance_service
+      dockerfile: Dockerfile
+    ports:
+      - "8005:8005"
+    environment:
+      - PORT=8005
+    networks:
+      - routing-network
 
 networks:
   routing-network:

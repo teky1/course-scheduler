@@ -8,4 +8,6 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY . /code
 
-# CMD ["fastapi", "run", ""]
+ENV PORT=8000
+
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "${PORT}", "--reload"]
