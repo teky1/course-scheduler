@@ -7,7 +7,7 @@ services:
     ports:
       - "8989:8989"
     volumes:
-      - "./services/graph_hopper/:/graphhopper/data/"
+      - "./services/graphhopper/:/graphhopper/data/"
     networks:
       - routing-network
     command: ["-i", "data/college-park.osm.pbf", "-c", "data/config.yml"]
