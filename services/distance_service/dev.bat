@@ -1,0 +1,1 @@
+docker run --rm -it -v .\:/app -w /app python:3.9-alpine sh
