@@ -1,0 +1,17 @@
+services:
+  graphhopper-service:  
+    image: israelhikingmap/graphhopper:9.1
+    environment:
+      - JAVA_OPTS=-Xmx100m -Xms100m
+      - GRAPH_OPTS=-Ddw.graphhopper.datareader.file=data/college-park.osm.pbf -Ddw.graphhopper.graph.location=data/graph-cache
+    ports:
+      - "8989:8989"
+    volumes:
+      - "./services/graph_hopper/:/graphhopper/data/"
+    networks:
+      - routing-network
+    command: ["-i", "data/college-park.osm.pbf", "-c", "data/config.yml"]
+
+networks:
+  routing-network:
+    driver: bridge 
