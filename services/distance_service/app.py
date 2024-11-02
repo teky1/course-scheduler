@@ -3,8 +3,11 @@ from bs4 import BeautifulSoup
 from fastapi import FastAPI, HTTPException
 
 import asyncio
+import logging
 
 app = FastAPI()
+
+logging.basicConfig(level=logging.INFO)
 
 @app.get("/")
 async def root():
@@ -26,8 +29,10 @@ async def traveltime(loc1: str, loc2: str, mode: str = "foot"):
 
 async def get_coords(loc: str):
     code = await get_numeric_building_code(loc)
-    return await get_coords_from_building_code(code)
-
+    logging.info(f"Received Code for {loc}")
+    coords = await get_coords_from_building_code(code)
+    logging.info(f"Received Coords for {loc}")
+    return coords
 
 async def get_numeric_building_code(loc: str):
     if loc.strip().isnumeric():
