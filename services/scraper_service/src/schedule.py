@@ -38,5 +38,13 @@ async def get_dept_list(semester):
     
     return [span.text for span in prefix_spans]
 
+async def get_dept(semester, dept, client):
+    url = f"https://app.testudo.umd.edu/soc/{semester}/{dept}"
 
+    res = await utils.client_get(client, url)
+
+    soup = BeautifulSoup(res.text, "html.parser")
+    courses = soup.find_all(class_="course")
+    
+    return [tag.get("id") for tag in courses]
 
