@@ -40,7 +40,7 @@ async def get_numeric_building_code(loc: str):
     
     bldg_code_endpoint = f"https://app.testudo.umd.edu/soc/buildings/{loc} 0"
 
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(timeout=30) as client:
         response = await client.get(bldg_code_endpoint)
         response.raise_for_status()
         html_content = response.text
@@ -52,7 +52,7 @@ async def get_numeric_building_code(loc: str):
 
 async def get_coords_from_building_code(code: str):
     lat_long_data_url = "https://geodata.md.gov/imap/rest/services/Structure/MD_CampusFacilities/FeatureServer/2/query?where=1%3D1&outFields=*&outSR=4326&f=json"
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(timeout=30) as client:
         response = await client.get(lat_long_data_url)
         response.raise_for_status()
         data = response.json()
