@@ -23,6 +23,11 @@ services:
     networks:
       - routing-network
 
+  scraper-service:
+    build:
+      context: ./services/scraper_service
+      dockerfile: Dockerfile
+
 networks:
   routing-network:
     driver: bridge 

@@ -1,0 +1,1 @@
+* * * * * python /code/src/main.py 2>&1
