@@ -23,4 +23,4 @@ async def single_get(url):
 
 
 def log(start, msg):
-    print(f"[{time.time()-start:5.2f}] {msg}")
+    print(f"[{time.time()-start:7.2f}] {msg}", flush=True)

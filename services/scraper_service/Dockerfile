@@ -14,4 +14,6 @@ RUN touch /code/logs/out.log /code/logs/err.log
 
 RUN chmod +x /code/entry.sh
 
+ENV PYTHONBUFFERED=1
+
 ENTRYPOINT ["/code/entry.sh"]
