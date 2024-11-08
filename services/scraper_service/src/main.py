@@ -40,7 +40,7 @@ async def main():
                     for course in res:
                         courses.append(course)
 
-                utils.log(start, f"\t({min(i+20, len(depts))}/{len(depts)}) depts retrieved")
+                utils.log(start, f"({min(i+20, len(depts))}/{len(depts)}) depts retrieved")
 
                 await asyncio.sleep(0.5)
         
