@@ -9,10 +9,6 @@ import schedule
 
 
 
-async def get_dept_list():
-    url = ""
-    await utils.single_get
-
 
 async def main():
 
