@@ -25,7 +25,7 @@ async def main():
         depts = await schedule.get_dept_list(semester)
         utils.log(start, f"{len(depts)} departments loaded")
 
-        courses = []
+        courses = {}
 
         async with httpx.AsyncClient() as client:
             for i in range(0,len(depts), 20):
@@ -34,7 +34,7 @@ async def main():
 
                 for res in results:
                     for course in res:
-                        courses.append(course)
+                        courses[course] = res[course]
 
                 # utils.log(start, f"({min(i+20, len(depts))}/{len(depts)}) depts retrieved")
 

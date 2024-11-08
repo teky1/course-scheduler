@@ -46,5 +46,5 @@ async def get_dept(semester, dept, client):
     soup = BeautifulSoup(res.text, "html.parser")
     courses = soup.find_all(class_="course")
     
-    return [tag.get("id") for tag in courses]
+    return {tag.get("id"):tag for tag in courses}
 
