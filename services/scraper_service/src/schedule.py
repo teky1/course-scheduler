@@ -4,7 +4,7 @@ import asyncio
 import itertools
 
 import httpx
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString
 
 import utils
 
@@ -48,3 +48,11 @@ async def get_dept(semester, dept, client):
     
     return {tag.get("id"):tag for tag in courses}
 
+def parse_raw_courses(courses):
+    for course in courses:
+        validate_raw_course(courses[course], "root")
+        exit()
+
+def validate_raw_course(tag, mark, depth=0):
+    print(f"{'  '*depth}{str(tag).split('>')[0]}>")
+    

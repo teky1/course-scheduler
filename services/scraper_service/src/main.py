@@ -28,21 +28,23 @@ async def main():
         courses = {}
 
         async with httpx.AsyncClient() as client:
-            for i in range(0,len(depts), 20):
+            concurrent = 25
+            for i in range(0,len(depts), concurrent):
                 results = await asyncio.gather(
-                    *(schedule.get_dept(semester, dept, client) for dept in depts[i:i+20]))
+                    *(schedule.get_dept(semester, dept, client) for dept in depts[i:i+concurrent]))
 
                 for res in results:
                     for course in res:
                         courses[course] = res[course]
 
-                # utils.log(start, f"({min(i+20, len(depts))}/{len(depts)}) depts retrieved")
+                # utils.log(start, f"({min(i+concurrent, len(depts))}/{len(depts)}) depts retrieved")
 
                 await asyncio.sleep(0.5)
         
 
         utils.log(start, f"{len(courses)} courses loaded total")
-
+        
+        schedule.parse_raw_courses(courses)
 
 if __name__ == "__main__":
     asyncio.run(main())
