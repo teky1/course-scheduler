@@ -70,15 +70,22 @@ def parse_course(root):
     course_data["reqs"] = {}
     course_data["desc_notes"] = ""
     course_data["desc"] = ""
+    course_data["gen_eds"] = None
+    course_data["min_credits"] = None
+    course_data["max_credits"] = None
 
     print(course_data)
 
+    # Parse additional course text
     for elem in root.find_all(class_="course-text"):
-        course_data["desc_notes"] = "\n".join([line.strip() for line in list(elem.strings)])+"\n"
+        course_data["desc_notes"] += "\n".join([line.strip() for line in list(elem.strings)])+"\n"
     
+    # Prase special messages
     for e in root.find_all(class_="individual-instruction-message"):
-        course_data["desc_notes"] = "\n".join([line.strip() for line in list(e.strings)])+"\n"
+        course_data["desc_notes"] += "\n".join([line.strip() for line in list(e.strings)])+"\n"
 
+
+    # Parse approved description
     for text_elements in root.find_all(class_="approved-course-text"):
 
         notes = [tag for tag in text_elements.find_all("div") if tag.find_all("strong", recursive=False)]
@@ -95,6 +102,20 @@ def parse_course(root):
             parts = [text.strip().replace(":","") for text in note.strings]
 
             course_data["reqs"][parts[0]] = parts[1]
+
+    # Parse GenEd
+    gen_ed_element = root.find(class_="gen-ed-codes-group")
+    if gen_ed_element:
+        course_data["gen_eds"] = " ".join(gen_ed_element.text.replace("GenEd:", "").strip().split())
+
+    min_credits_element = root.find(class_="course-min-credits")
+    max_credits_element = root.find(class_="course-max-credits")
+
+    if min_credits_element and min_credits_element.text.strip().isdigit():
+        course_data["min_credits"] = int(min_credits_element.text.strip())
+
+    if max_credits_element and max_credits_element.text.strip().isdigit():
+        course_data["max_credits"] = int(max_credits_element.text.strip())
 
     print(course_data)
 
