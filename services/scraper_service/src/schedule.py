@@ -4,6 +4,7 @@ import asyncio
 import itertools
 import json
 
+#i'm gay 
 import httpx
 from bs4 import BeautifulSoup, NavigableString
 
@@ -36,7 +37,6 @@ async def get_dept_list(semester):
     soup = BeautifulSoup(res.text, "lxml")
 
     prefix_spans = soup.find_all(class_="prefix-abbrev")
-    right_col = soup.find(id="right-course-prefix-column")
     
     return [span.text for span in prefix_spans]
 
@@ -55,17 +55,17 @@ def parse_raw_courses(courses):
     for course in courses:
         all_data[course] = parse_course(courses[course])
     
-    with open("out.json", "w") as f:
-        json.dump(all_data, f, indent=2)
+    # with open("out.json", "w") as f:
+    #     json.dump(all_data, f, indent=2)
     
-    exit()
+    return all_data
 
 def parse_course(root):
 
     course_data = {}
 
     course_data["id"] = root.find_all(class_="course-id")[0].text
-
+    course_data["_id"] = course_data["id"] # for indexing in mongo
     course_data["name"] = root.find_all(class_="course-title")[0].text
     course_data["reqs"] = {}
     course_data["desc_notes"] = ""
@@ -74,7 +74,7 @@ def parse_course(root):
     course_data["min_credits"] = None
     course_data["max_credits"] = None
 
-    print(course_data)
+    # print(course_data)
 
     # Parse additional course text
     for elem in root.find_all(class_="course-text"):
@@ -117,9 +117,9 @@ def parse_course(root):
     if max_credits_element and max_credits_element.text.strip().isdigit():
         course_data["max_credits"] = int(max_credits_element.text.strip())
 
-    print(course_data)
-
     return course_data
+
+
 
 def parse_section(root):
     section_data = {}

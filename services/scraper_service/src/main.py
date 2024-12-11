@@ -6,9 +6,7 @@ import httpx
 
 import utils 
 import schedule
-
-
-
+import db
 
 async def main():
 
@@ -44,7 +42,12 @@ async def main():
 
         utils.log(start, f"{len(courses)} courses loaded total")
         
-        schedule.parse_raw_courses(courses)
+        utils.log(start, "Parsing courses...")
+        course_data = schedule.parse_raw_courses(courses)
+        utils.log(start, "Updating DB...")
+        db.update_all_courses(semester, course_data)
+        utils.log(start, "Done.")
+
 
 if __name__ == "__main__":
     asyncio.run(main())
