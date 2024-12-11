@@ -1,3 +1,6 @@
+# DB URI
+db_uri.txt
+
 # Log folders
 logs/
 out.json

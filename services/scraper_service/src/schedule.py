@@ -4,7 +4,6 @@ import asyncio
 import itertools
 import json
 
-#i'm gay 
 import httpx
 from bs4 import BeautifulSoup, NavigableString
 
