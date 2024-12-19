@@ -6,7 +6,7 @@ import httpx
 
 import utils 
 import schedule
-import db
+# import db
 
 async def main():
 
@@ -44,8 +44,12 @@ async def main():
         
         utils.log(start, "Parsing courses...")
         course_data = schedule.parse_raw_courses(courses)
+
+        utils.log(start, "Parsing sections..")
+        section_data = await schedule.get_sections(list(course_data.keys()))
+
         utils.log(start, "Updating DB...")
-        db.update_all_courses(semester, course_data)
+        # db.update_all_courses(semester, course_data)
         utils.log(start, "Done.")
 
 

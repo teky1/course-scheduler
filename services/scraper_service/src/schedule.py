@@ -49,6 +49,28 @@ async def get_dept(semester, dept, client):
     
     return {tag.get("id"):tag for tag in courses}
 
+# courses is a list of course ids
+async def get_sections(courses):
+    out = {}
+    while len(courses) > 0:
+        url = "https://app.testudo.umd.edu/soc/202501/sections?courseIds="+courses.pop()
+        while len(url) < 6000 and len(courses) > 0:
+            url += f",{courses.pop()}"
+        res = await utils.single_get(url)
+
+        soup = BeautifulSoup(res.text, "html.parser")
+        courses_found = soup.find_all(class_="course-sections")
+
+        for course in courses_found:
+            sections = parse_sections(course)
+            print(sections)
+        
+
+
+def parse_sections(root):
+    pass # write section parsing here
+
+
 def parse_raw_courses(courses):
     all_data = {}
     for course in courses:
