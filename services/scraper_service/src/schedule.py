@@ -104,10 +104,11 @@ def parse_section(root):
 
     out["footnote_marked"] = len(root.find_all(class_="footnote-marker")) > 0
 
-    
+
     
     # online or in person or wte?
     # days/time/location
+    # deal with all the things listed on notion page for schema
     
     return out
 
