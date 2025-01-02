@@ -104,7 +104,8 @@ def parse_section(root):
 
     out["footnote_marked"] = len(root.find_all(class_="footnote-marker")) > 0
 
-
+    meetings_raw = root.find_all(class_="class-days-container")[0]
+    print(meetings_raw.find_all(class_="row"))
     
     # online or in person or wte?
     # days/time/location
