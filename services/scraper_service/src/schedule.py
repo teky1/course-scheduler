@@ -49,6 +49,71 @@ async def get_dept(semester, dept, client):
     
     return {tag.get("id"):tag for tag in courses}
 
+# courses is a list of course ids
+async def get_sections(semester, courses):
+    out = {}
+    while len(courses) > 0:
+        url = f"https://app.testudo.umd.edu/soc/{semester}/sections?courseIds="+courses.pop()
+        while len(url) < 2000 and len(courses) > 0:
+            url += f",{courses.pop()}"
+
+        res = await utils.single_get(url)
+
+        soup = BeautifulSoup(res.text, "html.parser")
+        courses_found = soup.find_all(class_="course-sections")
+
+        for course in courses_found:
+            course_id = course.get("id")
+            out[course_id] = {"footnote": ""}
+            sections = course.find_all(class_="section")
+
+            for msg in course.find_all(class_="footnote-message"):
+                out[course_id]["footnote"] += msg.text.strip()+"\n"
+
+
+            for section in sections:
+                section_data = parse_section(section)
+                out[course_id][section_data["section_id"]] = section_data
+
+        
+
+
+    with open("section-out.json", "w") as f:
+        json.dump(out, f, indent=2)
+        print(f"{sum([len(x.keys()) for x in out.values()])} sections data dumped to section-out.json")
+    
+    return out
+        
+
+
+def parse_section(root):
+    out = {}
+    out["section_id"] = root.find_all(class_="section-id")[0].text.strip()
+
+    out["total_seats"] = int(root.find_all(class_="total-seats-count")[0].text.strip())
+    out["open_seats"] = int(root.find_all(class_="open-seats-count")[0].text.strip())
+
+    waitlist_elements = root.find_all(class_="waitlist-count")
+
+    out["waitlist"] = 0 if len(waitlist_elements) < 1 else int(waitlist_elements[0].text.strip())
+
+    if len(waitlist_elements) > 1:
+        out["holdfile"] = int(waitlist_elements[1].text.strip())
+
+    out["instructors"] = [instruc.text.strip() for instruc in root.find_all(class_="section-instructor")]
+
+    out["footnote_marked"] = len(root.find_all(class_="footnote-marker")) > 0
+
+    meetings_raw = root.find_all(class_="class-days-container")[0]
+    print(meetings_raw.find_all(class_="row"))
+    
+    # online or in person or wte?
+    # days/time/location
+    # deal with all the things listed on notion page for schema
+    
+    return out
+
+
 def parse_raw_courses(courses):
     all_data = {}
     for course in courses:
@@ -118,10 +183,6 @@ def parse_course(root):
 
     return course_data
 
-
-
-def parse_section(root):
-    section_data = {}
 
 
 

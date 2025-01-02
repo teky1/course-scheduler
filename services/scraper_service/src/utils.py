@@ -21,6 +21,18 @@ async def single_get(url):
     async with httpx.AsyncClient() as client:
         return await client_get(client, url)
 
+async def multi_get(url_list, concurrent=25):
+    async with httpx.AsyncClient() as client:
+        out_list = []
+        for i in range(0, len(url_list), concurrent):
+            res = await asyncio.gather(*(client_get(client, url) for url in url_list[i:i+concurrent]))
+            out_list += res
+
+            await asyncio.sleep(0.5)
+
+        return out_list
+
+
 
 def log(start, msg):
     print(f"[{time.time()-start:7.2f}] {msg}", flush=True)

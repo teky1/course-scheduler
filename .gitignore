@@ -4,6 +4,8 @@ db_uri.txt
 # Log folders
 logs/
 out.json
+out.txt
+section-out.json
 
 # Graph hopper files
 services/graphhopper/default-gh/
