@@ -29,6 +29,7 @@ async def get_semesters():
     
     return out
 
+
 async def get_dept_list(semester):
     url = f"https://app.testudo.umd.edu/soc/{semester}"
     res = await utils.single_get(url)
@@ -39,6 +40,7 @@ async def get_dept_list(semester):
     
     return [span.text for span in prefix_spans]
 
+
 async def get_dept(semester, dept, client):
     url = f"https://app.testudo.umd.edu/soc/{semester}/{dept}"
 
@@ -48,6 +50,7 @@ async def get_dept(semester, dept, client):
     courses = soup.find_all(class_="course")
     
     return {tag.get("id"):tag for tag in courses}
+
 
 # courses is a list of course ids
 async def get_sections(semester, courses):
@@ -70,7 +73,7 @@ async def get_sections(semester, courses):
             for msg in course.find_all(class_="footnote-message"):
                 out[course_id]["footnote"] += msg.text.strip()+"\n"
 
-
+            print(f"{course_id} =========")
             for section in sections:
                 section_data = parse_section(section)
                 out[course_id][section_data["section_id"]] = section_data
@@ -83,7 +86,6 @@ async def get_sections(semester, courses):
         print(f"{sum([len(x.keys()) for x in out.values()])} sections data dumped to section-out.json")
     
     return out
-        
 
 
 def parse_section(root):
@@ -105,12 +107,29 @@ def parse_section(root):
     out["footnote_marked"] = len(root.find_all(class_="footnote-marker")) > 0
 
     meetings_raw = root.find_all(class_="class-days-container")[0]
-    print(meetings_raw.find_all(class_="row"))
+    meetings = []
+    for meeting in meetings_raw.find_all(class_="row"):
+        current_meeting_data = {}
+
+        time = meeting.find_all(class_="section-day-time-group")
+        location = meeting.find_all(class_="section-class-building-group")
+        meeting_type = meeting.find_all(class_="class-type")
+        meeting_message = meeting.find_all(class_="class-message")
+
+        current_meeting_data["time"] = "" if len(time) == 0 else time[0].text.strip()
+        current_meeting_data["location"] = "" if len(location) == 0 else location[0].text.strip()
+        current_meeting_data["type"] = "" if len(meeting_type) == 0 else meeting_type[0].text.strip()
+        current_meeting_data["message"] = "" if len(meeting_message) == 0 else meeting_message[0].text.strip() 
+
+        meetings.append(current_meeting_data)
     
-    # online or in person or wte?
-    # days/time/location
+    out["meetings"] = meetings
+
+    nonstandard_dates = root.find_all(class_="non-standard-dates-message")
+    out["non-standard-dates"] = "" if len(nonstandard_dates) == 0 else nonstandard_dates[0].text.strip()
+
     # deal with all the things listed on notion page for schema
-    
+    print(out)
     return out
 
 
@@ -123,6 +142,7 @@ def parse_raw_courses(courses):
     #     json.dump(all_data, f, indent=2)
     
     return all_data
+
 
 def parse_course(root):
 
