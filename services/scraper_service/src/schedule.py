@@ -73,7 +73,6 @@ async def get_sections(semester, courses):
             for msg in course.find_all(class_="footnote-message"):
                 out[course_id]["footnote"] += msg.text.strip()+"\n"
 
-            print(f"{course_id} =========")
             for section in sections:
                 section_data = parse_section(section)
                 out[course_id][section_data["section_id"]] = section_data
@@ -128,8 +127,6 @@ def parse_section(root):
     nonstandard_dates = root.find_all(class_="non-standard-dates-message")
     out["non-standard-dates"] = "" if len(nonstandard_dates) == 0 else nonstandard_dates[0].text.strip()
 
-    # deal with all the things listed on notion page for schema
-    print(out)
     return out
 
 
