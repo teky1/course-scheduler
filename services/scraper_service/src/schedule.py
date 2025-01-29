@@ -54,7 +54,7 @@ async def get_dept(semester, dept, client):
 
 # courses is a list of course ids
 async def get_sections(semester, courses):
-    out = {}
+    out = []
     while len(courses) > 0:
         url = f"https://app.testudo.umd.edu/soc/{semester}/sections?courseIds="+courses.pop()
         while len(url) < 2000 and len(courses) > 0:
@@ -67,22 +67,23 @@ async def get_sections(semester, courses):
 
         for course in courses_found:
             course_id = course.get("id")
-            out[course_id] = {"footnote": ""}
+            course_data = {"_id": course_id, "sections": [], "footnote": ""}
+            
             sections = course.find_all(class_="section")
 
             for msg in course.find_all(class_="footnote-message"):
-                out[course_id]["footnote"] += msg.text.strip()+"\n"
+                course_data["footnote"] += msg.text.strip()+"\n"
 
             for section in sections:
-                section_data = parse_section(section)
-                out[course_id][section_data["section_id"]] = section_data
+                course_data["sections"].append(parse_section(section))
+            
+            out.append(course_data)
 
         
 
 
     with open("section-out.json", "w") as f:
         json.dump(out, f, indent=2)
-        print(f"{sum([len(x.keys()) for x in out.values()])} sections data dumped to section-out.json")
     
     return out
 
@@ -145,8 +146,7 @@ def parse_course(root):
 
     course_data = {}
 
-    course_data["id"] = root.find_all(class_="course-id")[0].text
-    course_data["_id"] = course_data["id"] # for indexing in mongo
+    course_data["_id"] = root.find_all(class_="course-id")[0].text
     course_data["name"] = root.find_all(class_="course-title")[0].text
     course_data["reqs"] = {}
     course_data["desc_notes"] = ""
@@ -155,7 +155,7 @@ def parse_course(root):
     course_data["min_credits"] = None
     course_data["max_credits"] = None
 
-    # print(course_data)
+    
 
     # Parse additional course text
     for elem in root.find_all(class_="course-text"):

@@ -27,6 +27,18 @@ def update_all_courses(semester, course_data):
     course_db.insert_many(list(course_data.values()))
 
 
+def update_all_sections(semester, section_data):
+    collection = f"sections-{semester}"
+    section_db = db[collection]
+
+    # Deletes entire contents and updates it
+    # This behavior can be changed to be more efficient and
+    # also keep track of changes
+    section_db.delete_many({})
+    section_db.insert_many(section_data)
+
+
+
 def close():
     client.close()
 
