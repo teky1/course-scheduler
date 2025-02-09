@@ -1,0 +1,9 @@
+.root {
+
+    flex-basis: 25rem;
+    flex-shrink: 0;
+    background: rgba(255, 0, 0, 0.4);
+    margin: 1rem;
+    margin-right: 0;
+
+}

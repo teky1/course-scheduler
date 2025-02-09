@@ -1,8 +1,11 @@
 import '@mantine/core/styles.css';
+import styles from "./app.module.css";
 
 // import { useState } from 'react';
 import {AppShell, MantineProvider } from '@mantine/core';
-import Navbar from './components/navbar/Navbar';
+import Navbar from '../navbar/Navbar';
+import CourseList from '../courselist/CourseList';
+import ScheduleArea from '../schedule/ScheduleArea';
 
 
 function App() {
@@ -15,10 +18,9 @@ function App() {
       >
         <Navbar/>
 
-        <AppShell.Main>
-          <div>
-            
-          </div>
+        <AppShell.Main className={styles.main}>
+          <CourseList/>
+          <ScheduleArea/>
         </AppShell.Main>
 
       </AppShell>
