@@ -1,12 +1,12 @@
 import '@mantine/core/styles.css';
 
-import { useState } from 'react';
+// import { useState } from 'react';
 import {AppShell, MantineProvider } from '@mantine/core';
 import Navbar from './components/navbar/Navbar';
 
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
   return (
     <MantineProvider forceColorScheme='dark'>
