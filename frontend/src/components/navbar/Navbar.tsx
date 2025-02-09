@@ -1,6 +1,6 @@
 import styles from "./navbar.module.css";
 
-import { AppShell, Center, Title } from "@mantine/core";
+import { AppShell, Title } from "@mantine/core";
 
 function Navbar() {
   
