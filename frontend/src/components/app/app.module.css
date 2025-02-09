@@ -3,4 +3,5 @@
     flex-direction: row;
     align-items: stretch;
     flex-grow: 1;
+    overscroll-behavior: none;
 }
