@@ -6,10 +6,12 @@ import {AppShell, MantineProvider } from '@mantine/core';
 import Navbar from '../navbar/Navbar';
 import CourseList from '../courselist/CourseList';
 import ScheduleArea from '../schedule/ScheduleArea';
+import { useState } from 'react';
+import { Course, Section } from '../../types/api';
 
 
 function App() {
-  // const [count, setCount] = useState(0);
+  const [selectedSections, setSelectedSections] = useState<[Course, Section][]>([]);
 
   return (
     <MantineProvider forceColorScheme='dark'>
@@ -19,8 +21,8 @@ function App() {
         <Navbar/>
 
         <AppShell.Main className={styles.main}>
-          <CourseList/>
-          <ScheduleArea/>
+          <CourseList update={setSelectedSections}/>
+          <ScheduleArea sections={selectedSections}/>
         </AppShell.Main>
 
       </AppShell>
