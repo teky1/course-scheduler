@@ -5,4 +5,5 @@
     flex-grow: 1;
     overscroll-behavior: none;
     background-color: var(--mantine-color-gray-9);
+    max-height: 100vh;
 }

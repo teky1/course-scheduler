@@ -32,7 +32,7 @@ let CourseList:
           onChange={event => setSearchVal(event.target.value)}
         />
 
-        <div>
+        <div className={styles.resultsContainer}>
           {testCourses.map(course => 
           <CourseResult 
             course={course} 

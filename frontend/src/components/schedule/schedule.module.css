@@ -1,6 +1,16 @@
 .root {
-
+    position: relative;
     flex: 4;
     margin: 1rem;
+    /* border: 3px blue solid; */
 
+}
+
+.line {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: 1px;
+    background-color: var(--mantine-color-gray-7);
+    z-index: 0;
 }
