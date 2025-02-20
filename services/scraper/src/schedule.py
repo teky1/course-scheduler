@@ -128,7 +128,7 @@ def parse_section(root):
     out["meetings"] = meetings
 
     nonstandard_dates = root.find_all(class_="non-standard-dates-message")
-    out["non-standard-dates"] = "" if len(nonstandard_dates) == 0 else nonstandard_dates[0].text.strip()
+    out["non_standard_dates"] = "" if len(nonstandard_dates) == 0 else nonstandard_dates[0].text.strip()
 
     return out
 
