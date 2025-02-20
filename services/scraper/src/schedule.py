@@ -101,6 +101,8 @@ def parse_section(root):
 
     if len(waitlist_elements) > 1:
         out["holdfile"] = int(waitlist_elements[1].text.strip())
+    else:
+        out["holdfile"] = 0
 
     out["instructors"] = [instruc.text.strip() for instruc in root.find_all(class_="section-instructor")]
 
