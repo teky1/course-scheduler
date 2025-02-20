@@ -4,4 +4,5 @@
     align-items: stretch;
     flex-grow: 1;
     overscroll-behavior: none;
+    background-color: var(--mantine-color-gray-9);
 }
