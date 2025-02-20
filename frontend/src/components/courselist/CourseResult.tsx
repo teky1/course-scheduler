@@ -1,15 +1,15 @@
 // import styles from "./courselist.module.css";
 
-import { Course, Section } from "../../types/api";
+import { Section } from "../../types/api";
+import { CourseResultComponent } from "./courselist.types";
 import SectionResult from "./SectionResult";
 
-const CourseResult: React.FC<{
-  course: Course,
-  onSectionSelect: (course: Course, section: Section) => void
-}> = ({course, onSectionSelect}) => {
+const CourseResult: 
+  CourseResultComponent = ({course, onSectionSelect}) => {
 
   let sectionClick: (section: Section) => void = (section) => {
     onSectionSelect(course, section);
+    
   }
 
 

@@ -4,10 +4,10 @@ import { useState } from "react";
 import CourseResult from "./CourseResult";
 import { testCourses } from "./testData";
 import { Course, Section } from "../../types/api";
+import { CourseListComponent } from "./courselist.types";
 
-let CourseList: React.FC<{
-  update: React.Dispatch<React.SetStateAction<[Course, Section][]>>
-}> = ({update}) => {
+let CourseList: 
+  CourseListComponent = ({update}) => {
 
   let [searchVal, setSearchVal] = useState("");
   

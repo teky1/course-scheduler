@@ -1,7 +1,7 @@
-import { Course, Section } from "../../types/api";
 import styles from "./schedule.module.css";
+import { ScheduleAreaComponent } from "./schedule.types";
 
-let  ScheduleArea: React.FC<{sections: [Course, Section][]}> = ({sections}) => {
+let  ScheduleArea: ScheduleAreaComponent = ({sections}) => {
 
   
   return (

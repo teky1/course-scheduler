@@ -1,8 +1,9 @@
 // import styles from "./courselist.module.css";
 
-import { Section } from "../../types/api";
+import { SectionResultComponent } from "./courselist.types";
 
-const SectionResult: React.FC<{section: Section, onclick: (section: Section) => void}> = ({section, onclick}) => {
+const SectionResult: 
+  SectionResultComponent = ({section, onclick}) => {
 
   return (
     <div onClick={() => onclick(section)}>
