@@ -118,8 +118,8 @@ def parse_section(root):
         meeting_type = meeting.find_all(class_="class-type")
         meeting_message = meeting.find_all(class_="class-message")
 
-        current_meeting_data["time"] = "" if len(time) == 0 else time[0].text.strip()
-        current_meeting_data["location"] = "" if len(location) == 0 else location[0].text.strip()
+        current_meeting_data["time"] = "" if len(time) == 0 else time[0].text.strip().replace("\n", " ")
+        current_meeting_data["location"] = "" if len(location) == 0 else location[0].text.strip().replace("\n", " ")
         current_meeting_data["type"] = "" if len(meeting_type) == 0 else meeting_type[0].text.strip()
         current_meeting_data["message"] = "" if len(meeting_message) == 0 else meeting_message[0].text.strip() 
 
