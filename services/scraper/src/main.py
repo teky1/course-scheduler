@@ -18,7 +18,7 @@ async def main():
     semesters = await schedule.get_semesters()
     utils.log(start, "Done")
     
-    for semester in semesters:
+    for semester in semesters[::-1]:
         utils.log(start, f"Processing semester {semester}...")
         depts = await schedule.get_dept_list(semester)
         utils.log(start, f"{len(depts)} departments loaded")
