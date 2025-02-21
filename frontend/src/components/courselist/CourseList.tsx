@@ -25,7 +25,6 @@ let CourseList:
 
   return (
     <div className={styles.root}>
-        <h1>Course List</h1>
         <TextInput
           value={searchVal}
           placeholder="Search courses..."

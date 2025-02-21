@@ -1,4 +1,4 @@
-// import styles from "./courselist.module.css";
+import styles from "./courselist.module.css";
 
 import { Section } from "../../types/api";
 import { CourseResultComponent } from "./courselist.types";
@@ -14,7 +14,7 @@ const CourseResult:
 
 
   return (
-    <div>
+    <div className={styles.course}>
         <p>
             <strong>{course._id}</strong> {course.name}
             <br/>
@@ -23,8 +23,6 @@ const CourseResult:
         <div>
             {course.sections.map(section => <SectionResult onclick={sectionClick} section={section} />)}
         </div>
-
-        <hr/>
 
     </div>
   );
