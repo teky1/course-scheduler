@@ -27,7 +27,18 @@
 }
 
 .section {
-
     border-top: 1px solid var(--mantine-color-gray-7);
-
+}
+.sectionTopRow {
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+    justify-content: flex-start;
+}
+.instructors {
+    display: flex;
+    flex-direction: column;
+}
+.gpa {
+    margin-left: auto;
 }

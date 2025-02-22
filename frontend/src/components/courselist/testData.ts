@@ -1,6 +1,62 @@
 import { Course } from "../../types/api";
 
 export let testCourses: Course[] = [
+  {
+    "_id": "JOEL200",
+    "name": "Joel Studies",
+    "reqs": {
+      "Prerequisite": "Minimum grade of C- in JOEL101 and JOEL100",
+      "Restriction": "Must be a Joel Studies major to register",
+    },
+    "desc_notes": "",
+    "desc": "A very important class that is all about the study of Joel. We will go very much in depth into many things that involve him and things like that because this is a real class that is super interesting and good.",
+    "gen_eds": "DSSP, DVUP",
+    "min_credits": 3,
+    "max_credits": 5,
+    "sections": [
+      {
+        "section_id": "0101",
+        "total_seats": 99,
+        "open_seats": 4,
+        "waitlist": 23,
+        "holdfile": 10,
+        "instructors": [
+          "Lauren Rabe"
+        ],
+        "footnote_marked": true,
+        "meetings": [
+          {
+            "time": "MW 9:00am - 9:50am",
+            "location": "PFR 1111",
+            "type": "",
+            "message": ""
+          }
+        ],
+        "non_standard_dates": ""
+      },
+      {
+        "section_id": "0102",
+        "total_seats": 99,
+        "open_seats": 4,
+        "waitlist": 23,
+        "holdfile": 10,
+        "instructors": [
+          "Joel Chemmanur",
+          "Michel Cukier"
+        ],
+        "footnote_marked": true,
+        "meetings": [
+          {
+            "time": "MW 9:00am - 9:50am",
+            "location": "PFR 1111",
+            "type": "",
+            "message": ""
+          }
+        ],
+        "non_standard_dates": ""
+      }
+    ]
+  },
     {
         "_id": "HACS101",
         "name": "Applied Cybersecurity Foundations",
