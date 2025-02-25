@@ -10,9 +10,8 @@ const SectionResult:
   return (
     <div onClick={() => onclick(section)} className={styles.section}>
         <div className={styles.sectionTopRow}>
-          <div>
+          <div className={styles.sectionID}>
             <span>{section.section_id}</span>
-            <span>{(section.footnote_marked) ? "*" : ""}</span>
           </div>
           <div className={styles.instructors}>
             {
@@ -20,7 +19,7 @@ const SectionResult:
             }
           </div>
           <div className={styles.gpa}>
-            <span>GPA: {gpa}</span>
+            <span>GPA: <span>{gpa}</span></span>
           </div>
         </div>
         

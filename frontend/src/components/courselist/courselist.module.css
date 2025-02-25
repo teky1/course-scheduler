@@ -8,7 +8,8 @@
     max-height: 100%;
     display: flex;
     flex-direction: column;
-    /* padding: .5rem; */
+    font-family: Inter;
+    margin-top: 0.5rem;
 
 }
 
@@ -17,28 +18,42 @@
 }
 
 .resultsContainer {
-
-    overflow: hidden scroll;
+    overflow: hidden overlay;
+    scrollbar-width: auto;
+    scrollbar-color: var(--mantine-color-gray-8) var(--mantine-color-gray-9);
     max-height: 100%;
 }
-
 .course {
     background-color: var(--mantine-color-gray-8);
+    margin-right: .5rem;
 }
 
 .section {
-    border-top: 1px solid var(--mantine-color-gray-7);
+    border-top: 1px solid var(--mantine-color-gray-9);
+    padding: .75em;
 }
+
 .sectionTopRow {
     display: flex;
     flex-direction: row;
     align-items: top;
     justify-content: flex-start;
 }
+.sectionID {
+    color: #6C6C6C;
+    width: 3em;
+    font-weight: bold;
+    font-size: 1em;
+}
+
 .instructors {
     display: flex;
     flex-direction: column;
+    font-weight: bold;
+    font-size: 1em;
 }
 .gpa {
     margin-left: auto;
+    font-weight: bold;
+
 }
