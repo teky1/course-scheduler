@@ -22,6 +22,24 @@ const SectionResult:
             <span>GPA: <span>{gpa}</span></span>
           </div>
         </div>
+
+        <div className={styles.seatSection}>
+          <span className={styles.seats}>{section.open_seats}/{section.total_seats} seats open</span>
+          <div className={styles.waitlistHoldfile}>
+            <span>Waitlist: {section.waitlist} </span>
+            <span>Holdfile: {section.holdfile}</span>
+          </div>
+        </div>
+
+        <div className={styles.meetingIndicators}>
+          {section.meetings.map(() => "check")}
+        </div>
+        <div className={styles.meetingTimes}>
+          {section.meetings.map(meeting => meeting.time)}
+        </div>
+        <div className={styles.meetingLocations}>
+          {section.meetings.map(meeting => meeting.location)}
+        </div>
         
         
 
