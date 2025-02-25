@@ -29,7 +29,7 @@
 }
 
 .section {
-    border-top: 1px solid var(--mantine-color-gray-9);
+    border-top: .25rem solid var(--mantine-color-gray-9);
     padding: .75em;
 }
 
@@ -41,7 +41,7 @@
 }
 .sectionID {
     color: #6C6C6C;
-    width: 3em;
+    width: 3rem;
     font-weight: bold;
     font-size: 1em;
 }
@@ -55,5 +55,29 @@
 .gpa {
     margin-left: auto;
     font-weight: bold;
+    font-size: 0.9em;
+    justify-content: center;
+}
+.seatSection {
+    margin-left: 3rem;
+    font-size: .9em;
+}
+
+.meetingSection {
+    display: flex;
+    flex-direction: column;
+}
+.meeting {
+    display: flex;
+    flex-direction: row;
+}
+.meetingIndicator {
+    width: 3rem;
+}
+.meetingTime {
 
 }
+.meetingLocation {
+    margin-left: auto;
+}
+

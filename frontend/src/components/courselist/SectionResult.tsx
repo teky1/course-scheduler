@@ -30,19 +30,18 @@ const SectionResult:
             <span>Holdfile: {section.holdfile}</span>
           </div>
         </div>
-
-        <div className={styles.meetingIndicators}>
-          {section.meetings.map(() => "check")}
-        </div>
-        <div className={styles.meetingTimes}>
-          {section.meetings.map(meeting => meeting.time)}
-        </div>
-        <div className={styles.meetingLocations}>
-          {section.meetings.map(meeting => meeting.location)}
-        </div>
         
-        
-
+        <div className={styles.meetingSection}>
+          {
+            section.meetings.map(meeting => 
+            <div className={styles.meeting}>
+              <span className={styles.meetingIndicator}>✅</span>
+              <span className={styles.meetingTime}>{meeting.time}</span>
+              <span className={styles.meetingLocation}>{meeting.location}</span>
+            </div>
+            )
+          }
+        </div>
     </div>
   );
 }
