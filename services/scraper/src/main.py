@@ -16,6 +16,7 @@ async def main():
 
     utils.log(start, "Getting semesters...")
     semesters = await schedule.get_semesters()
+    db.update_semesters(semesters)
     utils.log(start, "Done")
     
     for semester in semesters[::-1]:
