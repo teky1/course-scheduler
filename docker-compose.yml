@@ -25,7 +25,7 @@ services:
 
   scraper-service:
     build:
-      context: ./services/scraper_service
+      context: ./services/scraper
       dockerfile: Dockerfile
 
 networks:
