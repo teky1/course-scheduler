@@ -11,7 +11,7 @@ logging.basicConfig(level=logging.INFO)
 
 @app.get("/")
 async def root():
-    return {"Title": "Distance Service", "Description": "This is the distance service!!"}
+    return {"Title": "ScheduleTerp Backend", "Description": "This is the ScheduleTerp Backend"}
 
 @app.get("/traveltime/{loc1}/{loc2}")
 async def traveltime(loc1: str, loc2: str, mode: str = "foot"):
