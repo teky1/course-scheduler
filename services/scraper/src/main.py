@@ -59,4 +59,6 @@ async def main():
 
 
 if __name__ == "__main__":
+    print("testudo scraper main!")
+    exit(0)
     asyncio.run(main())
