@@ -6,7 +6,7 @@ with open("db_uri.txt") as f:
     uri = f.read()
 
 print("testudo scraper main!")
-    exit(0)
+exit(0)
 
 client = MongoClient(uri, server_api=ServerApi('1'))
 
