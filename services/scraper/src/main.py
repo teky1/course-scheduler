@@ -16,10 +16,11 @@ async def main():
 
     utils.log(start, "Getting semesters...")
     semesters = await schedule.get_semesters()
+    utils.log(start, "Updating DB with semesters...")
     db.update_semesters(semesters)
     utils.log(start, "Done")
     
-    for semester in semesters[::-1]:
+    for semester in semesters[-1:-3:-1]:
         utils.log(start, f"Processing semester {semester}...")
         depts = await schedule.get_dept_list(semester)
         utils.log(start, f"{len(depts)} departments loaded")
@@ -47,7 +48,7 @@ async def main():
         utils.log(start, "Parsing courses...")
         course_data = schedule.parse_raw_courses(courses)
 
-        utils.log(start, "Parsing sections..")
+        utils.log(start, "Getting and parsing sections..")
         section_data = await schedule.get_sections(semester, list(course_data.keys()))
 
         utils.log(start, "Updating DB...")

@@ -1,2 +1,2 @@
-42 * * * * cd /code/src/ && date && python main.py >&1 2>&1
-42 * * * * cd /code/src/ && date && python planetterp/main.py >&1 2>&1
+2 * * * * cd /code/src/ && date && python main.py >&1 2>&1
+2 * * * * cd /code/src/ && date && python planetterp/main.py >&1 2>&1
