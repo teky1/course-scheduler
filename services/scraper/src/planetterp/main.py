@@ -5,7 +5,7 @@ from pymongo.server_api import ServerApi
 with open("db_uri.txt") as f:
     uri = f.read()
 
-print("testudo scraper main!")
+print("planetterp scraper main!")
 exit(0)
 
 client = MongoClient(uri, server_api=ServerApi('1'))
