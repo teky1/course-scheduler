@@ -17,7 +17,7 @@ def update_semesters(semesters):
     
     for semester in semesters:
         collection.update_one({"_id": semester}, {"$set": {"active": True}}, upsert=True)
-    exit(0)
+    
 # This can be changed to track course update changes
 # at a later time
 def update_all_courses(semester, course_data):
