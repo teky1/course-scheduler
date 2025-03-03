@@ -49,6 +49,7 @@ for i,course in enumerate(courses):
 
     gpas["_id"] = course
     client["ProfessorData"]["gpa"].replace_one({"_id": course}, gpas, upsert=True)
+
 log(start, f"Finished processing GPAs for {len(courses)} courses")
 
 exit(0)

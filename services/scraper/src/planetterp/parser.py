@@ -17,8 +17,10 @@ def parse_section_gpa(res):
             }
     for section in res:
         professor = section["professor"]
-        if professor not in grades:
-            grades[professor] = {g:0 for g in letter_grades} 
+        if professor not in grades and professor is not None:
+            grades[professor] = {g:0 for g in letter_grades}
+        elif professor is None:
+            continue
         
         for g in letter_grades:
             if g in section:
