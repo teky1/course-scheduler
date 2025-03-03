@@ -5,6 +5,8 @@ import planetterp
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
+import parser
+
 with open("db_uri.txt") as f:
     uri = f.read()
 
@@ -29,11 +31,25 @@ for semester in semesters:
     for course in client["CourseNotifierCluster"][f"sections-{semester}"].find():
         courses.add(course["_id"])
 
-log(start, f"Loaded {len(courses)} courses")
-for course in courses:
+log(start, f"Processing {len(courses)} courses")
+
+for i,course in enumerate(courses):
     res = planetterp.grades(course=course)
 
-    # CONTINUE WRITING HERE  #####################################
+    if (i+1)%500 == 0:
+        log(start, f"Processed GPAs for {i+1}/{len(courses)}")
+
+    if "error" in res and res["error"] == "course not found":
+        continue
+    
+    gpas = parser.parse_section_gpa(res)
+
+    if gpas == {}:
+        continue
+
+    gpas["_id"] = course
+    client["ProfessorData"]["gpa"].replace_one({"_id": course}, gpas, upsert=True)
+log(start, f"Finished processing GPAs for {len(courses)} courses")
 
 exit(0)
 
@@ -49,14 +65,14 @@ while True:
     for prof in res:
         if "average_rating" in prof and prof["average_rating"]:
             client["ProfessorData"]["ratings"].replace_one(
-            {"name": prof["name"]}, 
-            {
-                "name": prof["name"],
-                "slug": prof["slug"],
-                "rating": prof["average_rating"]
-            }, 
-            upsert=True
-        )
+                {"name": prof["name"]}, 
+                {
+                    "name": prof["name"],
+                    "slug": prof["slug"],
+                    "rating": prof["average_rating"]
+                }, 
+                upsert=True
+            )
 
 log(start, f"Finished {(off-100)//100} Professor Pages")    
 
