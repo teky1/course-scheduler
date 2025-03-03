@@ -15,7 +15,7 @@ async def client_get(client, url, retries=3, timeout=30):
             print(f"Failed Attempt {att+1} - {url} - {e}")
             if att+1 == retries:
                 raise
-            await asyncio.sleep(2 ** att)
+            await asyncio.sleep(2.5 ** att)
 
 async def single_get(url):
     async with httpx.AsyncClient() as client:
