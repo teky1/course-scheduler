@@ -31,13 +31,21 @@ for semester in semesters:
     for course in client["CourseNotifierCluster"][f"sections-{semester}"].find():
         courses.add(course["_id"])
 
+# TEMPORARY SKIPPING
+seen_courses = [x["_id"] for x in client["ProfessorData"]["gpa"].find()]
+
 log(start, f"Processing {len(courses)} courses")
 
 for i,course in enumerate(courses):
-    res = planetterp.grades(course=course)
 
-    if (i+1)%500 == 0:
-        log(start, f"Processed GPAs for {i+1}/{len(courses)}")
+    if (i)%500 == 0:
+        log(start, f"Processed GPAs for {i}/{len(courses)}")
+
+    if course in seen_courses:
+        continue
+
+    res = planetterp.grades(course=course)
+    time.sleep(0.75)
 
     if "error" in res and res["error"] == "course not found":
         continue
