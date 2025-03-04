@@ -24,6 +24,8 @@ services:
       - routing-network
 
   scraper-service:
+    environment:
+    - TZ=America/New_York
     build:
       context: ./services/scraper
       dockerfile: Dockerfile
