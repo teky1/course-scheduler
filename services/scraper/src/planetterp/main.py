@@ -32,7 +32,7 @@ for semester in semesters:
         courses.add(course["_id"])
 
 # TEMPORARY SKIPPING
-seen_courses = [x["_id"] for x in client["ProfessorData"]["gpa"].find()]
+# seen_courses = [x["_id"] for x in client["ProfessorData"]["gpa"].find()]
 
 log(start, f"Processing {len(courses)} courses")
 
@@ -41,8 +41,8 @@ for i,course in enumerate(courses):
     if (i)%500 == 0:
         log(start, f"Processed GPAs for {i}/{len(courses)}")
 
-    if course in seen_courses:
-        continue
+    # if course in seen_courses:
+    #     continue
 
     res = planetterp.grades(course=course)
     time.sleep(0.75)
@@ -60,12 +60,12 @@ for i,course in enumerate(courses):
 
 log(start, f"Finished processing GPAs for {len(courses)} courses")
 
-exit(0)
 
 log(start, f"Loading professor data...")
 off = 0
 while True:
     res = planetterp.professors(offset=off)
+    time.sleep(0.75)
     if len(res) <= 0:
         break
     if off % 2000 == 0:
@@ -84,7 +84,7 @@ while True:
             )
 
 log(start, f"Finished {(off-100)//100} Professor Pages")    
-
+log(start, "All done.")
 
 
 client.close()
