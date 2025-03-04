@@ -2,11 +2,11 @@ from fastapi import FastAPI, HTTPException
 
 import logging
 
-from routers import travelttime
+from routers import traveltime
 
 app = FastAPI()
 
-app.include_router(travelttime.router)
+app.include_router(traveltime.router)
 
 logging.basicConfig(level=logging.INFO)
 
