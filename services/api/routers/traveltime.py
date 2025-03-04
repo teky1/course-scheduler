@@ -3,7 +3,7 @@ import asyncio
 import httpx
 from bs4 import BeautifulSoup
 from fastapi import APIRouter
-import loggin
+import logging
 
 router = APIRouter()
 
