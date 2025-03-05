@@ -57,6 +57,78 @@ export let testCourses: Course[] = [
       }
     ]
   },
+  {
+    "_id": "ARAV376",
+    "name": "Aarav Studies",
+    "reqs": {
+      "Prerequisite": "Mininum of C- in JOEL200 and AMAN201",
+      "Restriction": "Must be chill",
+    },
+    "desc_notes": "",
+    "desc": "Study of the coolest guy on campus",
+    "gen_eds": "DVCC, DVUP, FSAW, FSPW, SCIS",
+    "min_credits": 8,
+    "max_credits": 18,
+    "sections": [
+      {
+        "section_id": "0101",
+        "total_seats": 99,
+        "open_seats": 1,
+        "waitlist": 87364,
+        "holdfile": 10234,
+        "instructors": [
+          "Raunak Banerjee"
+        ],
+        "footnote_marked": true,
+        "meetings": [
+          {
+            "time":"MWF 10:00am -5:50pm",
+            "location": "IRB 0324",
+            "type": "",
+            "message": ""
+          }
+        ],
+        "non_standard_dates": ""
+      }
+    ]
+  }
+  ,
+  {
+    "_id": "AMAN201",
+    "name": "Aman Etudes",
+    "reqs": {
+      "Prerequisite": "Minimum grade of C- in Les passions des Amons",
+      "Restriction": "Must be a Aman Studies major to register",
+    },
+    "desc_notes": "",
+    "desc": "C'est une cours tres interessant et vous allez apprendre beaucoup avec une fountaine de passion. Ad astra per aspera, a bientot!",
+    "gen_eds": "DVCC",
+    "min_credits": 3,
+    "max_credits": 5,
+    "sections": [
+      {
+        "section_id": "0101",
+        "total_seats": 99,
+        "open_seats": 4,
+        "waitlist": 23,
+        "holdfile": 10,
+        "instructors": [
+          "Sela Alonso"
+        ],
+        "footnote_marked": true,
+        "meetings": [
+          {
+            "time":"TuTh 9:00am - 9:50am",
+            "location": "CSI 2001",
+            "type": "",
+            "message": ""
+          }
+        ],
+        "non_standard_dates": ""
+      }
+    ]
+  }
+  ,
     {
         "_id": "HACS101",
         "name": "Applied Cybersecurity Foundations",

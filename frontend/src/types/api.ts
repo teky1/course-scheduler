@@ -34,3 +34,12 @@ export interface Course {
     sections: Section[]
     
 }
+
+export interface TimeBlock {
+    course: Course,
+    section: Section,
+    meeting: Meeting,
+    day: "M" | "Tu" | "W" | "Th" | "F" | "Other"
+    start: number,
+    end: number
+}

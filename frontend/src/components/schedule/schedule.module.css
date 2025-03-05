@@ -1,16 +1,41 @@
 .root {
-    position: relative;
     flex: 4;
     margin: 1rem;
     /* border: 3px blue solid; */
-
+    display: flex;
+    flex-direction: column;
+    font-family: Inter;
+}
+.sectionArea {
+    position: relative;
+    flex-grow: 1;
+    margin-bottom: 2rem;
+    margin-left: 4rem;
+}
+.daysContainer {
+    margin-left: 4rem;
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+}
+.dayLabel {
+    width: 20%;
+    text-align: center;
 }
 
 .line {
     position: absolute;
     width: 100%;
-    left: 0;
+    left:0;
     height: 1px;
     background-color: var(--mantine-color-gray-7);
+    z-index: 0;
+}
+.lineTime {
+    position: absolute;
+    right: 100%;
+    width: 4rem;
+    text-align: center;
+    transform: translateY(-50%);
     z-index: 0;
 }
