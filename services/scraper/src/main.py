@@ -27,6 +27,7 @@ async def main():
 
         courses = {}
 
+
         async with httpx.AsyncClient() as client:
             concurrent = 50
             for i in range(0,len(depts), concurrent):
