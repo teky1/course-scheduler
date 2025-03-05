@@ -1,5 +1,4 @@
-import { Course, Section } from "../../types/api";
-import { JSX } from "react";
+import { Course, Section } from "../../types/api"
 
 
 
