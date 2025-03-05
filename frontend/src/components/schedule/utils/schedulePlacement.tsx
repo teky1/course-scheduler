@@ -6,3 +6,4 @@ let renderSections: RenderSectionsFunc = (sections) => {
 
     return [];
 };
+

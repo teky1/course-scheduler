@@ -3,7 +3,7 @@ export interface Meeting {
     location: string,
     type: string,
     message: string
-}
+};
 
 export interface Section {
 
@@ -17,7 +17,7 @@ export interface Section {
     meetings: Meeting[]
     non_standard_dates: string
 
-}
+};
 
 export interface Course {
 
@@ -33,13 +33,15 @@ export interface Course {
     max_credits: number | null,
     sections: Section[]
     
-}
+};
+
+export type Day = "M" | "Tu" | "W" | "Th" | "F" | "Other";
 
 export interface TimeBlock {
     course: Course,
     section: Section,
     meeting: Meeting,
-    day: "M" | "Tu" | "W" | "Th" | "F" | "Other"
+    day: Day,
     start: number,
     end: number
-}
+};

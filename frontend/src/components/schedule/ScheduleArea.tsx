@@ -15,14 +15,14 @@ let  ScheduleArea: ScheduleAreaComponent = ({sections}) => {
 
   return (
     <div className={styles.root}>
-        {/* {sections.map(section => 
-          <span style={{position: "relative", zIndex: 2}}>
-            {section[0]._id}-{section[1].section_id}&nbsp;&nbsp;&nbsp;</span>
-        )} */}
         <div className={styles.daysContainer}>
           {days.map(day => <span className={styles.dayLabel}>{day}</span>)}
         </div>
         <div className={styles.sectionArea}>
+        {sections.map(section => 
+          <span style={{position: "relative", zIndex: 2}}>
+            {section[0]._id}-{section[1].section_id}&nbsp;&nbsp;&nbsp;</span>
+        )}
           {lines.map((x,time) => line(x))}
           {line(0, "8am")}
           {line(20, "9am")}
