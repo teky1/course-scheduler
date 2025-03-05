@@ -91,7 +91,6 @@ export function groupTimeBlocks(blocks: TimeBlock[]): TimeBlock[][] {
         out.forEach(group => {
             for(let innerBlock of group) {
 
-                
             }
         })
     });
