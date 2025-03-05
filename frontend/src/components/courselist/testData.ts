@@ -82,7 +82,7 @@ export let testCourses: Course[] = [
         "footnote_marked": true,
         "meetings": [
           {
-            "time":"MWF 10:00am -5:50pm",
+            "time":"MWF 10:00am - 5:50pm",
             "location": "IRB 0324",
             "type": "",
             "message": ""
@@ -137,7 +137,7 @@ export let testCourses: Course[] = [
           "Restriction": "Must be a second-semester student in the ACES (Advanced Cybersecurity Experience for Students) Living-Learning Program."
         },
         "desc_notes": "",
-        "desc": "Prepares students for team research that will be conducted in HACS 200. Students gain an understanding across the breadth of cybersecurity including system monitoring, networking basics and penetration testing. An applied approach to statistics is also included to prepare students to assess the data collected for their research projects. The course is conducted with a hands-on approach applying virtual environments to practice the concepts learned in the technical lectures each week.\n",
+        "desc": "Prepares students for team research that will be conducted in HACS 200. Students gain an understanding across the breadth of cybersecurity including system monitoring, networking basics and penetration testing. An applied approach to statistics is also included to prepare students to assess the data collected for their research projects. The course is conducted with a hands-on approach applying virtual environments to practice the concepts learned in the technical lectures each week. ",
         "gen_eds": "",
         "min_credits": 2,
         "max_credits": null,
@@ -154,8 +154,8 @@ export let testCourses: Course[] = [
               "footnote_marked": false,
               "meetings": [
                 {
-                  "time": "MW\n9:00am - 9:50am",
-                  "location": "PFR\n1111",
+                  "time": "MW 9:00am - 9:50am",
+                  "location": "PF 1111",
                   "type": "",
                   "message": ""
                 }
@@ -174,8 +174,8 @@ export let testCourses: Course[] = [
               "footnote_marked": false,
               "meetings": [
                 {
-                  "time": "MW\n10:00am - 10:50am",
-                  "location": "PFR\n1111",
+                  "time": "MW 10:00am - 10:50am",
+                  "location": "PFR 1111",
                   "type": "",
                   "message": ""
                 }
@@ -192,7 +192,7 @@ export let testCourses: Course[] = [
         "Restriction": "Must be in a major within the CMNS-Computer Science department; or must be in Engineering Computer program; or must be in the Computer Science Minor program; and Permission of CMSC - Computer Science department."
       },
       "desc_notes": "",
-      "desc": "Introduction to the interaction between user programs and the operating system/hardware. Major topics include C programming, introductory systems programming, and assembly language. Other concepts covered include UNIX, machine data representation, thread management, optimization, and virtual memory. Programming is done in the Linux Environment.\n",
+      "desc": "Introduction to the interaction between user programs and the operating system/hardware. Major topics include C programming, introductory systems programming, and assembly language. Other concepts covered include UNIX, machine data representation, thread management, optimization, and virtual memory. Programming is done in the Linux Environment. ",
       "gen_eds": "",
       "min_credits": 4,
       "max_credits": null,
@@ -209,14 +209,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n9:30am - 10:45am",
-              "location": "IRB\n0324",
+              "time": "TuTh 9:30am - 10:45am",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n9:00am - 9:50am",
-              "location": "CSI\n1122",
+              "time": "MW 9:00am - 9:50am",
+              "location": "CSI 1122",
               "type": "Discussion",
               "message": ""
             }
@@ -235,14 +235,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n9:30am - 10:45am",
-              "location": "IRB\n0324",
+              "time": "TuTh 9:30am - 10:45am",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n10:00am - 10:50am",
-              "location": "CSI\n1122",
+              "time": "MW 10:00am - 10:50am",
+              "location": "CSI 1122",
               "type": "Discussion",
               "message": ""
             }
@@ -261,14 +261,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n9:30am - 10:45am",
-              "location": "IRB\n0324",
+              "time": "TuTh 9:30am - 10:45am",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n10:00am - 10:50am",
-              "location": "CSI\n2107",
+              "time": "MW 10:00am - 10:50am",
+              "location": "CSI 2107",
               "type": "Discussion",
               "message": ""
             }
@@ -287,14 +287,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n9:30am - 10:45am",
-              "location": "IRB\n0324",
+              "time": "TuTh 9:30am - 10:45am",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n11:00am - 11:50am",
-              "location": "CSI\n2120",
+              "time": "MW 11:00am - 11:50am",
+              "location": "CSI 2120",
               "type": "Discussion",
               "message": ""
             }
@@ -313,14 +313,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n9:30am - 10:45am",
-              "location": "IRB\n0324",
+              "time": "TuTh 9:30am - 10:45am",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n2:00pm - 2:50pm",
-              "location": "CSI\n3118",
+              "time": "MW 2:00pm - 2:50pm",
+              "location": "CSI 3118",
               "type": "Discussion",
               "message": ""
             }
@@ -339,14 +339,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n9:30am - 10:45am",
-              "location": "IRB\n0324",
+              "time": "TuTh 9:30am - 10:45am",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n3:00pm - 3:50pm",
-              "location": "CSI\n3120",
+              "time": "MW 3:00pm - 3:50pm",
+              "location": "CSI 3120",
               "type": "Discussion",
               "message": ""
             }
@@ -365,14 +365,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n9:30am - 10:45am",
-              "location": "IRB\n0324",
+              "time": "TuTh 9:30am - 10:45am",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n4:00pm - 4:50pm",
-              "location": "CSI\n3120",
+              "time": "MW 4:00pm - 4:50pm",
+              "location": "CSI 3120",
               "type": "Discussion",
               "message": ""
             }
@@ -391,14 +391,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n11:00am - 12:15pm",
-              "location": "IRB\n0324",
+              "time": "TuTh 11:00am - 12:15pm",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n9:00am - 9:50am",
-              "location": "CSI\n3120",
+              "time": "MW 9:00am - 9:50am",
+              "location": "CSI 3120",
               "type": "Discussion",
               "message": ""
             }
@@ -417,14 +417,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n11:00am - 12:15pm",
-              "location": "IRB\n0324",
+              "time": "TuTh 11:00am - 12:15pm",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n9:00am - 9:50am",
-              "location": "CSI\n3118",
+              "time": "MW 9:00am - 9:50am",
+              "location": "CSI 3118",
               "type": "Discussion",
               "message": ""
             }
@@ -443,14 +443,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n11:00am - 12:15pm",
-              "location": "IRB\n0324",
+              "time": "TuTh 11:00am - 12:15pm",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n10:00am - 10:50am",
-              "location": "CSI\n3118",
+              "time": "MW 10:00am - 10:50am",
+              "location": "CSI 3118",
               "type": "Discussion",
               "message": ""
             }
@@ -469,14 +469,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n11:00am - 12:15pm",
-              "location": "IRB\n0324",
+              "time": "TuTh 11:00am - 12:15pm",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n10:00am - 10:50am",
-              "location": "CSI\n3120",
+              "time": "MW 10:00am - 10:50am",
+              "location": "CSI 3120",
               "type": "Discussion",
               "message": ""
             }
@@ -495,14 +495,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n11:00am - 12:15pm",
-              "location": "IRB\n0324",
+              "time": "TuTh 11:00am - 12:15pm",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n11:00am - 11:50am",
-              "location": "CSI\n3120",
+              "time": "MW 11:00am - 11:50am",
+              "location": "CSI 3120",
               "type": "Discussion",
               "message": ""
             }
@@ -521,14 +521,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n11:00am - 12:15pm",
-              "location": "IRB\n0324",
+              "time": "TuTh 11:00am - 12:15pm",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n12:00pm - 12:50pm",
-              "location": "CSI\n2120",
+              "time": "MW 12:00pm - 12:50pm",
+              "location": "CSI 2120",
               "type": "Discussion",
               "message": ""
             }
@@ -547,14 +547,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n12:30pm - 1:45pm",
-              "location": "CSI\n1115",
+              "time": "TuTh 12:30pm - 1:45pm",
+              "location": "CSI 1115",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n9:00am - 9:50am",
-              "location": "IRB\n1207",
+              "time": "MW 9:00am - 9:50am",
+              "location": "IRB 1207",
               "type": "Discussion",
               "message": ""
             }
@@ -573,14 +573,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n12:30pm - 1:45pm",
-              "location": "CSI\n1115",
+              "time": "TuTh 12:30pm - 1:45pm",
+              "location": "CSI 1115",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n10:00am - 10:50am",
-              "location": "IRB\n1207",
+              "time": "MW 10:00am - 10:50am",
+              "location": "IRB 1207",
               "type": "Discussion",
               "message": ""
             }
@@ -599,14 +599,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n12:30pm - 1:45pm",
-              "location": "CSI\n1115",
+              "time": "TuTh 12:30pm - 1:45pm",
+              "location": "CSI 1115",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n11:00am - 11:50am",
-              "location": "IRB\n1207",
+              "time": "MW 11:00am - 11:50am",
+              "location": "IRB 1207",
               "type": "Discussion",
               "message": ""
             }
@@ -625,14 +625,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n12:30pm - 1:45pm",
-              "location": "CSI\n1115",
+              "time": "TuTh 12:30pm - 1:45pm",
+              "location": "CSI 1115",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n11:00am - 11:50am",
-              "location": "IRB\n2107",
+              "time": "MW 11:00am - 11:50am",
+              "location": "IRB 2107",
               "type": "Discussion",
               "message": ""
             }
@@ -651,14 +651,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n2:00pm - 3:15pm",
-              "location": "IRB\n0324",
+              "time": "TuTh 2:00pm - 3:15pm",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n9:00am - 9:50am",
-              "location": "IRB\n2107",
+              "time": "MW 9:00am - 9:50am",
+              "location": "IRB 2107",
               "type": "Discussion",
               "message": ""
             }
@@ -677,14 +677,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n2:00pm - 3:15pm",
-              "location": "IRB\n0324",
+              "time": "TuTh 2:00pm - 3:15pm",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n10:00am - 10:50am",
-              "location": "IRB\n2107",
+              "time": "MW 10:00am - 10:50am",
+              "location": "IRB 2107",
               "type": "Discussion",
               "message": ""
             }
@@ -703,14 +703,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n2:00pm - 3:15pm",
-              "location": "IRB\n0324",
+              "time": "TuTh 2:00pm - 3:15pm",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n11:00am - 11:50am",
-              "location": "IRB\n2207",
+              "time": "MW 11:00am - 11:50am",
+              "location": "IRB 2207",
               "type": "Discussion",
               "message": ""
             }
@@ -729,14 +729,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n2:00pm - 3:15pm",
-              "location": "IRB\n0324",
+              "time": "TuTh 2:00pm - 3:15pm",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n12:00pm - 12:50pm",
-              "location": "IRB\n2107",
+              "time": "MW 12:00pm - 12:50pm",
+              "location": "IRB 2107",
               "type": "Discussion",
               "message": ""
             }
@@ -755,14 +755,14 @@ export let testCourses: Course[] = [
           "footnote_marked": false,
           "meetings": [
             {
-              "time": "TuTh\n2:00pm - 3:15pm",
-              "location": "IRB\n0324",
+              "time": "TuTh 2:00pm - 3:15pm",
+              "location": "IRB 0324",
               "type": "",
               "message": ""
             },
             {
-              "time": "MW\n1:00pm - 1:50pm",
-              "location": "IRB\n2207",
+              "time": "MW 1:00pm - 1:50pm",
+              "location": "IRB 2207",
               "type": "Discussion",
               "message": ""
             }
@@ -779,7 +779,7 @@ export let testCourses: Course[] = [
           "Restriction": "Must be in a major within the CMNS-Computer Science department; or must be in Engineering Computer program; or must be in the Computer Science Minor program; and Permission from the CMSC - Computer Science department."
         },
         "desc_notes": "",
-        "desc": "A systematic study of the complexity of some elementary algorithms related to sorting, graphs and trees, and combinatorics. Algorithms are analyzed using mathematical techniques to solve recurrences and summations.\n",
+        "desc": "A systematic study of the complexity of some elementary algorithms related to sorting, graphs and trees, and combinatorics. Algorithms are analyzed using mathematical techniques to solve recurrences and summations. ",
         "gen_eds": "",
         "min_credits": 3,
         "max_credits": null,
@@ -796,8 +796,8 @@ export let testCourses: Course[] = [
               "footnote_marked": false,
               "meetings": [
                 {
-                  "time": "MWF\n8:00am - 8:50am",
-                  "location": "IRB\n0324",
+                  "time": "MWF 8:00am - 8:50am",
+                  "location": "IRB 0324",
                   "type": "",
                   "message": ""
                 }
@@ -816,8 +816,8 @@ export let testCourses: Course[] = [
               "footnote_marked": false,
               "meetings": [
                 {
-                  "time": "MWF\n9:00am - 9:50am",
-                  "location": "IRB\n0324",
+                  "time": "MWF 9:00am - 9:50am",
+                  "location": "IRB 0324",
                   "type": "",
                   "message": ""
                 }
@@ -836,8 +836,8 @@ export let testCourses: Course[] = [
               "footnote_marked": false,
               "meetings": [
                 {
-                  "time": "MWF\n2:00pm - 2:50pm",
-                  "location": "IRB\n0324",
+                  "time": "MWF 2:00pm - 2:50pm",
+                  "location": "IRB 0324",
                   "type": "",
                   "message": ""
                 }
@@ -856,8 +856,8 @@ export let testCourses: Course[] = [
               "footnote_marked": false,
               "meetings": [
                 {
-                  "time": "MWF\n10:00am - 10:50am",
-                  "location": "ESJ\n2208",
+                  "time": "MWF 10:00am - 10:50am",
+                  "location": "ESJ 2208",
                   "type": "",
                   "message": ""
                 }

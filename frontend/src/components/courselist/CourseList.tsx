@@ -34,6 +34,7 @@ let CourseList:
         <div className={styles.resultsContainer}>
           {testCourses.map(course => 
           <CourseResult 
+            key={course._id}
             course={course} 
             onSectionSelect={sectionSelect}
           />)}

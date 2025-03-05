@@ -15,7 +15,7 @@ const SectionResult:
           </div>
           <div className={styles.instructors}>
             {
-              section.instructors.map(name => <span>{name}</span>)
+              section.instructors.map(name => <span key={name}>{name}</span>)
             }
           </div>
           <div className={styles.gpa}>
@@ -34,7 +34,7 @@ const SectionResult:
         <div className={styles.meetingSection}>
           {
             section.meetings.map(meeting => 
-            <div className={styles.meeting}>
+            <div className={styles.meeting} key={meeting.time}>
               <span className={styles.meetingIndicator}>✅</span>
               <span className={styles.meetingTime}>{meeting.time}</span>
               <span className={styles.meetingLocation}>{meeting.location}</span>

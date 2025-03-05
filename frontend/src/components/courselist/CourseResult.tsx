@@ -20,10 +20,10 @@ const CourseResult:
             <br/>
             Credits: {course.min_credits}{(course.max_credits) ? "-"+course.max_credits : ""}
             <br/>
-            <p>{course.desc}</p>
+            <span>{course.desc}</span>
         </p>
         <div>
-            {course.sections.map(section => <SectionResult onclick={sectionClick} section={section} />)}
+            {course.sections.map(section => <SectionResult key={section.section_id} onclick={sectionClick} section={section} />)}
         </div>
 
     </div>

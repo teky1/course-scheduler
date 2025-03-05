@@ -1,6 +1,6 @@
 import { Course, Day, Section, TimeBlock } from "../types/api";
 
-function parseTime(time: string) : number {
+export function parseTime(time: string) : number {
 
     const period = time.slice(-2).toLowerCase()
     time = time.slice(0, -2);
@@ -18,8 +18,18 @@ function parseTime(time: string) : number {
 
 }
 
-function doesIntersect(time1: TimeBlock, time2: TimeBlock) : boolean {
-    return time1.start < time2.end && time2.start < time1.end;
+// Gets the closest hour (floored)
+export function timeToStr(time: number) : string {
+    let hour = Math.floor(time/60);
+    let ampm = (hour < 12) ? "am" : "pm";
+    hour = (hour < 12) ? hour : hour-12;
+    hour = (hour == 0) ? 12 : hour;
+
+    return ""+hour+ampm;
+}
+
+export function doesIntersect(time1: TimeBlock, time2: TimeBlock) : boolean {
+    return time1.day == time2.day && time1.start < time2.end && time2.start < time1.end;
 }
 
 export function parseMeetingTime(time: string) : {days: Day[]; start: number; end: number}{
@@ -34,7 +44,6 @@ export function parseMeetingTime(time: string) : {days: Day[]; start: number; en
     let rawParts = time.split(" ");
     let days: Day[] = ["M", "Tu", "W", "Th", "F"];
     days = days.filter(day => rawParts[0].includes(day));
-
 
 
     return {days: days, start: parseTime(rawParts[1]), end:parseTime(rawParts[3])};
@@ -72,28 +81,27 @@ export function groupTimeBlocks(blocks: TimeBlock[]): TimeBlock[][] {
     let out: TimeBlock[][] = [];
 
     for(let block of blocks) {
-        for(let group of out) {
 
-            for(let innerBlock of group) {
+        let intersect: number[] = [];
+
+        out.forEach((group, i) => {
+            for(let innerBlock of group) { 
                 if(doesIntersect(block, innerBlock)) {
-                    group.push(block);
-                } else {
-                    // MAKE SURE TO CREATE LOGIC HERE SUCH THAT IF ONE SECTION 
-                    // INTERSECTS WITH MULTIPLE OTHER GROUPS ITS HANDLED CORRECTLY
+                    intersect.push(i)
+                    break;
                 }
-                    
             }
         
-        }
+        });
+
+        let newGroup = [block];
+        intersect.forEach(i => {
+            newGroup = newGroup.concat(out[i])
+        });
+        out = out.filter((_, i) => !intersect.includes(i))
+        out.push(newGroup);
+
     }
 
-    blocks.forEach(block => {
-        out.forEach(group => {
-            for(let innerBlock of group) {
-
-            }
-        })
-    });
-
-    return [];
+    return out;
 }

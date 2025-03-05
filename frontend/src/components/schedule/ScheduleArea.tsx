@@ -1,35 +1,25 @@
+import { getTimeBlocks, groupTimeBlocks } from "../../utils/sectionUtils";
 import styles from "./schedule.module.css";
 import { ScheduleAreaComponent } from "./schedule.types";
+import { produceLines } from "./utils/schedulePlacement";
 
 let  ScheduleArea: ScheduleAreaComponent = ({sections}) => {
 
   let days = ["Mon", "Tues", "Wed", "Thurs", "Fri"];
 
-  let line = (percent: number, time?: string ) => 
-    <>
-      <div className={styles.line} style={{top: percent+"%"}}></div>
-      {(time) ? <span className={styles.lineTime} style={{top: percent+"%"}}>{time}</span> : <></>}
-    </>
-  let lines = [0,10,20,30,40,50,60,70,80,90,100];
+  
+  let blocks = getTimeBlocks(sections);
+  // @ts-ignore
+  let groups = groupTimeBlocks(blocks); 
 
 
   return (
     <div className={styles.root}>
         <div className={styles.daysContainer}>
-          {days.map(day => <span className={styles.dayLabel}>{day}</span>)}
+          {days.map(day => <span key={day} className={styles.dayLabel}>{day}</span>)}
         </div>
         <div className={styles.sectionArea}>
-        {sections.map(section => 
-          <span style={{position: "relative", zIndex: 2}}>
-            {section[0]._id}-{section[1].section_id}&nbsp;&nbsp;&nbsp;</span>
-        )}
-          {lines.map((x,time) => line(x))}
-          {line(0, "8am")}
-          {line(20, "9am")}
-          {line(40, "10am")}
-          {line(60, "11am")}
-          {line(80, "12am")}
-          {line(100, "1pm")}
+          {produceLines(blocks)}
         </div>
     </div>
   );
