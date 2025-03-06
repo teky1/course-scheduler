@@ -2,6 +2,7 @@ import { Fragment, JSX } from "react";
 import { TimeBlock } from "../../../types/api";
 import styles from "../schedule.module.css";
 import { timeToStr } from "../../../utils/sectionUtils";
+import MeetingBlock from "../MeetingBlock";
 
 
 
@@ -30,7 +31,7 @@ export function getTimeRange(blocks: TimeBlock[]) : {start: number; end: number}
 
     return {
         start: start,
-        end: Math.max(start-60+(6*60), 60*(Math.floor(end/60)+1))
+        end: Math.max(start-60+(8*60), 60*(Math.floor(end/60)+1))
     };
 
 }
@@ -55,10 +56,24 @@ export function produceLines(blocks: TimeBlock[]) : JSX.Element[] {
     return out;
 }
 
-// @ts-ignore
 export function renderSections(groups: TimeBlock[][]) : JSX.Element[] {
 
-    
+    let out : JSX.Element[] = [];
+    let range = getTimeRange(groups.flat());
 
-    return [];
+    groups.forEach((group, groupNum) => {
+        group.forEach((block, i, arr) => {
+            out.push(
+                <MeetingBlock 
+                    key={`${groupNum} ${i}`}
+                    block={block} 
+                    groupIndex={i} 
+                    groupSize={arr.length} 
+                    range={range}
+                />
+            )
+        })
+    });
+
+    return out;
 };

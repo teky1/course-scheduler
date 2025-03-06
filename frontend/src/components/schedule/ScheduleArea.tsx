@@ -1,7 +1,7 @@
 import { getTimeBlocks, groupTimeBlocks } from "../../utils/sectionUtils";
 import styles from "./schedule.module.css";
 import { ScheduleAreaComponent } from "./schedule.types";
-import { produceLines } from "./utils/schedulePlacement";
+import { produceLines, renderSections } from "./utils/schedulePlacement";
 
 let  ScheduleArea: ScheduleAreaComponent = ({sections}) => {
 
@@ -9,7 +9,6 @@ let  ScheduleArea: ScheduleAreaComponent = ({sections}) => {
 
   
   let blocks = getTimeBlocks(sections);
-  // @ts-ignore
   let groups = groupTimeBlocks(blocks); 
 
 
@@ -20,6 +19,7 @@ let  ScheduleArea: ScheduleAreaComponent = ({sections}) => {
         </div>
         <div className={styles.sectionArea}>
           {produceLines(blocks)}
+          {renderSections(groups)}
         </div>
     </div>
   );
