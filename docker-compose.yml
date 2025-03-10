@@ -4,12 +4,10 @@ services:
     environment:
       - JAVA_OPTS=-Xmx100m -Xms100m
       - GRAPH_OPTS=-Ddw.graphhopper.datareader.file=data/college-park.osm.pbf -Ddw.graphhopper.graph.location=data/graph-cache
-    ports:
-      - "8989:8989"
     volumes:
       - "./services/graphhopper/:/graphhopper/data/"
     networks:
-      - routing-network
+      - backend-network
     command: ["-i", "data/college-park.osm.pbf", "-c", "data/config.yml"]
   
   api-service:
@@ -21,7 +19,7 @@ services:
     environment:
       - PORT=8005
     networks:
-      - routing-network
+      - backend-network
 
   scraper-service:
     environment:
@@ -30,6 +28,12 @@ services:
       context: ./services/scraper
       dockerfile: Dockerfile
 
+  redis:
+    image: redis:latest
+    restart: always
+    networks:
+      - backend_network  
+      
 networks:
-  routing-network:
+  backend-network:
     driver: bridge 
