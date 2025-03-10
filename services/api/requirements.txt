@@ -16,3 +16,5 @@ soupsieve==2.6
 starlette==0.41.2
 typing_extensions==4.12.2
 uvicorn==0.32.0
+pymongo==4.7.3
+redis==5.2.1
