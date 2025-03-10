@@ -32,7 +32,7 @@ services:
     image: redis:latest
     restart: always
     networks:
-      - backend_network  
+      - backend-network  
       
 networks:
   backend-network:
