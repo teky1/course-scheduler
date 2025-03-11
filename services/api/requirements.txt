@@ -18,3 +18,4 @@ typing_extensions==4.12.2
 uvicorn==0.32.0
 pymongo==4.7.3
 redis==5.2.1
+orjson==3.9.7
