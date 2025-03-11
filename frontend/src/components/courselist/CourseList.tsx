@@ -2,7 +2,6 @@ import { TextInput } from "@mantine/core";
 import styles from "./courselist.module.css";
 import { useState } from "react";
 import CourseResult from "./CourseResult";
-import { testCourses } from "./testData";
 import { Course, Section } from "../../types/api";
 import { CourseListComponent } from "./courselist.types";
 import { setupCache } from "axios-cache-interceptor";
