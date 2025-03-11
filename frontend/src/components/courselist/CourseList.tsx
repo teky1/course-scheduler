@@ -5,11 +5,18 @@ import CourseResult from "./CourseResult";
 import { testCourses } from "./testData";
 import { Course, Section } from "../../types/api";
 import { CourseListComponent } from "./courselist.types";
+import { setupCache } from "axios-cache-interceptor";
+import axios from "axios";
+
+const api = setupCache(axios.create(), {
+  ttl: 1000*60*5
+});
 
 let CourseList: 
   CourseListComponent = ({update}) => {
-
+  
   let [searchVal, setSearchVal] = useState("");
+  let [serachResults, setSearchResults] = useState<Course[]>([]);
   
   let sectionSelect: 
     (course: Course, section: Section) => void = (course, section) => {
@@ -28,11 +35,19 @@ let CourseList:
         <TextInput
           value={searchVal}
           placeholder="Search courses..."
-          onChange={event => setSearchVal(event.target.value)}
+          onChange={async event => {
+            setSearchVal(event.target.value);
+            let res = await api.get(`https://api.joelchem.com/search/202508`, {params: {query: event.target.value}});
+
+            if(res.status >= 200 && res.status < 300) {
+              setSearchResults(res.data.courses);
+            }
+
+          }}
         />
 
         <div className={styles.resultsContainer}>
-          {testCourses.map(course => 
+          {serachResults.map(course => 
           <CourseResult 
             key={course._id}
             course={course} 
