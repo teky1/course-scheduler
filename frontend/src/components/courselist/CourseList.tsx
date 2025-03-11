@@ -32,6 +32,9 @@ let CourseList:
   return (
     <div className={styles.root}>
         <TextInput
+          classNames={{
+            input: styles.searchBox
+          }}
           value={searchVal}
           placeholder="Search courses..."
           onChange={async event => {

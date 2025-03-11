@@ -32,6 +32,7 @@ const SectionResult:
         </div>
         
         <div className={styles.meetingSection}>
+          {/* TODO: HANDLE Contact department times */}
           {
             section.meetings.map(meeting => 
             <div className={styles.meeting} key={meeting.time}>

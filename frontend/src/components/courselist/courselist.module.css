@@ -1,35 +1,70 @@
 .root {
 
-    flex-basis: 25rem;
+    flex-basis: 25em;
     flex-shrink: 0;
     background: var(--mantine-color-gray-9);
-    margin: 1rem;
+    margin: 1em;
     margin-right: 0;
     max-height: 100%;
     display: flex;
     flex-direction: column;
     font-family: Inter;
-    margin-top: 0.5rem;
+    margin-top: 0.5em;
 
 }
 
 .searchBox {
-    background-color: aliceblue;
+    background-color: var(--mantine-color-gray-9);
+    font-family: Inter;
+    font-size: 1em;
+    border-radius: .5em;
+    padding: 1.2em 1em;
+    margin-top: .5em;
+    border: 2px var(--mantine-color-gray-7) solid
+}
+.searchBox::placeholder {
+    color: inherit;
 }
 
 .resultsContainer {
-    overflow: hidden overlay;
+    overflow-y: scroll;
     scrollbar-width: auto;
     scrollbar-color: var(--mantine-color-gray-8) var(--mantine-color-gray-9);
-    max-height: 100%;
+    scrollbar-gutter: stable;
+    height: 100%;
+    margin-top: 1em;
 }
 .course {
     background-color: var(--mantine-color-gray-8);
-    margin-right: .5rem;
+    margin-right: .5em;
+    border-radius: .75em;
+    margin-bottom: 1em;
+}
+.courseInfo {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+}
+.courseHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+.courseID {
+    font-weight: bolder;
+    font-size: 1.1em;
+}
+.courseName {
+    font-weight: 300;
+}
+.courseCredits {
+    text-align: right;
+    margin-left: auto;
+    color: #868E96;
 }
 
 .section {
-    border-top: .25rem solid var(--mantine-color-gray-9);
+    border-top: .15em solid var(--mantine-color-gray-7);
     padding: .75em;
 }
 
@@ -40,8 +75,8 @@
     justify-content: flex-start;
 }
 .sectionID {
-    color: #6C6C6C;
-    width: 3rem;
+    color: #868E96;
+    width: 3em;
     font-weight: bold;
     font-size: 1em;
 }
@@ -59,7 +94,7 @@
     justify-content: center;
 }
 .seatSection {
-    margin-left: 3rem;
+    margin-left: 3em;
     font-size: .9em;
 }
 
@@ -72,11 +107,9 @@
     flex-direction: row;
 }
 .meetingIndicator {
-    width: 3rem;
+    width: 3em;
 }
-.meetingTime {
 
-}
 .meetingLocation {
     margin-left: auto;
 }
