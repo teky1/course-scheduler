@@ -43,17 +43,40 @@ async def search(semester: int, query: str, offset: int = 0):
 
     res=None
     if re.search(r'^([A-Z]{4}\d{3}[A-Z]?|[A-Z]{1,4}|[A-Z]{4}\d{1,3})$', query.strip().upper()):
-        res = list(
-            collection.find({
-                "$or": [
-                    {"_id": {"$regex": f"^{re.escape(query.strip().upper())}"}},
-                    {"name": {"$regex": re.escape(query.strip()), "$options": "i"}}
-                ]
-            })
-            .sort("_id", 1)
-            .skip(offset)
-            .limit(RESULT_LIMIT)
-        )
+
+        pipeline = [
+            {
+                "$match": {
+                    "$or": [
+                        {"_id": {"$regex": f"^{re.escape(query.strip().upper())}"}},
+                        {"name": {"$regex": re.escape(query.strip()), "$options": "i"}}
+                    ]
+                }
+            },
+            {
+                "$addFields": {
+                    "sortKey": {
+                        "$cond": {
+                            "if": {
+                                "$regexMatch": {
+                                    "input": "$_id",
+                                    "regex": f"^{re.escape(query.strip().upper())}"
+                                }
+                            },
+                            "then": 0,
+                            "else": 1
+                        }
+                    }
+                }
+            },
+            {
+                "$sort": {"sortKey": 1, "_id": 1}
+            },
+            {"$skip": offset},
+            {"$limit": RESULT_LIMIT}
+        ]
+
+        res = list(collection.aggregate(pipeline))
     else:
         res = list(
             collection.find({"name": {"$regex": re.escape(query.strip()), "$options": "i"}})
