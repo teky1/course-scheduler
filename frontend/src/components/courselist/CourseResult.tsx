@@ -3,6 +3,8 @@ import styles from "./courselist.module.css";
 import { Section } from "../../types/api";
 import { CourseResultComponent } from "./courselist.types";
 import SectionResult from "./SectionResult";
+import { Collapse } from "@mantine/core";
+import { useState } from "react";
 
 const CourseResult: 
   CourseResultComponent = ({course, onSectionSelect}) => {
@@ -11,6 +13,8 @@ const CourseResult:
     onSectionSelect(course, section);
     
   }
+
+  let [expanded, setExpanded] = useState(true);
 
 
   return (
@@ -21,10 +25,18 @@ const CourseResult:
           <span className={styles.courseCredits}>{course.min_credits}{(course.max_credits) ? "-"+course.max_credits : ""} credits</span>
         </div>
         <span className={styles.courseName}>{course.name}</span>
-        {/* {(course.gen_eds) ? <span>GenEd: {course.gen_eds}</span> : null} */}
-        <div>
-          
-        </div>
+        
+        <Collapse in={expanded}>
+          <div className={styles.courseCollapse}>
+            {course.gen_eds ? <span className={styles.courseNote}><strong>GenEd: </strong>{course.gen_eds}</span> : null}
+            {Object.entries(course.reqs).map(([req, msg]) => 
+              <span key={req} className={styles.courseNote}><strong>{req}: </strong>{msg}</span>
+            )}
+            <span className={styles.courseDesc}>{course.desc}{"\n\n"+course.desc_notes}</span>
+          </div>
+        </Collapse>
+
+        <span className={styles.expandBtn} onClick={() => setExpanded(e => !e)}>{expanded ? "Less" : "More"} Info</span>
         
       </div>
 
