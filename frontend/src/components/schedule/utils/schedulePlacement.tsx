@@ -44,7 +44,6 @@ export function timeToPercent(time: number, range: {start: number; end: number})
 export function produceLines(blocks: TimeBlock[]) : JSX.Element[] {
 
     let range = getTimeRange(blocks);
-    console.log("Range", range)
     let out : JSX.Element[] = [];
     for(let i = range.start; i <= range.end; i += 30) {
         if(i % 60 == 0) {

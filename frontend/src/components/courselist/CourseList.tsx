@@ -39,7 +39,8 @@ let CourseList:
           placeholder="Search courses..."
           onChange={async event => {
             setSearchVal(event.target.value);
-            let res = await api.get(`https://api.joelchem.com/search/202508`, {params: {query: event.target.value}});
+
+            let res = await api.get(`https://api.joelchem.com/search/202501`, {params: {query: event.target.value}});
 
             if(res.status >= 200 && res.status < 300) {
               setSearchResults(res.data.courses);

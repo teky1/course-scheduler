@@ -14,7 +14,7 @@ const CourseResult:
     
   }
 
-  let [expanded, setExpanded] = useState(true);
+  let [expanded, setExpanded] = useState(false);
 
 
   return (

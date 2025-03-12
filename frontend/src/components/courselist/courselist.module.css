@@ -10,6 +10,7 @@
     flex-direction: column;
     font-family: Inter;
     margin-top: 0.5em;
+    position: relative;
 
 }
 
@@ -33,6 +34,7 @@
     scrollbar-gutter: stable;
     height: 100%;
     margin-top: 1em;
+    position: relative;
 }
 .course {
     background-color: var(--mantine-color-gray-8);
@@ -83,10 +85,13 @@
     text-align: center;
     font-weight: bold;
 }
+.expandBtn:hover {
+    color: #aaaaaa;
+}
 
 .section {
     border-top: .15em solid var(--mantine-color-gray-7);
-    padding: .75em;
+    padding: 1em;
 }
 
 .sectionTopRow {
@@ -115,8 +120,9 @@
     justify-content: center;
 }
 .seatSection {
-    margin-left: 3em;
+    margin-left: 3.3em;
     font-size: .9em;
+    margin-bottom: 1em;
 }
 
 .meetingSection {
@@ -126,9 +132,19 @@
 .meeting {
     display: flex;
     flex-direction: row;
+    font-size: .9em;
+    margin-bottom: 0.25em;
+    
 }
 .meetingIndicator {
-    width: 3em;
+    width: 3.3em;
+    text-align: center;
+    background-image: url("/check.svg") no-repeat center;
+}
+.meetingIndicator img {
+    height:1.25em;
+    image-rendering: auto;
+    transform: translate(-.3em, 0.1em);
 }
 
 .meetingLocation {
