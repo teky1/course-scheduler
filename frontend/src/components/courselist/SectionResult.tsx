@@ -2,12 +2,25 @@ import { textGradient, getGradientColor, backgroundGradient } from "../schedule/
 import styles from "./courselist.module.css";
 
 import { SectionResultComponent } from "./courselist.types";
+import { setupCache } from "axios-cache-interceptor";
+import axios from "axios";
+import { useState } from "react";
+
+// @ts-ignore
+const api = setupCache(axios.create(), {
+  ttl: 1000*60*5
+});
 
 
 const SectionResult: 
   SectionResultComponent = ({section, onclick}) => {
-
-    let gpa = Math.round((Math.random()*3+1)*100)/100;
+  
+  let [gpa] = useState<number | null>(Math.round((Math.random()*3+1)*100)/100);
+  let [rating] = useState<number | null>(Math.round((Math.random()*4+1)*10)/10);
+  
+  // api.get(`https://api.joelchem.com/search/202508`, {params: {query: event.target.value}})
+  // api.get("https://api.joelchem.com/prof", {params: {prof: se}})
+  // CONSIDER HAVING MULTIPLE PROFESSORS AND HOW THAT AFFECTS THINGSSS
 
   return (
     <div onClick={() => onclick(section)} className={styles.section}>
@@ -17,23 +30,25 @@ const SectionResult:
           </div>
           <div className={styles.instructors}>
             {
-              section.instructors.map(name => {
-                let rating = Math.round((Math.random()*40+10))/10;
-                return (
+              section.instructors.map(name => (
                 <span key={name}>
                   {name}
-                  <span 
-                    className={styles.profRating}
-                    style={{backgroundColor: getGradientColor(backgroundGradient, 100*rating/5)}}
-                  >
+                  {
+                    (rating) ?
+                    <span 
+                      className={styles.profRating}
+                      style={{backgroundColor: getGradientColor(backgroundGradient, 100*rating/5)}}
+                    >
                     {rating}
-                  </span>
+                    </span> : null
+                  }
                 </span>
-              )})
+              ))
             }
           </div>
           <div className={styles.gpa}>
-            <span>GPA: <span style={{color: getGradientColor(textGradient, 100*gpa/4)}}>{gpa}</span></span>
+            {gpa ? <span>GPA: <span style={{color: getGradientColor(textGradient, 100*gpa/4)}}>{gpa}</span></span>
+            : null}
           </div>
         </div>
 

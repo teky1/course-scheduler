@@ -35,6 +35,13 @@ export interface Course {
     
 };
 
+export interface ProfessorGPA {
+    slug: string,
+    rating: number,
+    gpa: number,
+    students: number
+}
+
 export type Day = "M" | "Tu" | "W" | "Th" | "F" | "Other";
 
 export interface TimeBlock {
@@ -45,3 +52,4 @@ export interface TimeBlock {
     start: number,
     end: number
 };
+
