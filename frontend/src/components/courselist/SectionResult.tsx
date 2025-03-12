@@ -1,4 +1,4 @@
-import { baseGradient, getGradientColor } from "../schedule/utils/colors";
+import { textGradient, getGradientColor, backgroundGradient } from "../schedule/utils/colors";
 import styles from "./courselist.module.css";
 
 import { SectionResultComponent } from "./courselist.types";
@@ -17,11 +17,23 @@ const SectionResult:
           </div>
           <div className={styles.instructors}>
             {
-              section.instructors.map(name => <span key={name}>{name}</span>)
+              section.instructors.map(name => {
+                let rating = Math.round((Math.random()*40+10))/10;
+                return (
+                <span key={name}>
+                  {name}
+                  <span 
+                    className={styles.profRating}
+                    style={{backgroundColor: getGradientColor(backgroundGradient, 100*rating/5)}}
+                  >
+                    {rating}
+                  </span>
+                </span>
+              )})
             }
           </div>
           <div className={styles.gpa}>
-            <span>GPA: <span style={{color: getGradientColor(baseGradient, 100*gpa/4)}}>{gpa}</span></span>
+            <span>GPA: <span style={{color: getGradientColor(textGradient, 100*gpa/4)}}>{gpa}</span></span>
           </div>
         </div>
 

@@ -113,6 +113,18 @@
     font-weight: bold;
     font-size: 1em;
 }
+.profRating {
+    display: inline-block;
+    line-height: 1em;
+    margin-left: .5em;
+    padding: .25em .5em;
+    font-size: .75em;
+    font-weight: bold;
+    border-radius: 0.5em;
+    color: white;
+    height: 1.5em;
+    transform: translate(0, -.2em);
+}
 .gpa {
     margin-left: auto;
     font-weight: bold;

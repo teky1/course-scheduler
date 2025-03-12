@@ -70,10 +70,15 @@ export function getGradientColor(gradient: GradientStop[], position: number): st
     return rgbToHex([r, g, b]);
   }
 
-  export const baseGradient: GradientStop[] = [
+  export const textGradient: GradientStop[] = [
     { color: "#cc6666", percent: 20 },
     { color: "#cccc66", percent: 70 },
     { color: "#66cc66", percent: 90 },
-    // { color: "#439c45", percent: 90}
+  ];
+
+  export const backgroundGradient: GradientStop[] = [
+    { color: "#a14545", percent: 30 },
+    { color: "#8e9140", percent: 60 },
+    { color: "#45a147", percent: 80 },
   ];
   
