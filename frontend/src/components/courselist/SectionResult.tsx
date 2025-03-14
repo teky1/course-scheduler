@@ -14,7 +14,7 @@ const api = setupCache(axios.create(), {
 
 
 const SectionResult: 
-  SectionResultComponent = ({section, onclick}) => {
+  SectionResultComponent = ({section, course, onclick}) => {
   
   let [gpa, setGPA] = useState<number | null>(Math.round((Math.random()*3+1)*100)/100);
   let [rating, setRatings] = useState<{[prof: string]: number}>({});
@@ -23,18 +23,16 @@ const SectionResult:
   // api.get("https://api.joelchem.com/prof", {params: {prof: se}})
   // CONSIDER HAVING MULTIPLE PROFESSORS AND HOW THAT AFFECTS THINGSSS
 
-  if(section.instructors.length > 0) {
-    api.get("https://api.joelchem.com/prof", {params: {prof: section.instructors}});
-  }
 
-  let res: Promise<ProfessorGPA>[] = section.instructors.map(async prof => 
-    await api.get("https://api.joelchem.com/prof", {params: {prof: section.instructors}}));
-  
-  if(section.instructors.length > 0) {
-    res[0].then(res => setGPA(res.gpa))
+  // let res: Promise<ProfessorGPA>[] = section.instructors.map(async prof => (await api.get("https://api.joelchem.com/prof", {params: {prof: prof, course: course._id}})).data)
+  let res: Promise<ProfessorGPA>[] = [];
+  // USE EFFECT PROPERLY OR SMTH BC INFINITE LOOP
+  if(res.length > 0) {
+    res[0].then(res => {console.log(res); setGPA(res.gpa)});
   }
   
-  res.forEach((promise, i) => promise.then(res => setRatings(ratings => {...ratings, })))
+  res.forEach((promise, i) => promise.then(res => setRatings(
+    ratings => (res.rating) ? {...ratings, [section.instructors[i]]: res.rating} : ratings)));
   
 
   return (
@@ -49,12 +47,12 @@ const SectionResult:
                 <span key={name}>
                   {name}
                   {
-                    (rating) ?
+                    (rating[name]) ?
                     <span 
                       className={styles.profRating}
-                      style={{backgroundColor: getGradientColor(backgroundGradient, 100*rating[i]/5)}}
+                      style={{backgroundColor: getGradientColor(backgroundGradient, 100*rating[name]/5)}}
                     >
-                    {rating}
+                    {rating[name]}
                     </span> : null
                   }
                 </span>

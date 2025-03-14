@@ -9,4 +9,4 @@ export type CourseResultComponent = React.FC<{
   onSectionSelect: (course: Course, section: Section) => void
 }>;
 
-export type SectionResultComponent = React.FC<{section: Section, onclick: (section: Section) => void}>;
+export type SectionResultComponent = React.FC<{section: Section, course: Course, onclick: (section: Section) => void}>;

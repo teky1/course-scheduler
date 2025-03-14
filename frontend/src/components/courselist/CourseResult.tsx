@@ -43,7 +43,8 @@ const CourseResult:
 
 
       <div>
-          {course.sections.map(section => <SectionResult key={section.section_id} onclick={sectionClick} section={section} />)}
+          {course.sections.map(section => <SectionResult 
+            key={section.section_id} onclick={sectionClick} section={section} course={course} />)}
       </div>
 
     </div>
