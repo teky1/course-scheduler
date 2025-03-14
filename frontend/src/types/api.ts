@@ -36,10 +36,10 @@ export interface Course {
 };
 
 export interface ProfessorGPA {
-    slug: string,
-    rating: number,
-    gpa: number,
-    students: number
+    slug: string | null,
+    rating: number | null,
+    gpa: number | null,
+    students: number | null
 }
 
 export type Day = "M" | "Tu" | "W" | "Th" | "F" | "Other";

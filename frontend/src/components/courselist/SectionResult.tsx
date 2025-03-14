@@ -5,8 +5,9 @@ import { SectionResultComponent } from "./courselist.types";
 import { setupCache } from "axios-cache-interceptor";
 import axios from "axios";
 import { useState } from "react";
+import { ProfessorGPA } from "../../types/api";
 
-// @ts-ignore
+
 const api = setupCache(axios.create(), {
   ttl: 1000*60*5
 });
@@ -15,12 +16,26 @@ const api = setupCache(axios.create(), {
 const SectionResult: 
   SectionResultComponent = ({section, onclick}) => {
   
-  let [gpa] = useState<number | null>(Math.round((Math.random()*3+1)*100)/100);
-  let [rating] = useState<number | null>(Math.round((Math.random()*4+1)*10)/10);
+  let [gpa, setGPA] = useState<number | null>(Math.round((Math.random()*3+1)*100)/100);
+  let [rating, setRatings] = useState<{[prof: string]: number}>({});
   
   // api.get(`https://api.joelchem.com/search/202508`, {params: {query: event.target.value}})
   // api.get("https://api.joelchem.com/prof", {params: {prof: se}})
   // CONSIDER HAVING MULTIPLE PROFESSORS AND HOW THAT AFFECTS THINGSSS
+
+  if(section.instructors.length > 0) {
+    api.get("https://api.joelchem.com/prof", {params: {prof: section.instructors}});
+  }
+
+  let res: Promise<ProfessorGPA>[] = section.instructors.map(async prof => 
+    await api.get("https://api.joelchem.com/prof", {params: {prof: section.instructors}}));
+  
+  if(section.instructors.length > 0) {
+    res[0].then(res => setGPA(res.gpa))
+  }
+  
+  res.forEach((promise, i) => promise.then(res => setRatings(ratings => {...ratings, })))
+  
 
   return (
     <div onClick={() => onclick(section)} className={styles.section}>
@@ -30,14 +45,14 @@ const SectionResult:
           </div>
           <div className={styles.instructors}>
             {
-              section.instructors.map(name => (
+              section.instructors.map((name, i) => (
                 <span key={name}>
                   {name}
                   {
                     (rating) ?
                     <span 
                       className={styles.profRating}
-                      style={{backgroundColor: getGradientColor(backgroundGradient, 100*rating/5)}}
+                      style={{backgroundColor: getGradientColor(backgroundGradient, 100*rating[i]/5)}}
                     >
                     {rating}
                     </span> : null
