@@ -3,6 +3,8 @@ import styles from "./schedule.module.css";
 import { Day } from "../../types/api";
 import { timeToPercent } from "./utils/schedulePlacement";
 
+const PADDING = 0.5; // em
+
 let MeetingBlock: MeetingBlockComponent = ({block, groupSize, groupIndex, range}) => {
 
     let days: Day[] = ["M", "Tu", "W", "Th", "F"];
@@ -17,8 +19,8 @@ let MeetingBlock: MeetingBlockComponent = ({block, groupSize, groupIndex, range}
         <div 
             className={styles.meetingRoot}
             style={{
-                width: `calc(20% / ${groupSize})`,
-                left: `calc(${getDayLeft(block.day)}% + (${groupIndex} * (20% / ${groupSize})))`,
+                width: `calc((20% / ${groupSize}) - ${PADDING}em)`,
+                left: `calc(${getDayLeft(block.day)}% + ${PADDING/2}em + (${groupIndex} * (20% / ${groupSize})))`,
                 top: `${timeToPercent(block.start, range)}%`,
                 bottom: `${100-timeToPercent(block.end, range)}%`
             }}
