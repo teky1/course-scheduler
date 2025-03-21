@@ -20,7 +20,7 @@ const SectionResult:
   let [rating, setRatings] = useState<{[prof: string]: number}>({});
 
   useEffect(() => {
-    let res: Promise<ProfessorGPA>[] = section.instructors.map(async prof => (await api.get("https://api.joelchem.com/prof", {params: {prof: prof, course: course._id}})).data)
+    let res: Promise<ProfessorGPA>[] = section.instructors.map(async prof => (await api.get("https://api.scheduleterp.com/prof", {params: {prof: prof, course: course._id}})).data)
     if(res.length > 0) {
       res[0].then(res => {setGPA(res.gpa)});
     }

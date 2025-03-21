@@ -34,7 +34,7 @@ let CourseList:
   useEffect(() => {
 
     const handler = setTimeout(async () => {
-      let res = await api.get(`https://api.joelchem.com/search/202508`, {params: {query: searchVal}});
+      let res = await api.get(`https://api.scheduleterp.com/search/202508`, {params: {query: searchVal}});
 
       if(res.status >= 200 && res.status < 300) {
         setSearchResults(res.data.courses);
