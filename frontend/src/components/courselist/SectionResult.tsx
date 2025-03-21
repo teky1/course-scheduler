@@ -41,7 +41,7 @@ const SectionResult:
           </div>
           <div className={styles.instructors}>
             {
-              section.instructors.map((name, i) => (
+              section.instructors.map(name => (
                 <span key={name}>
                   {name}
                   {
