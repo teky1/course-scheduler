@@ -1,6 +1,6 @@
 import { TextInput } from "@mantine/core";
 import styles from "./courselist.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CourseResult from "./CourseResult";
 import { Course, Section } from "../../types/api";
 import { CourseListComponent } from "./courselist.types";
@@ -10,6 +10,8 @@ import axios from "axios";
 const api = setupCache(axios.create(), {
   ttl: 1000*60*5
 });
+
+const DEBOUNCE = 250;
 
 let CourseList: 
   CourseListComponent = ({update}) => {
@@ -29,6 +31,22 @@ let CourseList:
     });
   } 
 
+  useEffect(() => {
+
+    const handler = setTimeout(async () => {
+      let res = await api.get(`https://api.joelchem.com/search/202508`, {params: {query: searchVal}});
+
+      if(res.status >= 200 && res.status < 300) {
+        setSearchResults(res.data.courses);
+      }
+    }, DEBOUNCE);
+    
+    return () => {
+      clearTimeout(handler); 
+    };
+
+  }, [searchVal])
+
   return (
     <div className={styles.root}>
         <TextInput
@@ -37,16 +55,7 @@ let CourseList:
           }}
           value={searchVal}
           placeholder="Search courses..."
-          onChange={async event => {
-            setSearchVal(event.target.value);
-
-            let res = await api.get(`https://api.joelchem.com/search/202508`, {params: {query: event.target.value}});
-
-            if(res.status >= 200 && res.status < 300) {
-              setSearchResults(res.data.courses);
-            }
-
-          }}
+          onChange={event => setSearchVal(event.target.value)}
         />
 
         <div className={styles.resultsContainer}>

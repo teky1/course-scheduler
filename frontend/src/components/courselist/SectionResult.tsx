@@ -4,7 +4,7 @@ import styles from "./courselist.module.css";
 import { SectionResultComponent } from "./courselist.types";
 import { setupCache } from "axios-cache-interceptor";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProfessorGPA } from "../../types/api";
 
 
@@ -16,23 +16,21 @@ const api = setupCache(axios.create(), {
 const SectionResult: 
   SectionResultComponent = ({section, course, onclick}) => {
   
-  let [gpa, setGPA] = useState<number | null>(Math.round((Math.random()*3+1)*100)/100);
+  let [gpa, setGPA] = useState<number | null>(null);
   let [rating, setRatings] = useState<{[prof: string]: number}>({});
-  
-  // api.get(`https://api.joelchem.com/search/202508`, {params: {query: event.target.value}})
-  // api.get("https://api.joelchem.com/prof", {params: {prof: se}})
-  // CONSIDER HAVING MULTIPLE PROFESSORS AND HOW THAT AFFECTS THINGSSS
 
+  useEffect(() => {
+    let res: Promise<ProfessorGPA>[] = section.instructors.map(async prof => (await api.get("https://api.joelchem.com/prof", {params: {prof: prof, course: course._id}})).data)
+    if(res.length > 0) {
+      res[0].then(res => {setGPA(res.gpa)});
+    }
+    
+    res.forEach((promise, i) => promise.then(res => setRatings(
+      ratings => (res.rating) ? {...ratings, [section.instructors[i]]: res.rating} : ratings)));
 
-  // let res: Promise<ProfessorGPA>[] = section.instructors.map(async prof => (await api.get("https://api.joelchem.com/prof", {params: {prof: prof, course: course._id}})).data)
-  let res: Promise<ProfessorGPA>[] = [];
-  // USE EFFECT PROPERLY OR SMTH BC INFINITE LOOP
-  if(res.length > 0) {
-    res[0].then(res => {console.log(res); setGPA(res.gpa)});
-  }
+  }, [section.instructors, course])
   
-  res.forEach((promise, i) => promise.then(res => setRatings(
-    ratings => (res.rating) ? {...ratings, [section.instructors[i]]: res.rating} : ratings)));
+
   
 
   return (
@@ -52,7 +50,7 @@ const SectionResult:
                       className={styles.profRating}
                       style={{backgroundColor: getGradientColor(backgroundGradient, 100*rating[name]/5)}}
                     >
-                    {rating[name]}
+                    {rating[name].toFixed(2)}
                     </span> : null
                   }
                 </span>
@@ -60,7 +58,7 @@ const SectionResult:
             }
           </div>
           <div className={styles.gpa}>
-            {gpa ? <span>GPA: <span style={{color: getGradientColor(textGradient, 100*gpa/4)}}>{gpa}</span></span>
+            {gpa ? <span>GPA: <span style={{color: getGradientColor(textGradient, 100*gpa/4)}}>{gpa.toFixed(2)}</span></span>
             : null}
           </div>
         </div>
@@ -94,14 +92,15 @@ const SectionResult:
           {/* TODO: HANDLE Contact department times */}
           {
             section.meetings.map(meeting => {
-              let type = ["warn", "x", "check"][Math.floor(Math.random()*3)];
+              // let type = ["warn", "x", "check", "neutral"][Math.floor(Math.random()*4)];
+              let type = "neutral";
               return (
                 <div className={styles.meeting} key={meeting.time} 
                   style={{
-                    fontWeight: (type == "check") ? "normal" : "bold",  
+                    fontWeight: (type == "check" || type == "neutral") ? "normal" : "bold",  
                     color: (type == "check") ? "#868E96" : "inherit"
                   }}>
-                  <div className={styles.meetingIndicator}><img src={`/${type}.svg`}/></div>
+                  <div className={styles.meetingIndicator}>{type != "neutral" ? <img src={`/${type}.svg`}/> : null}</div>
                   <span className={styles.meetingTime}>{meeting.time}</span>
                   <span className={styles.meetingLocation}>{meeting.location}</span>
                 </div>
