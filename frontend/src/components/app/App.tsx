@@ -21,7 +21,7 @@ function App() {
         <Navbar/>
 
         <AppShell.Main className={styles.main}>
-          <CourseList update={setSelectedSections}/>
+          <CourseList selectedSections={selectedSections} update={setSelectedSections}/>
           <ScheduleArea sections={selectedSections}/>
         </AppShell.Main>
 

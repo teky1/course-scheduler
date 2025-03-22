@@ -7,7 +7,7 @@ import { Collapse } from "@mantine/core";
 import { useState } from "react";
 
 const CourseResult: 
-  CourseResultComponent = ({course, onSectionSelect}) => {
+  CourseResultComponent = ({course, selectedSections, onSectionSelect}) => {
 
   let sectionClick: (section: Section) => void = (section) => {
     onSectionSelect(course, section);
@@ -43,8 +43,15 @@ const CourseResult:
 
 
       <div>
-          {course.sections.map(section => <SectionResult 
-            key={section.section_id} onclick={sectionClick} section={section} course={course} />)}
+          {course.sections.map(section => 
+          <SectionResult 
+            key={section.section_id} 
+            onclick={sectionClick} 
+            section={section} 
+            course={course} 
+            selected={!!(selectedSections.find(s => 
+              s[0]._id == course._id && s[1].section_id == section.section_id))} 
+          />)}
       </div>
 
     </div>

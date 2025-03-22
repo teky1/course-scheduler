@@ -93,6 +93,16 @@
     border-top: .15em solid var(--mantine-color-gray-7);
     padding: 1em;
 }
+.section:hover {
+    background-color: var(--mantine-color-gray-7);
+    border-top: .15em solid var(--mantine-color-gray-8);
+    cursor: pointer;
+    transition: 0.2s;
+}
+.activeSection {
+    border-top: .15em solid var(--mantine-color-gray-8);
+    background-color: var(--mantine-color-gray-7);
+}
 
 .sectionTopRow {
     display: flex;

@@ -14,7 +14,7 @@ const api = setupCache(axios.create(), {
 const DEBOUNCE = 250;
 
 let CourseList: 
-  CourseListComponent = ({update}) => {
+  CourseListComponent = ({selectedSections, update}) => {
   
   let [searchVal, setSearchVal] = useState("");
   let [serachResults, setSearchResults] = useState<Course[]>([]);
@@ -64,6 +64,7 @@ let CourseList:
             key={course._id}
             course={course} 
             onSectionSelect={sectionSelect}
+            selectedSections={selectedSections}
           />)}
         </div>
 

@@ -14,7 +14,7 @@ const api = setupCache(axios.create(), {
 
 
 const SectionResult: 
-  SectionResultComponent = ({section, course, onclick}) => {
+  SectionResultComponent = ({section, course, selected, onclick}) => {
   
   let [gpa, setGPA] = useState<number | null>(null);
   let [rating, setRatings] = useState<{[prof: string]: number}>({});
@@ -34,7 +34,8 @@ const SectionResult:
   
 
   return (
-    <div onClick={() => onclick(section)} className={styles.section}>
+    <div onClick={() => onclick(section)} 
+      className={`${styles.section} ${(selected) ? styles.activeSection : ''}`}>
         <div className={styles.sectionTopRow}>
           <div className={styles.sectionID}>
             <span>{section.section_id}</span>
