@@ -49,8 +49,7 @@ const CourseResult:
             onclick={sectionClick} 
             section={section} 
             course={course} 
-            selected={!!(selectedSections.find(s => 
-              s[0]._id == course._id && s[1].section_id == section.section_id))} 
+            selectedSections={selectedSections} 
           />)}
       </div>
 

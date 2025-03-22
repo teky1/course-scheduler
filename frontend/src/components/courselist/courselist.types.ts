@@ -12,4 +12,4 @@ export type CourseResultComponent = React.FC<{
 }>;
 
 export type SectionResultComponent = React.FC<{section: Section, course: Course, 
-  selected: boolean, onclick: (section: Section) => void}>;
+  selectedSections: [Course, Section][], onclick: (section: Section) => void}>;

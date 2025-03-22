@@ -1,4 +1,4 @@
-import { Course, Day, Section, TimeBlock } from "../types/api";
+import { Course, Day, Meeting, Section, TimeBlock } from "../types/api";
 
 export function parseTime(time: string) : number {
 
@@ -37,7 +37,7 @@ export function parseMeetingTime(time: string) : {days: Day[]; start: number; en
     // If a section meeting has "TBA" "Class time/details on ELMS" or "Sa" or "Su"
     // in it then give it "Other" day
     if(time.includes("TBA") || time.includes("Class time/details on ELMS")
-        || time.includes("Sa") || time.includes("Su")) {
+        || time.includes("Sa") || time.includes("Su") || time.trim() == "") {
         return {days: ["Other",], start: 0, end: 0}
     }
 
@@ -49,15 +49,11 @@ export function parseMeetingTime(time: string) : {days: Day[]; start: number; en
     return {days: days, start: parseTime(rawParts[1]), end:parseTime(rawParts[3])};
 }
 
-
-export function getTimeBlocks(sections: [Course, Section][]): TimeBlock[] {
+export function getMeetingTimeBlocks(section: [Course, Section], meeting: Meeting): TimeBlock[] {
 
     let out: TimeBlock[] = [];
 
-    sections.forEach(section => {
-        section[1].meetings.forEach(meeting => {
-
-            let parsedTime = parseMeetingTime(meeting.time);
+    let parsedTime = parseMeetingTime(meeting.time);
             parsedTime.days.forEach(day => {
                 out.push({
                     course: section[0],
@@ -69,7 +65,17 @@ export function getTimeBlocks(sections: [Course, Section][]): TimeBlock[] {
                 });
             });
 
+    return out;
 
+} 
+
+export function getTimeBlocks(sections: [Course, Section][]): TimeBlock[] {
+
+    let out: TimeBlock[] = [];
+
+    sections.forEach(section => {
+        section[1].meetings.forEach(meeting => {
+            out = out.concat(getMeetingTimeBlocks(section, meeting))
         });
     });
 
@@ -102,6 +108,35 @@ export function groupTimeBlocks(blocks: TimeBlock[]): TimeBlock[][] {
         out.push(newGroup);
 
     }
+
+    return out;
+}
+export type ConflictState = "check" | "warn" | "x" | "neutral";
+
+export function getConflict(section: [Course, Section], 
+    meeting: Meeting, selected: [Course, Section][]): ConflictState {
+    
+    if(parseMeetingTime(meeting.time).days.includes("Other")) {
+        return "neutral";
+    }
+
+    
+    let meetingBlocks = getMeetingTimeBlocks(section, meeting);
+    let otherBlocks = getTimeBlocks(selected);
+
+    let out: ConflictState = "check";
+
+    otherBlocks.forEach(otherBlock => {
+        meetingBlocks.forEach(meetingBlock => {
+            
+            if(doesIntersect(meetingBlock, otherBlock) && section[0]._id != otherBlock.course._id) {
+
+                out = "x";
+
+            }
+
+        });
+    });
 
     return out;
 }

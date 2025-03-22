@@ -6,6 +6,7 @@ import { setupCache } from "axios-cache-interceptor";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ProfessorGPA } from "../../types/api";
+import { ConflictState, getConflict } from "../../utils/sectionUtils";
 
 
 const api = setupCache(axios.create(), {
@@ -14,16 +15,15 @@ const api = setupCache(axios.create(), {
 
 
 const SectionResult: 
-  SectionResultComponent = ({section, course, selected, onclick}) => {
+  SectionResultComponent = ({section, course, selectedSections, onclick}) => {
   
   let [gpa, setGPA] = useState<number | null>(null);
   let [rating, setRatings] = useState<{[prof: string]: number}>({});
 
   useEffect(() => {
     let res: Promise<ProfessorGPA>[] = section.instructors.map(async prof => (await api.get("https://api.scheduleterp.com/prof", {params: {prof: prof, course: course._id}})).data)
-    if(res.length > 0) {
-      res[0].then(res => {setGPA(res.gpa)});
-    }
+    
+    res.reverse().forEach(res => res.then(res => {res.gpa ? setGPA(res.gpa) : null}))
     
     res.forEach((promise, i) => promise.then(res => setRatings(
       ratings => (res.rating) ? {...ratings, [section.instructors[i]]: res.rating} : ratings)));
@@ -31,7 +31,8 @@ const SectionResult:
   }, [section.instructors, course])
   
 
-  
+  let selected = !!(selectedSections.find(s => 
+    s[0]._id == course._id && s[1].section_id == section.section_id))
 
   return (
     <div onClick={() => onclick(section)} 
@@ -95,8 +96,7 @@ const SectionResult:
           {/* TODO: HANDLE Contact department times */}
           {
             section.meetings.map(meeting => {
-              // let type = ["warn", "x", "check", "neutral"][Math.floor(Math.random()*4)];
-              let type = "neutral";
+              let type: ConflictState = getConflict([course, section], meeting, selectedSections);
               return (
                 <div className={styles.meeting} key={meeting.time} 
                   style={{

@@ -3,7 +3,7 @@ import styles from "./schedule.module.css";
 import { Day } from "../../types/api";
 import { timeToPercent } from "./utils/schedulePlacement";
 
-const BORDER_RADIUS = 0.25; //em
+const BORDER_RADIUS = 0.2; //em
 const MARGIN = 0.25 + 2*BORDER_RADIUS; // em
 
 const COLORS = [0, 30, 60, 120, 180, 210, 230, 260, 300]
