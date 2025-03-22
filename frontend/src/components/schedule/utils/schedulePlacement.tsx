@@ -1,5 +1,5 @@
 import { Fragment, JSX } from "react";
-import { TimeBlock } from "../../../types/api";
+import { Course, Section, TimeBlock } from "../../../types/api";
 import styles from "../schedule.module.css";
 import { timeToStr } from "../../../utils/sectionUtils";
 import MeetingBlock from "../MeetingBlock";
@@ -55,7 +55,7 @@ export function produceLines(blocks: TimeBlock[]) : JSX.Element[] {
     return out;
 }
 
-export function renderSections(groups: TimeBlock[][]) : JSX.Element[] {
+export function renderSections(groups: TimeBlock[][], sections: [Course, Section][]) : JSX.Element[] {
 
     let out : JSX.Element[] = [];
     let range = getTimeRange(groups.flat());
@@ -69,6 +69,7 @@ export function renderSections(groups: TimeBlock[][]) : JSX.Element[] {
                     groupIndex={i} 
                     groupSize={arr.length} 
                     range={range}
+                    sectionOrder={sections}
                 />
             )
         })

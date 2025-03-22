@@ -42,10 +42,72 @@
 
 .meetingRoot {
     position: absolute;
-    background-color: var(--mantine-color-gray-7);
+    display:flex;
+    z-index: 0;
+}
+.meetingInner  {
+    background: var(--mantine-color-gray-8);
+    container-name: block;
+    container-type: size;
     color: #C9C9C9;
-    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+    border-radius: .3em;
     text-align: center;
-    justify-content: center;
-    display:flex
+    font-size: 0.9em;
+}
+.meetingRoot::before {
+    content: "";
+    position: absolute;
+    top: -.25em;
+    bottom: -.25em;
+    left: -.25em;
+    right: -.25em;
+    background: linear-gradient(135deg, hsl(var(--hue, 0),70%,65%), hsl(var(--hue, 0), 60%, 35%));
+    border-radius: 0.5em;
+    z-index: -1;
+}
+.courseId {
+    position: relative;
+    font-weight: bold;
+    overflow-wrap: break-word;
+    /* margin-left: 0.5em; */
+}
+.sectionId {
+    color: #868E96;
+    margin-left: auto;
+}
+
+
+@container block (max-width: 8em) {
+    .courseId {
+        font-size: 0.9em;
+    }
+    .meetingLoc {
+        font-size: 0.9em;
+    }
+    .sectionId {
+        display: none;
+    }
+    .meetingTime {
+        display: none;
+    }
+}
+
+@container block (max-width: 4em) {
+    .meetingLoc {
+        display: none;
+    }
+}
+
+@container block (max-height: 4em) {
+    .meetingTime {
+        display: none;
+    }
+}
+
+@container block (max-height: 3em) {
+    .meetingLoc {
+        display: none
+    }
 }

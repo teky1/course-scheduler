@@ -70,6 +70,20 @@ export function getGradientColor(gradient: GradientStop[], position: number): st
     return rgbToHex([r, g, b]);
   }
 
+  export function remapHueEvenly(hue: number): number {
+    // Normalize original hue to [0, 1]
+    const normalized = (hue % 360) / 360;
+  
+    // Define evenly distributed color "segments"
+    const colorCount = 6; // red, orange, yellow, green, blue, purple
+    const segment = Math.floor(normalized * colorCount);
+    const withinSegment = (normalized * colorCount) % 1;
+  
+    // Map to equal-sized hue slices
+    const evenHue = segment * (360 / colorCount) + withinSegment * (360 / colorCount);
+    return evenHue;
+  }
+
   export const textGradient: GradientStop[] = [
     { color: "#cc6666", percent: 20 },
     { color: "#cccc66", percent: 70 },

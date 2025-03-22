@@ -19,7 +19,7 @@ let  ScheduleArea: ScheduleAreaComponent = ({sections}) => {
         </div>
         <div className={styles.sectionArea}>
           {produceLines(blocks)}
-          {renderSections(groups)}
+          {renderSections(groups, sections)}
         </div>
     </div>
   );
