@@ -130,9 +130,7 @@ export function getConflict(section: [Course, Section],
         meetingBlocks.forEach(meetingBlock => {
             
             if(doesIntersect(meetingBlock, otherBlock) && section[0]._id != otherBlock.course._id) {
-
                 out = "x";
-
             }
 
         });

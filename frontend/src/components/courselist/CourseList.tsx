@@ -56,6 +56,7 @@ let CourseList:
           value={searchVal}
           placeholder="Search courses..."
           onChange={event => setSearchVal(event.target.value)}
+          spellCheck={false}
         />
 
         <div className={styles.resultsContainer}>
