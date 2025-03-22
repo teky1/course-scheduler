@@ -11,6 +11,9 @@ router = APIRouter()
 
 @router.get("/search/{semester}")
 async def search(semester: int, query: str, offset: int = 0): 
+
+    if query.strip() == "":
+        return {"size": 0, "courses": []}
     
     cache_key = f"{semester}:{offset}:{query}"
     cached = db.cache.get(cache_key)
