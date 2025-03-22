@@ -73,7 +73,9 @@ const SectionResult:
             }}
           >
               {section.open_seats}/{section.total_seats} seats open</span>
-          <div className={styles.waitlistHoldfile}>
+          <div className={styles.waitlistHoldfile}
+            style={{display: ((section.open_seats > Math.max(10, section.total_seats/4)) && section.waitlist == 0 && section.holdfile == 0) ? "none" : "block"}}
+          >
             <span
               style={{
                 color: (section.waitlist > 0) ? "inherit" : "#868E96",
