@@ -10,11 +10,30 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: .25rem;
+    height: .25em;
     background: linear-gradient(to right, #FE4D4D 15%, #892626 85%);
 }
 .logoText {
-    font-size: 1.5rem;
-    padding: 1rem;
+    font-size: 1.5em;
+    padding: 1em;
     color: white;
+}
+.searchToggle {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .header {
+        justify-content: center;
+    }
+    .searchToggle {
+        display: block;
+        position: absolute;
+        background-color: transparent;
+        color: white;
+        font-size: 1.2em;
+        left: .8em;
+        top: 0.8em;
+        border: 0;
+    }
 }

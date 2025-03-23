@@ -2,7 +2,8 @@ import { Course, Section } from "../../types/api";
 
 export type CourseListComponent = React.FC<{
   selectedSections: [Course, Section][],
-  update: React.Dispatch<React.SetStateAction<[Course, Section][]>>
+  update: React.Dispatch<React.SetStateAction<[Course, Section][]>>,
+  toggled: boolean
 }>;
 
 export type CourseResultComponent = React.FC<{

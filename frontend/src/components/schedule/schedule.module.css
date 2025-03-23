@@ -1,7 +1,6 @@
 .root {
-    flex: 4;
-    margin: 1rem;
-    /* border: 3px blue solid; */
+    flex: 1;
+    margin: 1em;
     display: flex;
     flex-direction: column;
     font-family: Inter;
@@ -9,12 +8,12 @@
 .sectionArea {
     position: relative;
     flex-grow: 1;
-    margin-bottom: 2rem;
-    margin-left: 4rem;
+    margin-bottom: 2em;
+    margin-left: 4em;
 }
 .daysContainer {
-    margin-left: 4rem;
-    height: 3rem;
+    margin-left: 4em;
+    height: 3em;
     display: flex;
     flex-direction: row;
 }
@@ -97,5 +96,15 @@
 @container block (max-height: 3em) {
     .meetingLoc, .meetingTime {
         display: none
+    }
+}
+
+@media (max-width: 767px) {
+    .root {
+        margin-left: 0.5em;
+        font-size: 0.8em;
+    }
+    .daysContainer {
+        height: 3em;
     }
 }

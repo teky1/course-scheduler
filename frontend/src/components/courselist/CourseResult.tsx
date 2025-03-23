@@ -5,13 +5,21 @@ import { CourseResultComponent } from "./courselist.types";
 import SectionResult from "./SectionResult";
 import { Collapse } from "@mantine/core";
 import { useState } from "react";
+import toast from "react-hot-toast";
+
 
 const CourseResult: 
   CourseResultComponent = ({course, selectedSections, onSectionSelect}) => {
 
   let sectionClick: (section: Section) => void = (section) => {
-    onSectionSelect(course, section);
     
+    if(!!(selectedSections.find(s => 
+      s[0]._id == course._id && s[1].section_id == section.section_id))) {
+      toast.error("Section Removed");
+    } else {
+      toast.success("Section Added");
+    }
+    onSectionSelect(course, section);
   }
 
   let [expanded, setExpanded] = useState(false);

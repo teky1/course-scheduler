@@ -1,6 +1,6 @@
 import { TextInput } from "@mantine/core";
 import styles from "./courselist.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CourseResult from "./CourseResult";
 import { Course, Section } from "../../types/api";
 import { CourseListComponent } from "./courselist.types";
@@ -14,10 +14,11 @@ const api = setupCache(axios.create(), {
 const DEBOUNCE = 250;
 
 let CourseList: 
-  CourseListComponent = ({selectedSections, update}) => {
+  CourseListComponent = ({selectedSections, update, toggled}) => {
   
   let [searchVal, setSearchVal] = useState("");
   let [serachResults, setSearchResults] = useState<Course[]>([]);
+  let inputRef = useRef<HTMLInputElement>(null);
   
   let sectionSelect: 
     (course: Course, section: Section) => void = (course, section) => {
@@ -30,6 +31,12 @@ let CourseList:
       }
     });
   } 
+
+  useEffect(() => {
+    if(toggled && serachResults.length == 0) {
+      inputRef.current?.focus();
+    }
+  }, [toggled])
 
   useEffect(() => {
 
@@ -48,8 +55,9 @@ let CourseList:
   }, [searchVal])
 
   return (
-    <div className={styles.root}>
+    <div className={`${styles.root} ${(toggled) ? styles.rootOpen : ""}`}>
         <TextInput
+          ref={inputRef}
           classNames={{
             input: styles.searchBox
           }}

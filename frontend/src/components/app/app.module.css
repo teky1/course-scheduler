@@ -7,3 +7,11 @@
     background-color: var(--mantine-color-gray-9);
     max-height: 100vh;
 }
+.toast {
+    display: none;
+}
+@media (max-width: 767px) {
+    .toast {
+        display: inline;
+    }
+}
