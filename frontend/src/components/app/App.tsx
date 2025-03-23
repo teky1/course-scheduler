@@ -32,7 +32,7 @@ function App() {
         />
       </div>
       <AppShell header={{ height: "4rem" }}>
-        <Navbar searchToggle={(b) => setSearchBarToggle(b)} />
+        <Navbar searchOpen={searchBarToggled} searchToggle={(b) => setSearchBarToggle(b)} />
 
         <AppShell.Main className={styles.main}>
           <CourseList

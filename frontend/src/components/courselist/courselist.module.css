@@ -1,6 +1,6 @@
 .root {
 
-    flex-basis: 25em;
+    flex-basis: 24em;
     flex-shrink: 0;
     background: var(--mantine-color-gray-9);
     margin: 1em;
@@ -98,15 +98,19 @@
     border-top: .15em solid var(--mantine-color-gray-7);
     padding: 1em;
 }
-/* .section:hover {
-    background-color: var(--mantine-color-gray-7);
-    border-top: .15em solid var(--mantine-color-gray-8);
-    cursor: pointer;
-    transition: 0.2s;
-} */
+@media (min-width: 767px) {
+    .section:hover {
+        background-color: var(--mantine-color-gray-7);
+        border-top: .15em solid var(--mantine-color-gray-8);
+        cursor: pointer;
+        transition: 0.2s;
+    }
+}
+
 .activeSection {
     border-top: .15em solid var(--mantine-color-gray-8);
     background-color: var(--mantine-color-gray-7);
+    transition: 0.2s;
 }
 
 .sectionTopRow {
@@ -193,7 +197,7 @@
         padding-left: 1em;
         padding-right: 1em;
         border-right: 1px solid var(--mantine-color-gray-8);
-        width: 27em;
+        width: 26em;
         font-size: 0.8em;
         height: 100%;
     }

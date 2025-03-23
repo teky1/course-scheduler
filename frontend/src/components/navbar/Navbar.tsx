@@ -1,18 +1,15 @@
-import { useState } from "react";
 import styles from "./navbar.module.css";
 import '@fortawesome/fontawesome-free/css/all.css';
 
 import { AppShell, Title } from "@mantine/core";
 
-function Navbar({searchToggle}: {searchToggle: (b: boolean) => void}) {
-  
-  let [searchOpen, setSearchOpen] = useState<boolean>(false);
+function Navbar({searchOpen, searchToggle}: {searchOpen: boolean, searchToggle: (b: boolean) => void}) {
 
   return (
     <AppShell.Header className={styles.header}>
       <button
         className={styles.searchToggle}
-        onClick={() => setSearchOpen(last => {searchToggle(!last); return !last})}
+        onClick={() => searchToggle(!searchOpen)}
       >{!searchOpen ? 
           <i className="fa-sharp fa-solid fa-magnifying-glass"></i> 
           : 
