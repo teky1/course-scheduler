@@ -14,7 +14,7 @@ const api = setupCache(axios.create(), {
 const DEBOUNCE = 250;
 
 let CourseList: 
-  CourseListComponent = ({selectedSections, update, toggled}) => {
+  CourseListComponent = ({selectedSections, update, toggled, setToggled}) => {
   
   let [searchVal, setSearchVal] = useState("");
   let [serachResults, setSearchResults] = useState<Course[]>([]);
@@ -54,7 +54,8 @@ let CourseList:
 
   }, [searchVal])
 
-  return (
+  return (<>
+    {toggled ? <div className={styles.exitCapture} onClick={() => setToggled(false)}></div> : null}
     <div className={`${styles.root} ${(toggled) ? styles.rootOpen : ""}`}>
         <TextInput
           ref={inputRef}
@@ -78,6 +79,7 @@ let CourseList:
         </div>
 
     </div>
+    </>
   );
 };
 

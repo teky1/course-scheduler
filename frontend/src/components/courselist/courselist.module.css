@@ -14,6 +14,9 @@
     font-size: 0.9em;
     transition: transform 0.3s ease;
 }
+.exitCapture {
+    display: none;
+}
 
 .searchBox {
     background-color: var(--mantine-color-gray-9);
@@ -193,6 +196,15 @@
         width: 27em;
         font-size: 0.8em;
         height: 100%;
+    }
+    .exitCapture {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
     }
 
     .rootOpen {

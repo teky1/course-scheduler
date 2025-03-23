@@ -9,7 +9,7 @@
     position: relative;
     flex-grow: 1;
     margin-bottom: 2em;
-    margin-left: 4em;
+    margin-left: 3.5em;
 }
 .daysContainer {
     margin-left: 4em;
@@ -101,7 +101,7 @@
 
 @media (max-width: 767px) {
     .root {
-        margin-left: 0.5em;
+        margin-left: 1em;
         font-size: 0.8em;
     }
     .daysContainer {

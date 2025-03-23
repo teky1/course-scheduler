@@ -39,6 +39,7 @@ function App() {
             selectedSections={selectedSections}
             update={setSelectedSections}
             toggled={searchBarToggled}
+            setToggled={(b) => setSearchBarToggle(b)}
           />
           <ScheduleArea sections={selectedSections} />
         </AppShell.Main>

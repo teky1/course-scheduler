@@ -3,7 +3,8 @@ import { Course, Section } from "../../types/api";
 export type CourseListComponent = React.FC<{
   selectedSections: [Course, Section][],
   update: React.Dispatch<React.SetStateAction<[Course, Section][]>>,
-  toggled: boolean
+  toggled: boolean,
+  setToggled: (b: boolean) => void
 }>;
 
 export type CourseResultComponent = React.FC<{
