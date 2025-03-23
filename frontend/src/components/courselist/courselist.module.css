@@ -1,230 +1,227 @@
 .root {
-
-    flex-basis: 24em;
-    flex-shrink: 0;
-    background: var(--mantine-color-gray-9);
-    margin: 1em;
-    margin-right: 0;
-    max-height: 100%;
-    display: flex;
-    flex-direction: column;
-    font-family: Inter;
-    margin-top: 0.5em;
-    position: relative;
-    font-size: 0.9em;
-    transition: transform 0.3s ease;
+  flex-basis: 24em;
+  flex-shrink: 0;
+  background: var(--mantine-color-gray-9);
+  margin: 1em;
+  margin-right: 0;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: Inter;
+  margin-top: 0.5em;
+  position: relative;
+  font-size: 0.9em;
+  transition: transform 0.3s ease;
 }
 .exitCapture {
-    display: none;
+  display: none;
 }
 
 .searchBox {
-    background-color: var(--mantine-color-gray-9);
-    font-family: Inter;
-    font-size: 1em;
-    border-radius: .5em;
-    padding: 1.2em 1em;
-    margin-top: .5em;
-    border: 2px var(--mantine-color-gray-7) solid
+  background-color: var(--mantine-color-gray-9);
+  font-family: Inter;
+  font-size: 1em;
+  border-radius: 0.5em;
+  padding: 1.2em 1em;
+  margin-top: 0.5em;
+  border: 2px var(--mantine-color-gray-7) solid;
 }
 .searchBox::placeholder {
-    color: inherit;
+  color: inherit;
 }
 
 .resultsContainer {
-    overflow-y: scroll;
-    scrollbar-width: auto;
-    scrollbar-color: var(--mantine-color-gray-8) var(--mantine-color-gray-9);
-    scrollbar-gutter: stable;
-    height: 100%;
-    margin-top: 1em;
-    position: relative;
+  overflow-y: scroll;
+  scrollbar-width: auto;
+  scrollbar-color: var(--mantine-color-gray-8) var(--mantine-color-gray-9);
+  scrollbar-gutter: stable;
+  height: 100%;
+  margin-top: 1em;
+  position: relative;
 }
 .course {
-    background-color: var(--mantine-color-gray-8);
-    margin-right: .5em;
-    border-radius: .75em;
-    margin-bottom: 1em;
-    overflow-y: hidden;
+  background-color: var(--mantine-color-gray-8);
+  margin-right: 0.5em;
+  border-radius: 0.75em;
+  margin-bottom: 1em;
+  overflow-y: hidden;
 }
 .courseInfo {
-    padding: 1em;
-    display: flex;
-    flex-direction: column;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
 }
 .courseHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
 }
 .courseID {
-    font-weight: bolder;
-    font-size: 1.1em;
+  font-weight: bolder;
+  font-size: 1.1em;
 }
 .courseName {
-    font-weight: 400;
-    margin-bottom: .25em;
+  font-weight: 400;
+  margin-bottom: 0.25em;
 }
 .courseCredits {
-    text-align: right;
-    margin-left: auto;
-    color: #868E96;
+  text-align: right;
+  margin-left: auto;
+  color: #868e96;
 }
 .courseCollapse {
-    display: flex;
-    flex-direction: column;
-    font-size: .9em;
-    margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9em;
+  margin-top: 1em;
 }
 .courseNote {
-    margin-bottom: .5em;
+  margin-bottom: 0.5em;
 }
 .courseDesc {
-    margin: 1em 0;
-    font-weight: 400;
+  margin: 1em 0;
+  font-weight: 400;
 }
 .expandBtn {
-    color: #868E96;
-    cursor: pointer;
-    width: 100%;
-    text-align: center;
-    font-weight: bold;
+  color: #868e96;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
 }
 .expandBtn:hover {
-    color: #aaaaaa;
+  color: #aaaaaa;
 }
 
 .section {
-    border-top: .15em solid var(--mantine-color-gray-7);
-    padding: 1em;
+  border-top: 0.15em solid var(--mantine-color-gray-7);
+  padding: 1em;
 }
 @media (min-width: 767px) {
-    .section:hover {
-        background-color: var(--mantine-color-gray-7);
-        border-top: .15em solid var(--mantine-color-gray-8);
-        cursor: pointer;
-        transition: 0.2s;
-    }
+  .section:hover {
+    background-color: var(--mantine-color-gray-7);
+    border-top: 0.15em solid var(--mantine-color-gray-8);
+    cursor: pointer;
+    transition: 0.2s;
+  }
 }
 
 .activeSection {
-    border-top: .15em solid var(--mantine-color-gray-8);
-    background-color: var(--mantine-color-gray-7);
-    transition: 0.2s;
+  border-top: 0.15em solid var(--mantine-color-gray-8);
+  background-color: var(--mantine-color-gray-7);
+  transition: 0.2s;
 }
 
 .sectionTopRow {
-    display: flex;
-    flex-direction: row;
-    align-items: top;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+  justify-content: flex-start;
 }
 .sectionID {
-    color: #868E96;
-    width: 3em;
-    font-weight: bold;
-    font-size: 1em;
+  color: #868e96;
+  width: 3em;
+  font-weight: bold;
+  font-size: 1em;
 }
 
 .instructors {
-    display: flex;
-    flex-direction: column;
-    font-weight: bold;
-    font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 1em;
 }
 .profRating {
-    display: inline-block;
-    line-height: 1em;
-    margin-left: .5em;
-    padding: .25em .5em;
-    font-size: .75em;
-    font-weight: bold;
-    border-radius: 0.5em;
-    color: white;
-    height: 1.5em;
-    transform: translate(0, -.2em);
+  display: inline-block;
+  line-height: 1em;
+  margin-left: 0.5em;
+  padding: 0.25em 0.5em;
+  font-size: 0.75em;
+  font-weight: bold;
+  border-radius: 0.5em;
+  color: white;
+  height: 1.5em;
+  transform: translate(0, -0.2em);
 }
 .gpa {
-    margin-left: auto;
-    font-weight: bold;
-    font-size: 0.9em;
-    justify-content: center;
+  margin-left: auto;
+  font-weight: bold;
+  font-size: 0.9em;
+  justify-content: center;
 }
 .seatSection {
-    margin-left: 3.3em;
-    font-size: .9em;
-    margin-bottom: 1em;
+  margin-left: 3.3em;
+  font-size: 0.9em;
+  margin-bottom: 1em;
 }
 
 .meetingSection {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .meeting {
-    display: flex;
-    flex-direction: row;
-    font-size: .9em;
-    margin-bottom: 0.25em;
-    
+  display: flex;
+  flex-direction: row;
+  font-size: 0.9em;
+  margin-bottom: 0.25em;
 }
 .meetingIndicator {
-    width: 3.3em;
-    text-align: center;
-    background-image: url("/check.svg") no-repeat center;
+  width: 3.3em;
+  text-align: center;
+  background-image: url("/check.svg") no-repeat center;
 }
 .meetingIndicator img {
-    height:1.25em;
-    image-rendering: auto;
-    transform: translate(-.3em, 0.1em);
+  height: 1.25em;
+  image-rendering: auto;
+  transform: translate(-0.3em, 0.1em);
 }
 
 .meetingLocation {
-    margin-left: auto;
+  margin-left: auto;
 }
 
-
 @media (max-width: 767px) {
-    .root {
-        position: fixed;
-        top: 0;
-        left: 0;
-        transform: translate(-100%);
-        z-index: 5;
-        /* height: calc(100% - 2.75em); */
-        margin-left: 0;
-        margin-top: 0;
-        padding-top: 5.5em;
-        padding-left: 1em;
-        padding-right: 1em;
-        border-right: 1px solid var(--mantine-color-gray-8);
-        width: 26em;
-        font-size: 0.8em;
-        height: 100%;
-    }
-    .exitCapture {
-        display: block;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 2;
-    }
+  .root {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-100%);
+    z-index: 5;
+    /* height: calc(100% - 2.75em); */
+    margin-left: 0;
+    margin-top: 0;
+    padding-top: 5.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-right: 1px solid var(--mantine-color-gray-8);
+    width: 26em;
+    font-size: 0.8em;
+    height: 100%;
+  }
+  .exitCapture {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
 
-    .rootOpen {
-        transform: translate(0);
-    }
+  .rootOpen {
+    transform: translate(0);
+  }
 
-    /* .section:hover {
+  /* .section:hover {
         background-color: transparent;
     } */
 
-    .activeSection {
-        border-top: .15em solid var(--mantine-color-gray-8);
-        background-color: var(--mantine-color-gray-7);
-    }
+  .activeSection {
+    border-top: 0.15em solid var(--mantine-color-gray-8);
+    background-color: var(--mantine-color-gray-7);
+  }
 
-    .searchBox {
-        font-size: max(1em, 16px);
-    }
+  .searchBox {
+    font-size: max(1em, 16px);
+  }
 }

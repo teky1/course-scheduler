@@ -8,77 +8,94 @@ import { setupCache } from "axios-cache-interceptor";
 import axios from "axios";
 
 const api = setupCache(axios.create(), {
-  ttl: 1000*60*5
+  ttl: 1000 * 60 * 5,
 });
 
 const DEBOUNCE = 250;
 
-let CourseList: 
-  CourseListComponent = ({selectedSections, update, toggled, setToggled}) => {
-  
+let CourseList: CourseListComponent = ({
+  selectedSections,
+  update,
+  toggled,
+  setToggled,
+}) => {
   let [searchVal, setSearchVal] = useState("");
   let [serachResults, setSearchResults] = useState<Course[]>([]);
   let inputRef = useRef<HTMLInputElement>(null);
-  
-  let sectionSelect: 
-    (course: Course, section: Section) => void = (course, section) => {
 
-    update(old => {
-      if(old.some(([c, s]) => c._id == course._id && s.section_id == section.section_id)) {
-        return old.filter(([c, s]) => !(c._id == course._id && s.section_id == section.section_id));
+  let sectionSelect: (course: Course, section: Section) => void = (
+    course,
+    section
+  ) => {
+    update((old) => {
+      if (
+        old.some(
+          ([c, s]) => c._id == course._id && s.section_id == section.section_id
+        )
+      ) {
+        return old.filter(
+          ([c, s]) =>
+            !(c._id == course._id && s.section_id == section.section_id)
+        );
       } else {
         return [...old, [course, section]];
       }
     });
-  } 
+  };
 
   useEffect(() => {
-    if(toggled && serachResults.length == 0) {
+    if (toggled && serachResults.length == 0) {
       inputRef.current?.focus();
     }
-  }, [toggled])
+  }, [toggled]);
 
   useEffect(() => {
-
     const handler = setTimeout(async () => {
-      let res = await api.get(`https://api.scheduleterp.com/search/202508`, {params: {query: searchVal}});
+      let res = await api.get(`https://api.scheduleterp.com/search/202508`, {
+        params: { query: searchVal },
+      });
 
-      if(res.status >= 200 && res.status < 300) {
+      if (res.status >= 200 && res.status < 300) {
         setSearchResults(res.data.courses);
       }
     }, DEBOUNCE);
-    
+
     return () => {
-      clearTimeout(handler); 
+      clearTimeout(handler);
     };
+  }, [searchVal]);
 
-  }, [searchVal])
-
-  return (<>
-    {toggled ? <div className={styles.exitCapture} onClick={() => setToggled(false)}></div> : null}
-    <div className={`${styles.root} ${(toggled) ? styles.rootOpen : ""}`}>
+  return (
+    <>
+      {toggled ? (
+        <div
+          className={styles.exitCapture}
+          onClick={() => setToggled(false)}
+        ></div>
+      ) : null}
+      <div className={`${styles.root} ${toggled ? styles.rootOpen : ""}`}>
         <TextInput
           ref={inputRef}
           classNames={{
-            input: styles.searchBox
+            input: styles.searchBox,
           }}
           value={searchVal}
           placeholder="Search courses..."
-          onChange={event => setSearchVal(event.target.value)}
+          onChange={(event) => setSearchVal(event.target.value)}
           spellCheck={false}
         />
 
         <div className={styles.resultsContainer}>
-          {serachResults.map(course => 
-          <CourseResult 
-            key={course._id}
-            course={course} 
-            onSectionSelect={sectionSelect}
-            selectedSections={selectedSections}
-          />)}
+          {serachResults.map((course) => (
+            <CourseResult
+              key={course._id}
+              course={course}
+              onSectionSelect={sectionSelect}
+              selectedSections={selectedSections}
+            />
+          ))}
         </div>
-
-    </div>
+      </div>
     </>
   );
 };

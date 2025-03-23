@@ -1,110 +1,117 @@
 .root {
-    flex: 1;
-    margin: 1em;
-    display: flex;
-    flex-direction: column;
-    font-family: Inter;
+  flex: 1;
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  font-family: Inter;
 }
 .sectionArea {
-    position: relative;
-    flex-grow: 1;
-    margin-bottom: 2em;
-    margin-left: 3.5em;
+  position: relative;
+  flex-grow: 1;
+  margin-bottom: 2em;
+  margin-left: 3.5em;
 }
 .daysContainer {
-    margin-left: 4em;
-    height: 3em;
-    display: flex;
-    flex-direction: row;
+  margin-left: 4em;
+  height: 3em;
+  display: flex;
+  flex-direction: row;
 }
 .dayLabel {
-    width: 20%;
-    text-align: center;
+  width: 20%;
+  text-align: center;
 }
 
 .line {
-    position: absolute;
-    width: 100%;
-    left:0;
-    height: 1px;
-    background-color: var(--mantine-color-gray-7);
-    z-index: 0;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  height: 1px;
+  background-color: var(--mantine-color-gray-7);
+  z-index: 0;
 }
 .lineTime {
-    position: absolute;
-    right: 100%;
-    width: 4rem;
-    text-align: center;
-    transform: translateY(-50%);
-    z-index: 0;
+  position: absolute;
+  right: 100%;
+  width: 4rem;
+  text-align: center;
+  transform: translateY(-50%);
+  z-index: 0;
 }
 
 .meetingRoot {
-    position: absolute;
-    display:flex;
-    z-index: 0;
+  position: absolute;
+  display: flex;
+  z-index: 0;
 }
-.meetingInner  {
-    background: var(--mantine-color-gray-8);
-    container-name: block;
-    container-type: size;
-    color: #C9C9C9;
-    width: 100%;
-    height: 100%;
-    border-radius: .4em;
-    text-align: center;
-    font-size: 0.9em;
+.meetingInner {
+  background: var(--mantine-color-gray-8);
+  container-name: block;
+  container-type: size;
+  color: #c9c9c9;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.4em;
+  text-align: center;
+  font-size: 0.9em;
 }
 .meetingRoot::before {
-    content: "";
-    position: absolute;
-    top: -.2em;
-    bottom: -.2em;
-    left: -.2em;
-    right: -.2em;
-    background: linear-gradient(135deg, hsl(var(--hue, 0),60%,55%), hsl(var(--hue, 0), 50%, 35%));
-    border-radius: 0.5em;
-    z-index: -1;
+  content: "";
+  position: absolute;
+  top: -0.2em;
+  bottom: -0.2em;
+  left: -0.2em;
+  right: -0.2em;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--hue, 0), 60%, 55%),
+    hsl(var(--hue, 0), 50%, 35%)
+  );
+  border-radius: 0.5em;
+  z-index: -1;
 }
 .courseId {
-    position: relative;
-    font-weight: bold;
-    overflow-wrap: break-word;
-    font-size: 1.1em;
+  position: relative;
+  font-weight: bold;
+  overflow-wrap: break-word;
+  font-size: 1.1em;
 }
-.sectionId, .meetingLoc, .meetingTime {
-    color: #868E96;
+.sectionId,
+.meetingLoc,
+.meetingTime {
+  color: #868e96;
 }
-
 
 @container block (max-width: 10em) {
-    .courseId, .meetingLoc {
-        font-size: 0.9em;
-    }
-    .sectionId, .meetingTime {
-        display: none;
-    }
+  .courseId,
+  .meetingLoc {
+    font-size: 0.9em;
+  }
+  .sectionId,
+  .meetingTime {
+    display: none;
+  }
 }
 
 @container block (max-width: 4em) {
-    .meetingLoc {
-        display: none;
-    }
+  .meetingLoc {
+    display: none;
+  }
 }
 
-
 @container block (max-height: 3em) {
-    .meetingLoc, .meetingTime {
-        display: none
-    }
+  .meetingLoc,
+  .meetingTime {
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {
-    .root {
-        margin-left: 1em;
-        font-size: 0.8em;
-    }
-    .daysContainer {
-        height: 3em;
-    }
+  .root {
+    margin-left: 1em;
+    font-size: 0.8em;
+  }
+  .daysContainer {
+    height: 3em;
+  }
 }

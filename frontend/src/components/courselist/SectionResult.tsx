@@ -1,4 +1,8 @@
-import { textGradient, getGradientColor, backgroundGradient } from "../schedule/utils/colors";
+import {
+  textGradient,
+  getGradientColor,
+  backgroundGradient,
+} from "../schedule/utils/colors";
 import styles from "./courselist.module.css";
 
 import { SectionResultComponent } from "./courselist.types";
@@ -8,111 +12,172 @@ import { useEffect, useState } from "react";
 import { ProfessorGPA } from "../../types/api";
 import { ConflictState, getConflict } from "../../utils/sectionUtils";
 
-
 const api = setupCache(axios.create(), {
-  ttl: 1000*60*5
+  ttl: 1000 * 60 * 5,
 });
 
-
-const SectionResult: 
-  SectionResultComponent = ({section, course, selectedSections, onclick}) => {
-  
+const SectionResult: SectionResultComponent = ({
+  section,
+  course,
+  selectedSections,
+  onclick,
+}) => {
   let [gpa, setGPA] = useState<number | null>(null);
-  let [rating, setRatings] = useState<{[prof: string]: number}>({});
+  let [rating, setRatings] = useState<{ [prof: string]: number }>({});
 
   useEffect(() => {
-    let res: Promise<ProfessorGPA>[] = section.instructors.map(async prof => (await api.get("https://api.scheduleterp.com/prof", {params: {prof: prof, course: course._id}})).data)
-    
-    res.reverse().forEach(res => res.then(res => {res.gpa ? setGPA(res.gpa) : null}))
-    
-    res.forEach((promise, i) => promise.then(res => setRatings(
-      ratings => (res.rating) ? {...ratings, [section.instructors[i]]: res.rating} : ratings)));
+    let res: Promise<ProfessorGPA>[] = section.instructors.map(
+      async (prof) =>
+        (
+          await api.get("https://api.scheduleterp.com/prof", {
+            params: { prof: prof, course: course._id },
+          })
+        ).data
+    );
 
-  }, [section.instructors, course])
-  
+    res.reverse().forEach((res) =>
+      res.then((res) => {
+        res.gpa ? setGPA(res.gpa) : null;
+      })
+    );
 
-  let selected = !!(selectedSections.find(s => 
-    s[0]._id == course._id && s[1].section_id == section.section_id))
+    res.forEach((promise, i) =>
+      promise.then((res) =>
+        setRatings((ratings) =>
+          res.rating
+            ? { ...ratings, [section.instructors[i]]: res.rating }
+            : ratings
+        )
+      )
+    );
+  }, [section.instructors, course]);
+
+  let selected = !!selectedSections.find(
+    (s) => s[0]._id == course._id && s[1].section_id == section.section_id
+  );
 
   return (
-    <div onClick={() => onclick(section)} 
-      className={`${styles.section} ${(selected) ? styles.activeSection : ''}`}>
-        <div className={styles.sectionTopRow}>
-          <div className={styles.sectionID}>
-            <span>{section.section_id}</span>
-          </div>
-          <div className={styles.instructors}>
-            {
-              section.instructors.map(name => (
-                <span key={name}>
-                  {name}
-                  {
-                    (rating[name]) ?
-                    <span 
-                      className={styles.profRating}
-                      style={{backgroundColor: getGradientColor(backgroundGradient, 100*rating[name]/5)}}
-                    >
-                    {rating[name].toFixed(2)}
-                    </span> : null
-                  }
-                </span>
-              ))
-            }
-          </div>
-          <div className={styles.gpa}>
-            {gpa ? <span>GPA: <span style={{color: getGradientColor(textGradient, 100*gpa/4)}}>{gpa.toFixed(2)}</span></span>
-            : null}
-          </div>
+    <div
+      onClick={() => onclick(section)}
+      className={`${styles.section} ${selected ? styles.activeSection : ""}`}
+    >
+      <div className={styles.sectionTopRow}>
+        <div className={styles.sectionID}>
+          <span>{section.section_id}</span>
         </div>
+        <div className={styles.instructors}>
+          {section.instructors.map((name) => (
+            <span key={name}>
+              {name}
+              {rating[name] ? (
+                <span
+                  className={styles.profRating}
+                  style={{
+                    backgroundColor: getGradientColor(
+                      backgroundGradient,
+                      (100 * rating[name]) / 5
+                    ),
+                  }}
+                >
+                  {rating[name].toFixed(2)}
+                </span>
+              ) : null}
+            </span>
+          ))}
+        </div>
+        <div className={styles.gpa}>
+          {gpa ? (
+            <span>
+              GPA:{" "}
+              <span
+                style={{
+                  color: getGradientColor(textGradient, (100 * gpa) / 4),
+                }}
+              >
+                {gpa.toFixed(2)}
+              </span>
+            </span>
+          ) : null}
+        </div>
+      </div>
 
-        <div className={styles.seatSection}>
-          <span className={styles.seats}
+      <div className={styles.seatSection}>
+        <span
+          className={styles.seats}
+          style={{
+            color:
+              section.open_seats == 0
+                ? "#cc6666"
+                : section.open_seats <= Math.max(10, section.total_seats / 4)
+                ? "#C5CA5A"
+                : "#868E96",
+            fontWeight:
+              section.open_seats <= Math.max(10, section.total_seats / 4)
+                ? "bold"
+                : "normal",
+          }}
+        >
+          {section.open_seats}/{section.total_seats} seats open
+        </span>
+        <div
+          className={styles.waitlistHoldfile}
+          style={{
+            display:
+              section.open_seats > Math.max(10, section.total_seats / 4) &&
+              section.waitlist == 0 &&
+              section.holdfile == 0
+                ? "none"
+                : "block",
+          }}
+        >
+          <span
             style={{
-              color: (section.open_seats == 0) ? "#cc6666" : 
-                (section.open_seats <= Math.max(10, section.total_seats/4)) ? "#C5CA5A" : "#868E96",
-              fontWeight: (section.open_seats <= Math.max(10, section.total_seats/4)) ? "bold" : "normal"
+              color: section.waitlist > 0 ? "inherit" : "#868E96",
+              fontWeight: section.waitlist > 0 ? "bold" : "normal",
             }}
           >
-              {section.open_seats}/{section.total_seats} seats open</span>
-          <div className={styles.waitlistHoldfile}
-            style={{display: ((section.open_seats > Math.max(10, section.total_seats/4)) && section.waitlist == 0 && section.holdfile == 0) ? "none" : "block"}}
+            Waitlist: {section.waitlist}{" "}
+          </span>
+          <span
+            style={{
+              color: section.holdfile > 0 ? "inherit" : "#868E96",
+              fontWeight: section.holdfile > 0 ? "bold" : "normal",
+            }}
           >
-            <span
-              style={{
-                color: (section.waitlist > 0) ? "inherit" : "#868E96",
-                fontWeight: (section.waitlist > 0) ? "bold" : "normal"
-              }}
-            >Waitlist: {section.waitlist} </span>
-            <span
-              style={{
-                color: (section.holdfile > 0) ? "inherit" : "#868E96",
-                fontWeight: (section.holdfile > 0) ? "bold" : "normal"
-              }}
-            >Holdfile: {section.holdfile}</span>
-          </div>
+            Holdfile: {section.holdfile}
+          </span>
         </div>
-        
-        <div className={styles.meetingSection}>
-          {/* TODO: HANDLE Contact department times */}
-          {
-            section.meetings.map(meeting => {
-              let type: ConflictState = getConflict([course, section], meeting, selectedSections);
-              return (
-                <div className={styles.meeting} key={meeting.time} 
-                  style={{
-                    fontWeight: (type == "check" || type == "neutral") ? "normal" : "bold",  
-                    color: (type == "check") ? "#868E96" : "inherit"
-                  }}>
-                  <div className={styles.meetingIndicator}>{type != "neutral" ? <img src={`/${type}.svg`}/> : null}</div>
-                  <span className={styles.meetingTime}>{meeting.time}</span>
-                  <span className={styles.meetingLocation}>{meeting.location}</span>
-                </div>
-              )
-            })
-          }
-        </div>
+      </div>
+
+      <div className={styles.meetingSection}>
+        {/* TODO: HANDLE Contact department times */}
+        {section.meetings.map((meeting) => {
+          let type: ConflictState = getConflict(
+            [course, section],
+            meeting,
+            selectedSections
+          );
+          return (
+            <div
+              className={styles.meeting}
+              key={meeting.time}
+              style={{
+                fontWeight:
+                  type == "check" || type == "neutral" ? "normal" : "bold",
+                color: type == "check" ? "#868E96" : "inherit",
+              }}
+            >
+              <div className={styles.meetingIndicator}>
+                {type != "neutral" ? <img src={`/${type}.svg`} /> : null}
+              </div>
+              <span className={styles.meetingTime}>{meeting.time}</span>
+              <span className={styles.meetingLocation}>{meeting.location}</span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
-}
+};
 
 export default SectionResult;

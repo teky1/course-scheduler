@@ -1,17 +1,17 @@
 .main {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    flex-grow: 1;
-    overscroll-behavior: none;
-    background-color: var(--mantine-color-gray-9);
-    max-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  flex-grow: 1;
+  overscroll-behavior: none;
+  background-color: var(--mantine-color-gray-9);
+  max-height: 100vh;
 }
 .toast {
-    display: none;
+  display: none;
 }
 @media (max-width: 767px) {
-    .toast {
-        display: inline;
-    }
+  .toast {
+    display: inline;
+  }
 }
