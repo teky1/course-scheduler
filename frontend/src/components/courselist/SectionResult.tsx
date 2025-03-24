@@ -8,9 +8,10 @@ import styles from "./courselist.module.css";
 import { SectionResultComponent } from "./courselist.types";
 import { setupCache } from "axios-cache-interceptor";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProfessorGPA } from "../../types/api";
-import { ConflictState, getConflict } from "../../utils/sectionUtils";
+import { ConflictState, getConflict, sameSection } from "../../utils/sectionUtils";
+import { AppContext } from "../app/App";
 
 const api = setupCache(axios.create(), {
   ttl: 1000 * 60 * 5,
@@ -24,6 +25,7 @@ const SectionResult: SectionResultComponent = ({
 }) => {
   let [gpa, setGPA] = useState<number | null>(null);
   let [rating, setRatings] = useState<{ [prof: string]: number }>({});
+  let appContext = useContext(AppContext);
 
   useEffect(() => {
     let res: Promise<ProfessorGPA>[] = section.instructors.map(
@@ -53,12 +55,14 @@ const SectionResult: SectionResultComponent = ({
   }, [section.instructors, course]);
 
   let selected = !!selectedSections.find(
-    (s) => s[0]._id == course._id && s[1].section_id == section.section_id
+    (s) => sameSection(s, [course, section])
   );
 
   return (
     <div
       onClick={() => onclick(section)}
+      onMouseEnter={() => appContext?.setHovered([course, section])}
+      onMouseLeave={() => appContext?.setHovered(last => sameSection(last, [course, section]) ? null : last)}
       className={`${styles.section} ${selected ? styles.activeSection : ""}`}
     >
       <div className={styles.sectionTopRow}>

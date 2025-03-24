@@ -44,6 +44,11 @@
   display: flex;
   z-index: 0;
 }
+
+.ghostBlock {
+  opacity: 0.5;
+}
+
 .meetingInner {
   background: var(--mantine-color-gray-8);
   container-name: block;

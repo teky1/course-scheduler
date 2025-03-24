@@ -1,7 +1,7 @@
 import { Fragment, JSX } from "react";
 import { Course, Section, TimeBlock } from "../../../types/api";
 import styles from "../schedule.module.css";
-import { timeToStr } from "../../../utils/sectionUtils";
+import { sameSection, timeToStr } from "../../../utils/sectionUtils";
 import MeetingBlock from "../MeetingBlock";
 
 export let line = (percent: number, time?: string) => (
@@ -41,13 +41,25 @@ export function getTimeRange(blocks: TimeBlock[]): {
   }
 
   if (end < start) {
-    return { start: 8 * 60, end: 14 * 60 };
+    return { start: 9 * 60, end: 15 * 60 };
   }
 
+  if(end - start >= 8*60) {
+    return {start: start, end: end};
+  }
+
+  let s = Math.min(11*60, 60*Math.floor(start/60))
+
   return {
-    start: start,
-    end: Math.max(start - 60 + 8 * 60, 60 * (Math.floor(end / 60) + 1)),
-  };
+    start: s,
+    end: Math.max(Math.max(15*60, s + 6*60), 60*Math.ceil(end/60 + 1))
+  }
+
+
+  // return {
+  //   start: Math.min(start, 9*60),
+  //   end: Math.max(16 * 60, 60 * (Math.floor(end / 60) + 1)),
+  // };
 }
 export function timeToPercent(
   time: number,
@@ -71,7 +83,8 @@ export function produceLines(blocks: TimeBlock[]): JSX.Element[] {
 
 export function renderSections(
   groups: TimeBlock[][],
-  sections: [Course, Section][]
+  sections: [Course, Section][],
+  hovered: [Course, Section] | null
 ): JSX.Element[] {
   let out: JSX.Element[] = [];
   let range = getTimeRange(groups.flat());
@@ -86,6 +99,7 @@ export function renderSections(
           groupSize={arr.length}
           range={range}
           sectionOrder={sections}
+          ghost={sameSection(hovered, [block.course, block.section])}
         />
       );
     });

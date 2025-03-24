@@ -8,4 +8,5 @@ export type MeetingBlockComponent = React.FC<{
   groupIndex: number;
   range: { start: number; end: number };
   sectionOrder: [Course, Section][];
+  ghost: boolean;
 }>;

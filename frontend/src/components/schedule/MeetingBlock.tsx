@@ -14,6 +14,7 @@ let MeetingBlock: MeetingBlockComponent = ({
   groupIndex,
   range,
   sectionOrder,
+  ghost
 }) => {
   function addSpace(courseID: string): string {
     const match = courseID.match(/\d/);
@@ -63,7 +64,7 @@ let MeetingBlock: MeetingBlockComponent = ({
 
   return (
     <div
-      className={styles.meetingRoot}
+      className={`${styles.meetingRoot} ${ghost ? styles.ghostBlock : ''}`}
       style={
         {
           width: `calc((20% / ${groupSize}) - ${MARGIN}em)`,

@@ -1,5 +1,19 @@
 import { Course, Day, Meeting, Section, TimeBlock } from "../types/api";
 
+export function sameSection(sec1: [Course, Section] | null, sec2: [Course, Section] | null) {
+ 
+  return sec1 != null && sec2 != null && sec1[0]._id == sec2[0]._id && sec1[1].section_id == sec2[1].section_id
+}
+
+export function sectionIncluded(sec: [Course, Section], lst: [Course, Section][]) {
+  for(let otherSection of lst) {
+    if(sameSection(sec, otherSection)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 export function parseTime(time: string): number {
   const period = time.slice(-2).toLowerCase();
   time = time.slice(0, -2);
