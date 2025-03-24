@@ -3,6 +3,8 @@
 # DB URI
 db_uri.txt
 
+cftunnel
+
 # Log folders
 logs/
 out.json
