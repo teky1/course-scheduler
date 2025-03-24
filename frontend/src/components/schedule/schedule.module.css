@@ -59,6 +59,7 @@
   border-radius: 0.4em;
   text-align: center;
   font-size: 0.9em;
+  line-height: 1.3;
 }
 .meetingRoot::before {
   content: "";
@@ -88,11 +89,10 @@
 }
 
 @container block (max-width: 10em) {
-  .courseId,
-  .meetingLoc {
+  .courseId, .sectionId, .meetingLoc {
     font-size: 0.9em;
+    transform: translateY(.5em);
   }
-  .sectionId,
   .meetingTime {
     display: none;
   }
@@ -104,6 +104,16 @@
   }
 }
 
+@container block (max-width: 3em) {
+  .sectionId {
+    display: none;
+  }
+}
+@container block (max-height: 5em) {
+  .meetingInner {
+    line-height: 1.2;
+  }
+}
 @container block (max-height: 3em) {
   .meetingLoc,
   .meetingTime {
