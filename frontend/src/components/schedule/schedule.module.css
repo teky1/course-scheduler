@@ -106,6 +106,12 @@
   }
 }
 
+@media (min-width: 1500px) {
+  .root {
+    font-size: 1.1em;
+  }
+}
+
 @media (max-width: 767px) {
   .root {
     margin-left: 1em;
