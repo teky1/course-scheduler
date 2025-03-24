@@ -135,4 +135,7 @@
   .daysContainer {
     height: 3em;
   }
+  .ghostBlock {
+    opacity: 1;
+  }
 }
