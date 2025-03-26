@@ -89,16 +89,15 @@ let MeetingBlock: MeetingBlockComponent = ({
       }
     >
       <div className={styles.meetingInner}>
-        <button 
+        {/* <button 
           className={styles.meetingRemove}
-          style={{"--hue": COLORS[sectionIndex % COLORS.length]} as React.CSSProperties}
           onClick={() => {
             appContext?.setSelectedSections(old => old.filter(([c, s]) =>
                 !(c._id == block.course._id && s.section_id == block.section.section_id)))
           }}
         >
           <i className="fa-solid fa-xmark"></i>
-        </button>
+        </button> */}
         <span className={styles.courseId}>{addSpace(block.course._id)}</span>
         <span className={styles.sectionId}> {block.section.section_id}</span>
         <br />
