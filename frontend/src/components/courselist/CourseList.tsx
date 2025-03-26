@@ -6,6 +6,7 @@ import { Course, Section } from "../../types/api";
 import { CourseListComponent } from "./courselist.types";
 import { setupCache } from "axios-cache-interceptor";
 import axios from "axios";
+import { CourseListGuide } from "./CourseListGuide";
 
 const api = setupCache(axios.create(), {
   ttl: 1000 * 60 * 5,
@@ -21,7 +22,9 @@ let CourseList: CourseListComponent = ({
 }) => {
   let [searchVal, setSearchVal] = useState("");
   let [serachResults, setSearchResults] = useState<Course[]>([]);
+  let [guideShown, ]
   let inputRef = useRef<HTMLInputElement>(null);
+
 
   let sectionSelect: (course: Course, section: Section) => void = (
     course,
@@ -51,6 +54,17 @@ let CourseList: CourseListComponent = ({
 
   useEffect(() => {
     const handler = setTimeout(async () => {
+      
+      if(searchVal.trim() == "") {
+        let out: Course[] = [];
+        selectedSections.forEach(([course]) => {
+          out = out.filter(c => c._id != course._id).concat([course]);
+        })
+        console.log(out);
+        setSearchResults(out);
+        return;
+      }
+
       let res = await api.get(`https://api.scheduleterp.com/search/202508`, {
         params: { query: searchVal },
       });
@@ -86,6 +100,7 @@ let CourseList: CourseListComponent = ({
         />
 
         <div className={styles.resultsContainer}>
+          {(searchVal.trim() == "") ? <CourseListGuide /> : null}
           {serachResults.map((course) => (
             <CourseResult
               key={course._id}

@@ -39,7 +39,22 @@
   margin-top: 1em;
   position: relative;
 }
-.course {
+.courseListGuide {
+  background-color: var(--mantine-color-gray-8);
+  margin-right: 0.5em;
+  border-radius: 0.75em;
+  margin-bottom: 1em;
+  padding: 1em;
+  overflow-y: hidden;
+}
+.guideTitle {
+  width: 100%;
+  font-size: 1.3em;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+}
+.course{
   background-color: var(--mantine-color-gray-8);
   margin-right: 0.5em;
   border-radius: 0.75em;
