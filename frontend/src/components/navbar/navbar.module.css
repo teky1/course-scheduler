@@ -18,9 +18,26 @@
   padding: 1em;
   color: white;
 }
-.searchToggle {
+
+.searchToggle, .controlToggle {
   display: none;
 }
+
+@media (max-width: 1100px) {
+ 
+  .controlToggle {
+    display: block;
+    position: absolute;
+    background-color: transparent;
+    color: white;
+    font-size: 1.2em;
+    right: 0.8em;
+    top: 0.8em;
+    border: 0;
+    cursor: pointer;
+  }
+}
+
 
 @media (max-width: 767px) {
   .header {

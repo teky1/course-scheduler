@@ -203,6 +203,7 @@
     width: 26em;
     font-size: 0.8em;
     height: 100%;
+    
   }
   .exitCapture {
     display: block;
@@ -216,6 +217,7 @@
 
   .rootOpen {
     transform: translate(0);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
   }
 
   /* .section:hover {
