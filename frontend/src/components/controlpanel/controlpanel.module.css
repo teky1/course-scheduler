@@ -51,6 +51,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    padding-left: .5em;
+    padding-right: .5em;
 }
 .nameEditBox {
     background: transparent;
@@ -128,10 +130,4 @@
         border-radius: 1em;
         background: linear-gradient(160deg, #fe4d4d -20%, #892626 130%);
     }
-    .dropdownIcon {
-        padding-left: .5em;
-        padding-right: .5em;
-    }
-
-
 }
