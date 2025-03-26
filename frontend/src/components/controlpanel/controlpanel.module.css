@@ -3,6 +3,7 @@
     flex-shrink: 0;
     background: var(--mantine-color-gray-9);
     margin: 1em;
+    margin-left: 1.5em;
     margin-left: 0;
     max-height: 100%;
     display: flex;
@@ -14,13 +15,12 @@
 }
 
 .saveButtonsContainer {
-    margin-left: .5em;
     margin-top: 1em;
     display: flex;
     flex-direction: row;
     gap: .5em;
 }
-.urlBtn, .calBtn {
+.btn {
     height: 3.5em;
     border: none;
     font-family: Inter;
@@ -28,10 +28,57 @@
     background: linear-gradient(150deg, #fe4d4d -30%, #892626 130%);
     white-space: normal;
 }
+.btn:hover {
+    background: #d03d3e;
+}
+
 .btnLabel {
     white-space: normal;
     font-weight: 600;
     overflow: visible;
+}
+.scheduleSelectContainer {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.2em;
+}
+.dropdownIcon {
+    width: 2em;
+    font-size: 1.2em;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.nameEditBox {
+    background: transparent;
+    border: none;
+    font-weight: bold;
+    color: #C9C9C9;
+}
+.nameEditBox:hover {
+    color: white;
+}
+.nameEditBox:focus {
+    outline: none;
+    color: white;
+}
+.otherSchedulesContainers {
+    
+}
+.otherSchedules {
+    color: #C9C9C9;
+    padding-left: 4em;
+    cursor: pointer;
+    width: max-content;
+    display: block;
+    overflow-wrap: normal;
+    line-height: 2;
+}
+.otherSchedules:hover {
+    color: white;
 }
 
 @media (max-width: 1400px) {
@@ -80,6 +127,10 @@
         font-family: Inter;
         border-radius: 1em;
         background: linear-gradient(160deg, #fe4d4d -20%, #892626 130%);
+    }
+    .dropdownIcon {
+        padding-left: .5em;
+        padding-right: .5em;
     }
 
 
