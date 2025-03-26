@@ -61,8 +61,9 @@ const SectionResult: SectionResultComponent = ({
   return (
     <div
       onClick={() => onclick(section)}
-      onMouseEnter={() => appContext?.setHovered([course, section])}
-      onMouseLeave={() => appContext?.setHovered(last => sameSection(last, [course, section]) ? null : last)}
+      onPointerEnter={(e) => (e.pointerType !== 'touch') ? appContext?.setHovered([course, section]) : null}
+      onPointerLeave={(e) => (e.pointerType !== 'touch') ? 
+        appContext?.setHovered(last => sameSection(last, [course, section]) ? null : last) : null}
       className={`${styles.section} ${selected ? styles.activeSection : ""}`}
     >
       <div className={styles.sectionTopRow}>

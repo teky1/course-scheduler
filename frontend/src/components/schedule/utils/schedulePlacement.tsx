@@ -49,7 +49,6 @@ export function getTimeRange(blocks: TimeBlock[]): {
   }
 
   let s = Math.min(11*60, 60*Math.floor(start/60))
-  console.log(end, 60*Math.ceil(end/60))
   return { 
     start: s,
     end: Math.max(Math.max(15*60, s + 6*60), 60*Math.ceil(end/60))

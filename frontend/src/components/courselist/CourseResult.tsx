@@ -22,7 +22,10 @@ const CourseResult: CourseResultComponent = ({
     } else {
       toast.success("Section Added");
     }
-    onSectionSelect(course, section);
+    requestAnimationFrame(() => {
+      onSectionSelect(course, section);
+    });
+    
   };
 
   let [expanded, setExpanded] = useState(false);

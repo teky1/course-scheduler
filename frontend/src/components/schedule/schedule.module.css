@@ -85,7 +85,6 @@
   background: transparent;
   color: hsl(var(--hue, 0), 50%, 35%);
   cursor: pointer;
-  z-index: 10;
   width: 1em;
   height: 1em;
 }

@@ -89,15 +89,10 @@ let MeetingBlock: MeetingBlockComponent = ({
       }
     >
       <div className={styles.meetingInner}>
-        <button 
-          className={styles.meetingRemove}
-          onClick={() => {
-            appContext?.setSelectedSections(old => old.filter(([c, s]) =>
-                !(c._id == block.course._id && s.section_id == block.section.section_id)))
-          }}
-        >
-          <i className="fa-solid fa-xmark"></i>
-        </button>
+        <i className={`fa-solid fa-xmark ${styles.meetingRemove}`} onClick={() => {
+          appContext?.setSelectedSections(old => old.filter(([c, s]) =>
+              !(c._id == block.course._id && s.section_id == block.section.section_id)))
+        }}></i>
         <span className={styles.courseId}>{addSpace(block.course._id)}</span>
         <span className={styles.sectionId}> {block.section.section_id}</span>
         <br />
