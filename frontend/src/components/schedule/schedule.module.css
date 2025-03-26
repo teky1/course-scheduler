@@ -76,6 +76,18 @@
   border-radius: 0.5em;
   z-index: -1;
 }
+
+.meetingRemove {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: none;
+  background: transparent;
+  color: hsl(var(--hue, 0), 50%, 35%);
+  cursor: pointer;
+  z-index: 10;
+}
+
 .courseId {
   position: relative;
   font-weight: bold;

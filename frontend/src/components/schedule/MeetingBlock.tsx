@@ -1,7 +1,10 @@
 import { MeetingBlockComponent } from "./schedule.types";
 import styles from "./schedule.module.css";
+import "@fortawesome/fontawesome-free/css/all.css";
 import { Day } from "../../types/api";
 import { timeToPercent } from "./utils/schedulePlacement";
+import { useContext } from "react";
+import { AppContext } from "../app/App";
 
 const BORDER_RADIUS = 0.2; //em
 const MARGIN = 0.25 + 2 * BORDER_RADIUS; // em
@@ -16,6 +19,9 @@ let MeetingBlock: MeetingBlockComponent = ({
   sectionOrder,
   ghost
 }) => {
+
+  let appContext = useContext(AppContext);
+
   function addSpace(courseID: string): string {
     const match = courseID.match(/\d/);
     if (!match) return courseID;
@@ -83,6 +89,16 @@ let MeetingBlock: MeetingBlockComponent = ({
       }
     >
       <div className={styles.meetingInner}>
+        <button 
+          className={styles.meetingRemove}
+          style={{"--hue": COLORS[sectionIndex % COLORS.length]} as React.CSSProperties}
+          onClick={() => {
+            appContext?.setSelectedSections(old => old.filter(([c, s]) =>
+                !(c._id == block.course._id && s.section_id == block.section.section_id)))
+          }}
+        >
+          <i className="fa-solid fa-xmark"></i>
+        </button>
         <span className={styles.courseId}>{addSpace(block.course._id)}</span>
         <span className={styles.sectionId}> {block.section.section_id}</span>
         <br />

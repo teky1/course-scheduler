@@ -13,6 +13,8 @@ import { Toaster } from "react-hot-toast";
 export type AppContextType = {
   hovered: [Course, Section] | null,
   setHovered: React.Dispatch<React.SetStateAction<[Course, Section] | null>>,
+  selectedSections: [Course, Section][],
+  setSelectedSections: React.Dispatch<React.SetStateAction<[Course, Section][]>>
 }
 
 export const AppContext = createContext<AppContextType | null>(null);
@@ -26,7 +28,7 @@ function App() {
 
   return (
     <AppContext.Provider value={{
-      hovered, setHovered
+      hovered, setHovered, selectedSections, setSelectedSections
     }}>
       <MantineProvider forceColorScheme="dark">
         <div className={styles.toast}>
