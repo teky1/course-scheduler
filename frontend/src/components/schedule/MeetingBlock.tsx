@@ -20,7 +20,6 @@ let MeetingBlock: MeetingBlockComponent = ({
   ghost
 }) => {
 
-  // @ts-ignore
   let appContext = useContext(AppContext);
 
   function addSpace(courseID: string): string {
@@ -90,7 +89,7 @@ let MeetingBlock: MeetingBlockComponent = ({
       }
     >
       <div className={styles.meetingInner}>
-        {/* <button 
+        <button 
           className={styles.meetingRemove}
           onClick={() => {
             appContext?.setSelectedSections(old => old.filter(([c, s]) =>
@@ -98,7 +97,7 @@ let MeetingBlock: MeetingBlockComponent = ({
           }}
         >
           <i className="fa-solid fa-xmark"></i>
-        </button> */}
+        </button>
         <span className={styles.courseId}>{addSpace(block.course._id)}</span>
         <span className={styles.sectionId}> {block.section.section_id}</span>
         <br />
