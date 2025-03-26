@@ -20,6 +20,7 @@ let MeetingBlock: MeetingBlockComponent = ({
   ghost
 }) => {
 
+  // @ts-ignore
   let appContext = useContext(AppContext);
 
   function addSpace(courseID: string): string {
