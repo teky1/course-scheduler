@@ -50,7 +50,9 @@
 }
 
 .meetingInner {
-  background: var(--mantine-color-gray-8);
+  /* background: var(--mantine-color-gray-8); */
+  background: hsl(var(--hue, 0),50%, 20%);
+  /* background: linear-gradient(135deg, hsl(var(--hue, 0),50%, 35%), hsl(var(--hue, 0),50%, 20%)); */
   container-name: block;
   container-type: size;
   color: #c9c9c9;

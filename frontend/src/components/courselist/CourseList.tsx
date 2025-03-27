@@ -22,7 +22,7 @@ let CourseList: CourseListComponent = ({
 }) => {
   let [searchVal, setSearchVal] = useState("");
   let [serachResults, setSearchResults] = useState<Course[]>([]);
-  let [guideShown, ]
+  // let [guideShown, ]
   let inputRef = useRef<HTMLInputElement>(null);
 
 
@@ -100,7 +100,7 @@ let CourseList: CourseListComponent = ({
         />
 
         <div className={styles.resultsContainer}>
-          {(searchVal.trim() == "") ? <CourseListGuide /> : null}
+          {(searchVal.trim() == "" && false) ? <CourseListGuide /> : null}
           {serachResults.map((course) => (
             <CourseResult
               key={course._id}
