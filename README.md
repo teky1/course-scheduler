@@ -1,4 +1,4 @@
-# ScheduleTerp
+# [ScheduleTerp](https://scheduleterp.com)
 
 [scheduleterp.com](https://scheduleterp.com)
 
