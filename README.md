@@ -1,6 +1,4 @@
-# [ScheduleTerp](https://scheduleterp.com)
-
-[scheduleterp.com](https://scheduleterp.com)
+# ScheduleTerp ([scheduleterp.com](https://scheduleterp.com))
 
 A platform to build your UMD schedule using data from Testudo and PlanetTerp—complete with walking and biking times between classes, all in one smart interface.
 
