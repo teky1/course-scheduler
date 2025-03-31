@@ -48,3 +48,9 @@ export interface TimeBlock {
   start: number;
   end: number;
 }
+
+export interface Schedule {
+  id: string;
+  name: string;
+  sections: [Course, Section][];
+}

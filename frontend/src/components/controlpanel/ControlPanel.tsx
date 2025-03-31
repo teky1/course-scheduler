@@ -7,7 +7,6 @@ function ControlPanel() {
 
     let appContext = useContext(AppContext);
 
-    let [scheduleNameInp, setSchedNameInp] = useState<string>("Schedule 1");
     let [nameDropdownToggled, setNameDropdownToggle] = useState<boolean>(false);
 
     return (
@@ -32,16 +31,19 @@ function ControlPanel() {
                 ></i>
                 <input 
                     className={styles.nameEditBox} 
-                    value={scheduleNameInp} 
-                    onChange={e => setSchedNameInp(e.target.value.substring(0,32))}
-                    onBlur={() => setSchedNameInp(last => last ? last : "default")}
+                    value={appContext?.currentScheduleName} 
+                    onChange={e => appContext?.setCurrentScheduleName(e.target.value.substring(0,32))}
+                    onBlur={() => appContext?.setCurrentScheduleName(last => last.trim() ? last : "default")}
                 ></input>
             </div>
             <Collapse className={styles.otherSchedulesContainer} in={nameDropdownToggled}>
-                <span className={styles.otherSchedules}>Schedule 1</span>
-                <span className={styles.otherSchedules}>Schedule 2</span>
-                <span className={styles.otherSchedules}>Schedule 3</span>
-                <span className={styles.otherSchedules}>Schedule 7</span>
+                {
+                    appContext?.schedulesList.map(schedule => (
+                        <div className={styles.otherSchedules}>
+                            <span>{schedule.name}</span>
+                        </div>
+                    ))
+                }
             </Collapse>
             
         </div>
