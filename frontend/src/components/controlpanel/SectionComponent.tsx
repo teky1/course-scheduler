@@ -54,15 +54,15 @@ function SectionComponent({ section }: { section: [Course, Section] }) {
         className={styles.sliderWrap}
         style={!showSlider ? { display: "none" } : {}}
       >
+        <i
+          className={`fa-solid fa-xmark ${styles.sliderClose}`}
+          onClick={() => setShowSlider(false)}
+        ></i>
         <HueSlider
           value={hue}
           onChange={setHue}
           classNames={{ slider: styles.slider }}
         />
-        <i
-          className={`fa-solid fa-xmark ${styles.sliderClose}`}
-          onClick={() => setShowSlider(false)}
-        ></i>
       </div>
       {/* {s.instructors.map((instruc, i) => (
         <span className={styles.instructor} key={i}>
