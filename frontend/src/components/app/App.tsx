@@ -6,7 +6,7 @@ import { AppShell, MantineProvider } from "@mantine/core";
 import Navbar from "../navbar/Navbar";
 import CourseList from "../courselist/CourseList";
 import ScheduleArea from "../schedule/ScheduleArea";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { Course, Section } from "../../types/api";
 import { Toaster } from "react-hot-toast";
 import ControlPanel from "../controlpanel/ControlPanel";
@@ -29,6 +29,14 @@ function App() {
   let [hovered, setHovered] = useState<[Course, Section] | null>(null);
   let [searchBarToggled, setSearchBarToggle] = useState<boolean>(false);
   let [controlPanelToggled, setControlPanelToggle] = useState<boolean>(false);
+
+  useEffect(() => {
+    // on first load
+  }, []);
+
+  useEffect(() => {
+    // on first load
+  }, []);
 
   return (
     <AppContext.Provider value={{
