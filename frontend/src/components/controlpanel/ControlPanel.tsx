@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
 import styles from "./controlpanel.module.css";
 import { AppContext } from "../app/App";
-import { Button, Collapse } from "@mantine/core";
+import { Button, Collapse, Divider } from "@mantine/core";
 import { createSchedule, deleteSchedule, getScheduleList, saveSchedule } from "../app/storage";
+import SectionComponent from "./SectionComponent";
 
 function ControlPanel() {
 
@@ -66,6 +67,11 @@ function ControlPanel() {
                     ))
                 }
             </Collapse>
+            <Divider my="sm" color="var(--mantine-color-gray-7)"/>
+            <div className={styles.sectionsContainer}>
+                {appContext?.selectedSections.map(section => <SectionComponent section={section}/>)}
+            </div>
+
             
         </div>
     )

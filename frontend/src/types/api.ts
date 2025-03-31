@@ -53,4 +53,5 @@ export interface Schedule {
   id: string;
   name: string;
   sections: [Course, Section][];
+  colorMap: {[section: string]: number};
 }

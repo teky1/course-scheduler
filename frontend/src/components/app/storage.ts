@@ -31,6 +31,11 @@ export function getSchedule(id: string): Schedule | null {
     }
     let schedules: {[id: string]: Schedule} = JSON.parse(stored);
     if(id in schedules) {
+        
+        if(!schedules[id].colorMap) {
+            schedules[id].colorMap = {};
+        }
+
         return schedules[id];
     }
     return null;
@@ -43,7 +48,8 @@ export function createSchedule() {
     let newSchedule = {
         id: crypto.randomUUID(),
         name: `Schedule ${n+1}`,
-        sections: [] 
+        sections: [],
+        colorMap: {},
     }
 
     localStorage.setItem("totalCreated", `${n+1}`)
@@ -83,12 +89,10 @@ export function deleteSchedule(id: string) {
     
     let schedules: {[id: string]: Schedule} = JSON.parse(stored);
     let {[id]: string, ...rest} = schedules;
-    console.log(schedules, rest);
     localStorage.setItem("schedules", JSON.stringify(rest));
 }
 
 export function setActiveSchedule(id: string) {
-    console.log("active sched "+id);
     localStorage.setItem("active", id);
 }
 

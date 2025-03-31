@@ -29,6 +29,8 @@ export type AppContextType = {
   setCurrentScheduleID: React.Dispatch<React.SetStateAction<string>>;
   searchVal: string;
   setSearchVal: React.Dispatch<React.SetStateAction<string>>;
+  colorMap: {[section: string]: number};
+  setColorMap: React.Dispatch<React.SetStateAction<{[section: string]: number}>>;
 };
 
 export const AppContext = createContext<AppContextType | null>(null);
@@ -44,10 +46,11 @@ function App() {
   let [currentScheduleID, setCurrentScheduleID] = useState<string>("");
   let [schedulesList, setSchedulesList] = useState<Schedule[]>([]);
   let [searchVal, setSearchVal] = useState<string>("");
+  let [colorMap, setColorMap] = useState<{[section: string]: number}>({});
 
   useEffect(() => {
     // on first load
-    console.log("first load")
+
     // check to see if there is a share URL
 
     let schedule = getActiveSchedule();
@@ -63,21 +66,22 @@ function App() {
     if(!currentScheduleID.trim()) {
       return;
     }
-    console.log('saving schedule')
+
     saveSchedule({
       id: currentScheduleID,
       name: currentScheduleName,
       sections: selectedSections,
+      colorMap: colorMap
     });
-  }, [currentScheduleName, selectedSections]);
+  }, [currentScheduleName, selectedSections, colorMap]);
 
   useEffect(() => {
     if(!currentScheduleID.trim()) {
       return;
     }
-    console.log('changing schedule')
     setActiveSchedule(currentScheduleID);
     let schedule = getActiveSchedule();
+    setColorMap(schedule.colorMap);
     setCurrentScheduleName(schedule.name);
     setSelectedSections(schedule.sections);
 
@@ -100,7 +104,9 @@ function App() {
         currentScheduleID,
         setCurrentScheduleID,
         searchVal,
-        setSearchVal
+        setSearchVal,
+        colorMap,
+        setColorMap
       }}
     >
       <MantineProvider forceColorScheme="dark">

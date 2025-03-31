@@ -54,7 +54,6 @@ let CourseList: CourseListComponent = ({
 
   useEffect(() => {
     if(appContext?.currentScheduleID != lastUpdatedSchedID) {
-      console.log("here")
       setLastUpdatedSchedID(last => (appContext) ? appContext.currentScheduleID : last);
       if(appContext?.searchVal.trim() == "") {
         let out: Course[] = [];

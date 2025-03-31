@@ -74,6 +74,41 @@ export function parseMeetingTime(time: string): {
   };
 }
 
+export function getDayPartOfTime(input: string): string {
+  let rawParts = input.split(" ");
+  let days: Day[] = ["M", "Tu", "W", "Th", "F"];
+  days.forEach(day => {
+    if(rawParts[0].startsWith(day)) {
+      rawParts[0] = rawParts[0].slice(day.length);
+    }
+  })
+  return (rawParts[0].trim() == "") ? input.split(" ")[0] : "";
+}
+
+export function minifyTimeCode(input: string): string {
+  const timeMatch = input.match(
+    /(\d{1,2}:\d{2}|\d{1,2})(am|pm)\s*-\s*(\d{1,2}:\d{2}|\d{1,2})(am|pm)/i
+  );
+  if (!timeMatch) return input;
+
+  let [, startTime, startPeriod, endTime, endPeriod] = timeMatch;
+
+  // Remove :00 from times like 9:00
+  const simplifyTime = (time: string) => {
+    return time.endsWith(":00") ? time.split(":")[0] : time;
+  };
+
+  startTime = simplifyTime(startTime);
+  endTime = simplifyTime(endTime);
+
+  const needsStartPeriod =
+    startPeriod.toLowerCase() !== endPeriod.toLowerCase();
+
+  return `${startTime}${
+    needsStartPeriod ? startPeriod : ""
+  }-${endTime}${endPeriod}`;
+}
+
 export function getMeetingTimeBlocks(
   section: [Course, Section],
   meeting: Meeting

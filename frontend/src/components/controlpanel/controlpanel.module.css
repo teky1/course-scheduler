@@ -77,7 +77,7 @@
 }
 .otherSchedules {
   color: #c9c9c9;
-  padding-left: 4em;
+  padding-left: 3em;
   width: max-content;
   display: block;
   overflow-wrap: normal;
@@ -103,6 +103,58 @@
 }
 .otherScheduleTitle:hover {
   color: white;
+}
+
+.section {
+  background-color: var(--mantine-color-gray-8);
+  margin: .5em 0;
+  padding: .5em .75em;
+  border-radius: .5em;
+}
+
+.sectionTop {
+  display: flex;
+  align-items: center;
+}
+.sectionRemove {
+  margin-left: auto;
+  color: var(--mantine-color-gray-6);
+  cursor: pointer;
+}
+
+.colorBlock {
+  background-color: hsl(var(--hue, 0), 60%, 50%);
+  width: 1em;
+  height: 1em;
+  border-radius: .25em;
+  display: inline-block;
+  cursor: pointer;
+}
+.sliderWrap {
+  margin-top: .5em;
+  display: flex;
+}
+.slider {
+  flex-grow: 1;
+  margin-right: 1em;
+}
+.sliderClose {
+  cursor: pointer;
+  color: var(--mantine-color-gray-7)
+}
+.courseCode {
+  display: inline;
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-left: .9em;
+}
+.instructor {
+  display: block;
+  font-size: 0.8em;
+}
+.meeting {
+  display: block;
+  font-size: 0.8em;
 }
 
 @media (max-width: 1400px) {

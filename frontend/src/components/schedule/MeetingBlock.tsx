@@ -5,6 +5,7 @@ import { Day } from "../../types/api";
 import { timeToPercent } from "./utils/schedulePlacement";
 import { useContext } from "react";
 import { AppContext } from "../app/App";
+import { minifyTimeCode } from "../../utils/sectionUtils";
 
 const BORDER_RADIUS = 0.2; //em
 const MARGIN = 0.25 + 2 * BORDER_RADIUS; // em
@@ -30,29 +31,6 @@ let MeetingBlock: MeetingBlockComponent = ({
     return courseID.slice(0, index) + "​" + courseID.slice(index);
   }
 
-  function minifyTimeCode(input: string): string {
-    const timeMatch = input.match(
-      /(\d{1,2}:\d{2}|\d{1,2})(am|pm)\s*-\s*(\d{1,2}:\d{2}|\d{1,2})(am|pm)/i
-    );
-    if (!timeMatch) return input;
-
-    let [, startTime, startPeriod, endTime, endPeriod] = timeMatch;
-
-    // Remove :00 from times like 9:00
-    const simplifyTime = (time: string) => {
-      return time.endsWith(":00") ? time.split(":")[0] : time;
-    };
-
-    startTime = simplifyTime(startTime);
-    endTime = simplifyTime(endTime);
-
-    const needsStartPeriod =
-      startPeriod.toLowerCase() !== endPeriod.toLowerCase();
-
-    return `${startTime}${
-      needsStartPeriod ? startPeriod : ""
-    }-${endTime}${endPeriod}`;
-  }
 
   let days: Day[] = ["M", "Tu", "W", "Th", "F"];
 
@@ -67,7 +45,12 @@ let MeetingBlock: MeetingBlockComponent = ({
       section[0]._id == block.course._id &&
       section[1].section_id == block.section.section_id
   );
-
+  let sectionCode = block.course._id+"-"+block.section.section_id;
+  if(!(sectionCode in ((appContext) ? appContext.colorMap : {}))) {
+    appContext?.setColorMap((last) => {
+      return ({ ...last, [sectionCode]: COLORS[sectionIndex % COLORS.length]}); 
+    });
+  }
   return (
     <div
       className={`${styles.meetingRoot} ${ghost ? styles.ghostBlock : ''}`}
@@ -84,7 +67,7 @@ let MeetingBlock: MeetingBlockComponent = ({
           bottom: `calc(${
             100 - timeToPercent(block.end, range)
           }% + ${BORDER_RADIUS}em)`,
-          "--hue": COLORS[sectionIndex % COLORS.length],
+          "--hue": appContext?.colorMap[sectionCode],
         } as React.CSSProperties
       }
     >
