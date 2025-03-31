@@ -29,6 +29,7 @@ let CourseList: CourseListComponent = ({
 
   // let [guideShown, ]
   let inputRef = useRef<HTMLInputElement>(null);
+  let resDivRef = useRef<HTMLDivElement>(null);
 
 
   let sectionSelect: (course: Course, section: Section) => void = (
@@ -61,6 +62,7 @@ let CourseList: CourseListComponent = ({
           out = out.filter(c => c._id != course._id).concat([course]);
         })
         setSearchResults(out);
+        resDivRef.current?.scrollTo({top: 0})
         return;
       }
     }
@@ -80,6 +82,7 @@ let CourseList: CourseListComponent = ({
         out = out.filter(c => c._id != course._id).concat([course]);
       })
       setSearchResults(out);
+      resDivRef.current?.scrollTo({top: 0})
       return;
     }
     const handler = setTimeout(async () => {
@@ -90,6 +93,7 @@ let CourseList: CourseListComponent = ({
 
       if (res.status >= 200 && res.status < 300) {
         setSearchResults(res.data.courses);
+        resDivRef.current?.scrollTo({top: 0})
       }
     }, DEBOUNCE);
 
@@ -118,7 +122,7 @@ let CourseList: CourseListComponent = ({
           spellCheck={false}
         />
 
-        <div className={styles.resultsContainer}>
+        <div className={styles.resultsContainer}  ref={resDivRef}>
           {(appContext?.searchVal.trim() == "" && false) ? <CourseListGuide /> : null}
           {serachResults.map((course) => (
             <CourseResult
