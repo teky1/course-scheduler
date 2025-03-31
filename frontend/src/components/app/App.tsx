@@ -10,7 +10,7 @@ import { createContext, useEffect, useState } from "react";
 import { Course, Schedule, Section } from "../../types/api";
 import { Toaster } from "react-hot-toast";
 import ControlPanel from "../controlpanel/ControlPanel";
-import { getActiveSchedule, getSchedule, getScheduleList, saveSchedule, setActiveSchedule } from "./storage";
+import { getActiveSchedule, getScheduleList, saveSchedule, setActiveSchedule } from "./storage";
 
 export type AppContextType = {
   hovered: [Course, Section] | null;
@@ -27,6 +27,8 @@ export type AppContextType = {
   setCurrentScheduleName: React.Dispatch<React.SetStateAction<string>>;
   currentScheduleID: string;
   setCurrentScheduleID: React.Dispatch<React.SetStateAction<string>>;
+  searchVal: string;
+  setSearchVal: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const AppContext = createContext<AppContextType | null>(null);
@@ -41,10 +43,11 @@ function App() {
   let [currentScheduleName, setCurrentScheduleName] = useState<string>("");
   let [currentScheduleID, setCurrentScheduleID] = useState<string>("");
   let [schedulesList, setSchedulesList] = useState<Schedule[]>([]);
+  let [searchVal, setSearchVal] = useState<string>("");
 
   useEffect(() => {
     // on first load
-
+    console.log("first load")
     // check to see if there is a share URL
 
     let schedule = getActiveSchedule();
@@ -52,12 +55,15 @@ function App() {
 
     // set everything for that active schedule
     setCurrentScheduleID(schedule.id);
-    setCurrentScheduleName(schedule.name);
-    setSelectedSections(schedule.sections);
     setSchedulesList(scheduleList);
   }, []);
 
   useEffect(() => {
+    
+    if(!currentScheduleID.trim()) {
+      return;
+    }
+    console.log('saving schedule')
     saveSchedule({
       id: currentScheduleID,
       name: currentScheduleName,
@@ -66,10 +72,16 @@ function App() {
   }, [currentScheduleName, selectedSections]);
 
   useEffect(() => {
+    if(!currentScheduleID.trim()) {
+      return;
+    }
+    console.log('changing schedule')
     setActiveSchedule(currentScheduleID);
-    let schedule = getSchedule(currentScheduleID);
+    let schedule = getActiveSchedule();
     setCurrentScheduleName(schedule.name);
     setSelectedSections(schedule.sections);
+
+    setSchedulesList(getScheduleList());
   }, [currentScheduleID]);
 
   return (
@@ -86,7 +98,9 @@ function App() {
         currentScheduleName,
         setCurrentScheduleName,
         currentScheduleID,
-        setCurrentScheduleID
+        setCurrentScheduleID,
+        searchVal,
+        setSearchVal
       }}
     >
       <MantineProvider forceColorScheme="dark">

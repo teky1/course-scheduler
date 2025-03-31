@@ -1,132 +1,153 @@
 .root {
-    width: 18em;
-    flex-shrink: 0;
-    background: var(--mantine-color-gray-9);
-    margin: 1em;
-    margin-left: 1.5em;
-    margin-left: 0;
-    max-height: 100%;
-    display: flex;
-    flex-direction: column;
-    font-family: Inter;
-    margin-top: 0.5em;
-    position: relative;
-    transition: transform 0.3s ease;
+  width: 18em;
+  flex-shrink: 0;
+  background: var(--mantine-color-gray-9);
+  margin: 1em;
+  margin-left: 1.5em;
+  margin-left: 0;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: Inter;
+  margin-top: 0.5em;
+  position: relative;
+  transition: transform 0.3s ease;
+  overflow: scroll;
 }
 
 .saveButtonsContainer {
-    margin-top: 1em;
-    display: flex;
-    flex-direction: row;
-    gap: .5em;
+  margin-top: 1em;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
 }
 .btn {
-    height: 3.5em;
-    border: none;
-    font-family: Inter;
-    border-radius: 1em;
-    background: linear-gradient(150deg, #fe4d4d -30%, #892626 130%);
-    white-space: normal;
+  height: 3.5em;
+  border: none;
+  font-family: Inter;
+  border-radius: 1em;
+  background: linear-gradient(150deg, #fe4d4d -30%, #892626 130%);
+  white-space: normal;
 }
 .btn:hover {
-    background: #d03d3e;
+  background: #d03d3e;
 }
 
 .btnLabel {
-    white-space: normal;
-    font-weight: 600;
-    overflow: visible;
+  white-space: normal;
+  font-weight: 600;
+  overflow: visible;
 }
 .scheduleSelectContainer {
-    margin-top: 1em;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-size: 1.2em;
+  margin-top: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1.2em;
 }
 .dropdownIcon {
-    width: 2em;
-    font-size: 1.2em;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding-left: .5em;
-    padding-right: .5em;
+  width: 2em;
+  font-size: 1.2em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
+.addBtn {
+  cursor: pointer;
+  font-size: .9em;
+}
+
 .nameEditBox {
-    background: transparent;
-    flex-grow: 1;
-    width: 3ch;
-    border: none;
-    font-weight: bold;
-    color: #C9C9C9;
+  background: transparent;
+  flex-grow: 1;
+  width: 3ch;
+  border: none;
+  font-weight: bold;
+  color: #c9c9c9;
 }
 .nameEditBox:hover {
-    color: white;
+  color: white;
 }
 .nameEditBox:focus {
-    outline: none;
-    color: white;
+  outline: none;
+  color: white;
 }
 .otherSchedules {
-    color: #C9C9C9;
-    padding-left: 4em;
-    cursor: pointer;
-    width: max-content;
-    display: block;
-    overflow-wrap: normal;
-    line-height: 2;
+  color: #c9c9c9;
+  padding-left: 4em;
+  width: max-content;
+  display: block;
+  overflow-wrap: normal;
+  line-height: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
-.otherSchedules:hover {
-    color: white;
+.deleteScheduleBtn {
+  cursor: pointer;
+  font-size: 0.9em;
+  color: #868e96;
+}
+.deleteScheduleBtn:hover,
+.deleteScheduleBtn:active,
+.addBtn:hover,
+.addBtn:active {
+  color: #fe4d4d;
+}
+.otherScheduleTitle {
+  cursor: pointer;
+}
+.otherScheduleTitle:hover {
+  color: white;
 }
 
 @media (max-width: 1400px) {
-    .root {
-        flex-basis: 12.5em;
-    }
+  .root {
+    flex-basis: 12.5em;
+  }
 }
 
-
 @media (max-width: 1100px) {
+  .root {
+    position: fixed;
+    top: 0;
+    right: 0;
+    transform: translate(100%);
+    z-index: 5;
+    margin-right: 0;
+    margin-top: 0;
+    padding-top: 5.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-left: 1px solid var(--mantine-color-gray-8);
+    width: 18em;
+    height: 100%;
+  }
 
-    .root {
-        position: fixed;
-        top: 0;
-        right: 0;
-        transform: translate(100%);
-        z-index: 5;
-        margin-right: 0;
-        margin-top: 0;
-        padding-top: 5.5em;
-        padding-left: 1em;
-        padding-right: 1em;
-        border-left: 1px solid var(--mantine-color-gray-8);
-        width: 18em;
-        height: 100%;
+  .rootOpen {
+    transform: translate(0);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  }
 
-    }
+  .saveButtonsContainer {
+    margin-left: 0.5em;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
 
-    .rootOpen {
-        transform: translate(0);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .saveButtonsContainer {
-        margin-left: .5em;
-        margin-top: 0;
-        display: flex;
-        flex-direction: column;
-        gap: .5em;
-    }
-
-    .urlBtn, .calBtn {
-        width: 100%;
-        height: 3em;
-        border: none;
-        font-family: Inter;
-        border-radius: 1em;
-        background: linear-gradient(160deg, #fe4d4d -20%, #892626 130%);
-    }
+  .urlBtn,
+  .calBtn {
+    width: 100%;
+    height: 3em;
+    border: none;
+    font-family: Inter;
+    border-radius: 1em;
+    background: linear-gradient(160deg, #fe4d4d -20%, #892626 130%);
+  }
 }
