@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from "react";
 import styles from "./controlpanel.module.css";
 import { AppContext } from "../app/App";
-import { Button, Code, Collapse, Divider, LoadingOverlay, Modal } from "@mantine/core";
+import { Button, Collapse, Divider, LoadingOverlay, Modal } from "@mantine/core";
 import { createSchedule, deleteSchedule, getScheduleList, saveSchedule } from "../app/storage";
 import SectionComponent from "./SectionComponent";
 import axios from "axios";
@@ -25,7 +25,7 @@ function ControlPanel() {
                 classNames={{ content: styles.urlModalRoot, header: styles.urlModalRoot, title: styles.urlModalTitle }}
             >
                 <LoadingOverlay visible={urlLoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} loaderProps={{ color: "#fe4d4d" }} />
-                <Code style={{userSelect: 'all'}} ref={urlRef} className={styles.url}>{url}</Code>
+                <span ref={urlRef} className={styles.url}>{url}</span>
                 {/* <button className={styles.urlCopyBtn} onClick={() => {urlRef.current?.select()}}>Copy</button> */}
                 {/* <Popover position="bottom" withArrow shadow="md">
                     <Popover.Target>
