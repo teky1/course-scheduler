@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 import logging
 
-from routers import traveltime, courses, professors
+from routers import traveltime, courses, professors, schedules
 
 app = FastAPI()
 
@@ -18,6 +18,8 @@ app.add_middleware(
 app.include_router(traveltime.router)
 app.include_router(courses.router)
 app.include_router(professors.router)
+app.include_router(schedules.router)
+
 
 logging.basicConfig(level=logging.INFO)
 

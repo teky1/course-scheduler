@@ -34,6 +34,26 @@ async def verify_semester(semester):
 
     return bool(cache.get(semester))
 
+async def save_schedule(id, semester, colorMap, sections):
+
+    collection = mongo["Public"]["shared-schedules"]
+
+    doc = {
+        "_id": id,
+        "semester": semester,
+        "colorMap": colorMap,
+        "sections": sections
+    }
+
+    result = collection.insert_one(doc)
+    return result.inserted_id if result.acknowledged else None
+
+async def get_schedule(id):
+    collection = mongo["Public"]["shared-schedules"]
+
+    res = collection.find_one({"_id": id})
+    return res if res else None
+
 async def get_prof_rating(prof):
 
     cached = cache.get(f"prof-rating:{prof}")
