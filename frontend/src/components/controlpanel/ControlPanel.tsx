@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from "react";
 import styles from "./controlpanel.module.css";
 import { AppContext } from "../app/App";
-import { Button, Code, Collapse, Divider, LoadingOverlay, Modal, Popover } from "@mantine/core";
+import { Button, Code, Collapse, Divider, LoadingOverlay, Modal } from "@mantine/core";
 import { createSchedule, deleteSchedule, getScheduleList, saveSchedule } from "../app/storage";
 import SectionComponent from "./SectionComponent";
 import axios from "axios";
