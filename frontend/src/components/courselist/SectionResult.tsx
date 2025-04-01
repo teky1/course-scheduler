@@ -83,6 +83,7 @@ const SectionResult: SectionResultComponent = ({
                 href={`https://planetterp.com/professor/${slug[name]}`}
                 target="_blank" rel="noopener noreferrer"
                 style={rating[name] ? {} : {pointerEvents: "none"}}
+                onClick={(event) => event.stopPropagation()}
               >
               {name}
               {rating[name] ? (

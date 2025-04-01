@@ -67,7 +67,7 @@ function ControlPanel() {
                 <Button
                     classNames={{ label: styles.btnLabel, root: styles.btn }}
                     leftSection={<i className="fa-regular fa-calendar"></i>}
-                    onClick={() => alert("calendar export WIP")}
+                    onClick={() => alert("Export to calendar coming soon....")}
                 >Export Calendar</Button>
 
             </div>
