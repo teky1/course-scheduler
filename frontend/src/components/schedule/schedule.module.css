@@ -51,7 +51,7 @@
 
 .meetingInner {
   /* background: var(--mantine-color-gray-8); */
-  background: hsl(var(--hue, 0),50%, 20%);
+  background: hsl(var(--hue, 0),50%, 30%);
   /* background: linear-gradient(135deg, hsl(var(--hue, 0),50%, 35%), hsl(var(--hue, 0),50%, 20%)); */
   container-name: block;
   container-type: size;
@@ -97,11 +97,11 @@
   overflow-wrap: break-word;
   font-size: 1.1em;
 }
-.sectionId,
+/* .sectionId,
 .meetingLoc,
 .meetingTime {
   color: #868e96;
-}
+} */
 
 @container block (max-width: 10em) {
   .courseId, .sectionId, .meetingLoc {

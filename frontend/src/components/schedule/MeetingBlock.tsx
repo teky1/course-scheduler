@@ -48,7 +48,8 @@ let MeetingBlock: MeetingBlockComponent = ({
   let sectionCode = block.course._id+"-"+block.section.section_id;
   if(!(sectionCode in ((appContext) ? appContext.colorMap : {}))) {
     appContext?.setColorMap((last) => {
-      return ({ ...last, [sectionCode]: COLORS[sectionIndex % COLORS.length]}); 
+      return ({ ...last, [sectionCode]: COLORS[Math.floor(Math.random() * COLORS.length)]}); 
+      // return ({ ...last, [sectionCode]: Math.floor(Math.random() * 360)}); 
     });
   }
   return (
