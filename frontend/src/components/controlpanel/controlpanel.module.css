@@ -24,7 +24,8 @@
   color: #fe4d4d;
   background-color: var(--mantine-color-gray-8);
   font-size: 1.2em;
-  font-family: monospace;
+  /* font-family: ; */
+  user-select: text;
 }
 .urlCopyBtn {
   margin-left: .5em;
