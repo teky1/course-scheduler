@@ -1,48 +1,91 @@
 import { useContext, useState } from "react";
 import styles from "./controlpanel.module.css";
 import { AppContext } from "../app/App";
-import { Button, Collapse, Divider } from "@mantine/core";
+import { Button, Code, Collapse, Divider, LoadingOverlay, Modal, Popover } from "@mantine/core";
 import { createSchedule, deleteSchedule, getScheduleList, saveSchedule } from "../app/storage";
 import SectionComponent from "./SectionComponent";
+import axios from "axios";
 
 function ControlPanel() {
 
     let appContext = useContext(AppContext);
 
     let [nameDropdownToggled, setNameDropdownToggle] = useState<boolean>(false);
+    let [urlModal, setUrlModal] = useState<boolean>(false);
+    let [urlLoading, setUrlLoading] = useState<boolean>(false);
+    let [url, setUrl] = useState<string>("");
 
     return (
         <div className={`${styles.root} ${(appContext?.controlPanelToggled) ? styles.rootOpen : ""}`}>
+            <Modal
+                opened={urlModal}
+                onClose={() => setUrlModal(false)}
+                title="Share Link"
+                classNames={{ content: styles.urlModalRoot, header: styles.urlModalRoot, title: styles.urlModalTitle }}
+            >
+                <LoadingOverlay visible={urlLoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} loaderProps={{ color: "#fe4d4d" }} />
+                <Code className={styles.url}>{url}</Code>
+                
+                <Popover position="bottom" withArrow shadow="md">
+                    <Popover.Target>
+                        <button className={styles.urlCopyBtn} onClick={async () => {await navigator.clipboard.writeText("test")}}>Copy</button>
+                    </Popover.Target>
+                    <Popover.Dropdown>
+                        Link Copied
+                    </Popover.Dropdown>
+                </Popover>
+            </Modal>
             <div className={`${styles.saveButtonsContainer}`}>
-                <Button 
-                    classNames={{label: styles.btnLabel, root: styles.btn}}
+                <Button
+                    classNames={{ label: styles.btnLabel, root: styles.btn }}
                     leftSection={<i className="fa-solid fa-link"></i>}
-                    onClick={() => alert("link sharing WIP")}
+                    onClick={() => {
+                        setUrlModal(true);
+                        setUrlLoading(true);
+
+                        let sections = appContext?.selectedSections.map(([course, section]) => {
+                            return course._id+"-"+section.section_id
+                        })
+
+                        axios.post("https://api.scheduleterp.com/schedule/upload", {
+                            semester: "202508",
+                            sections,
+                            colors: sections?.map((sec) => appContext?.colorMap[sec])
+                        }).then((resp) => {
+                            if(resp.data.success) {
+                                setUrl(window.location.host+"/share/"+resp.data.id);
+                                
+                            } else {
+                                setUrl("Error: "+resp.data.error);
+                            }
+                            setUrlLoading(false);
+                        });
+                    }}
                 >Share Link</Button>
-                <Button 
-                    classNames={{label: styles.btnLabel, root: styles.btn}}
+                <Button
+                    classNames={{ label: styles.btnLabel, root: styles.btn }}
                     leftSection={<i className="fa-regular fa-calendar"></i>}
                     onClick={() => alert("calendar export WIP")}
                 >Export Calendar</Button>
 
             </div>
             <div className={styles.scheduleSelectContainer}>
-                <i 
-                    className={`${styles.dropdownIcon} fa-solid fa-caret-${nameDropdownToggled ? "down": "right"}`}
-                    onClick={()=>setNameDropdownToggle(last => !last)}
+                <i
+                    className={`${styles.dropdownIcon} fa-solid fa-caret-${nameDropdownToggled ? "down" : "right"}`}
+                    onClick={() => setNameDropdownToggle(last => !last)}
                 ></i>
-                <input 
-                    className={styles.nameEditBox} 
-                    value={appContext?.currentScheduleName} 
-                    onChange={e => appContext?.setCurrentScheduleName(e.target.value.substring(0,32))}
+                <input
+                    className={styles.nameEditBox}
+                    value={appContext?.currentScheduleName}
+                    onChange={e => appContext?.setCurrentScheduleName(e.target.value.substring(0, 32))}
                     onBlur={() => appContext?.setCurrentScheduleName(last => last.trim() ? last : "Unnamed Schedule")}
                 ></input>
-                <i 
+                <i
                     className={`${styles.addBtn} fa-solid fa-plus`}
                     onClick={() => {
                         let sched = createSchedule();
                         let id = sched.id;
-                        
+
                         saveSchedule(sched);
                         appContext?.setCurrentScheduleID(id);
                         setNameDropdownToggle(true);
@@ -51,28 +94,28 @@ function ControlPanel() {
             <Collapse className={styles.otherSchedulesContainer} in={nameDropdownToggled}>
                 {
                     appContext?.schedulesList.map(schedule => ((schedule.id == appContext.currentScheduleID) ? null :
-                        <div className={styles.otherSchedules} 
+                        <div className={styles.otherSchedules}
                             key={schedule.id}>
                             <span className={styles.otherScheduleTitle}
                                 onClick={() => appContext.setCurrentScheduleID(schedule.id)}
                             >{schedule.name}</span>
                             <i className={`${styles.deleteScheduleBtn} fa-solid fa-trash`}
-                            onClick={() => {
-                                let confirm = window.confirm(`Are you sure you want to delete \"${schedule.name}\"?`);
-                                if(!confirm) {return;};
-                                deleteSchedule(schedule.id);
-                                appContext.setSchedulesList(() => getScheduleList());
-                            }}></i>
+                                onClick={() => {
+                                    let confirm = window.confirm(`Are you sure you want to delete \"${schedule.name}\"?`);
+                                    if (!confirm) { return; };
+                                    deleteSchedule(schedule.id);
+                                    appContext.setSchedulesList(() => getScheduleList());
+                                }}></i>
                         </div>
                     ))
                 }
             </Collapse>
-            <Divider my="sm" color="var(--mantine-color-gray-7)"/>
+            <Divider my="sm" color="var(--mantine-color-gray-7)" />
             <div className={styles.sectionsContainer}>
-                {appContext?.selectedSections.map(section => <SectionComponent section={section}/>)}
+                {appContext?.selectedSections.map(section => <SectionComponent section={section} />)}
             </div>
 
-            
+
         </div>
     )
 }

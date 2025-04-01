@@ -12,7 +12,23 @@
   transition: transform 0.3s ease;
   overflow-y: scroll;
 }
-
+.urlModalRoot {
+  background-color: var(--mantine-color-gray-9);
+  border-radius: .5em;
+}
+.urlModalTitle {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.url {
+  color: #fe4d4d;
+  background-color: var(--mantine-color-gray-8);
+  font-size: 1.2em;
+}
+.urlCopyBtn {
+  margin-left: .5em;
+  cursor: pointer;
+}
 .saveButtonsContainer {
   margin-top: 1em;
   display: flex;
