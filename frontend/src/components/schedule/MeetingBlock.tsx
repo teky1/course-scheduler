@@ -17,7 +17,7 @@ let MeetingBlock: MeetingBlockComponent = ({
   groupSize,
   groupIndex,
   range,
-  sectionOrder,
+  // sectionOrder,
   ghost
 }) => {
 
@@ -40,11 +40,11 @@ let MeetingBlock: MeetingBlockComponent = ({
     return <></>;
   }
 
-  let sectionIndex = sectionOrder.findIndex(
-    (section) =>
-      section[0]._id == block.course._id &&
-      section[1].section_id == block.section.section_id
-  );
+  // let sectionIndex = sectionOrder.findIndex(
+  //   (section) =>
+  //     section[0]._id == block.course._id &&
+  //     section[1].section_id == block.section.section_id
+  // );
   let sectionCode = block.course._id+"-"+block.section.section_id;
   if(!(sectionCode in ((appContext) ? appContext.colorMap : {}))) {
     appContext?.setColorMap((last) => {
