@@ -55,7 +55,7 @@ function ControlPanel() {
                             colors: sections?.map((sec) => appContext?.colorMap[sec])
                         }).then((resp) => {
                             if(resp.data.success) {
-                                setUrl(window.location.host+"/share/"+resp.data.id);
+                                setUrl("http://"+window.location.host+"/share/"+resp.data.id);
                                 
                             } else {
                                 setUrl("Error: "+resp.data.error);
