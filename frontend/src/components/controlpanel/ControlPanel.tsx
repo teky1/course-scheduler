@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import styles from "./controlpanel.module.css";
 import { AppContext } from "../app/App";
 import { Button, Code, Collapse, Divider, LoadingOverlay, Modal, Popover } from "@mantine/core";
@@ -14,6 +14,7 @@ function ControlPanel() {
     let [urlModal, setUrlModal] = useState<boolean>(false);
     let [urlLoading, setUrlLoading] = useState<boolean>(false);
     let [url, setUrl] = useState<string>("");
+    let urlRef = useRef<HTMLTextAreaElement | null>(null);
 
     return (
         <div className={`${styles.root} ${(appContext?.controlPanelToggled) ? styles.rootOpen : ""}`}>
@@ -24,16 +25,16 @@ function ControlPanel() {
                 classNames={{ content: styles.urlModalRoot, header: styles.urlModalRoot, title: styles.urlModalTitle }}
             >
                 <LoadingOverlay visible={urlLoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} loaderProps={{ color: "#fe4d4d" }} />
-                <Code className={styles.url}>{url}</Code>
-                
-                <Popover position="bottom" withArrow shadow="md">
+                <Code style={{userSelect: 'all'}} ref={urlRef} className={styles.url}>{url}</Code>
+                {/* <button className={styles.urlCopyBtn} onClick={() => {urlRef.current?.select()}}>Copy</button> */}
+                {/* <Popover position="bottom" withArrow shadow="md">
                     <Popover.Target>
-                        <button className={styles.urlCopyBtn} onClick={() => {navigator.clipboard.writeText("test").then()}}>Copy</button>
+                        
                     </Popover.Target>
                     <Popover.Dropdown>
                         Link Copied
                     </Popover.Dropdown>
-                </Popover>
+                </Popover> */}
             </Modal>
             <div className={`${styles.saveButtonsContainer}`}>
                 <Button
