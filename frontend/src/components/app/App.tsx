@@ -11,6 +11,12 @@ import { Course, Schedule, Section } from "../../types/api";
 import { Toaster } from "react-hot-toast";
 import ControlPanel from "../controlpanel/ControlPanel";
 import { getActiveSchedule, getScheduleList, saveSchedule, setActiveSchedule } from "./storage";
+import axios from "axios";
+import { setupCache } from "axios-cache-interceptor";
+
+const api = setupCache(axios.create(), {
+  ttl: 1000 * 60 * 5,
+});
 
 export type AppContextType = {
   hovered: [Course, Section] | null;
@@ -50,6 +56,49 @@ function App() {
 
   useEffect(() => {
     // on first load
+    console.log("first load")
+    if(window.location.pathname.startsWith("/share/")) {
+      let id = window.location.pathname.replace("/share/", "");
+      api.get(`https://api.scheduleterp.com/schedule/get?id=${id}`).then(
+        (response) => {
+          if(response.data.success) {
+            
+            let out: [Course, Section][] = [];
+
+            let promises = [];
+
+            for(let sectionCode of response.data.schedule.sections) {
+              let [courseID, sectionID]: string[] = sectionCode.split("-");
+
+              promises.push(api.get(`https://api.scheduleterp.com/search/202508?query=${courseID}`).then((response) => {
+                if(response.data.size) {
+                  let course: Course = response.data.courses[0];
+                  let section: Section | undefined = course.sections.find((s) => s.section_id == sectionID);
+                  if(course && section) {
+                    out.push([course, section])
+                  }
+                }
+              }));
+            }
+
+            Promise.all(promises).then(() => {
+              let sched = {
+                id: crypto.randomUUID(),
+                name: `Shared [${id}]`,
+                colorMap: response.data.schedule.colorMap,
+                sections: out
+              }
+              console.log(sched)
+              saveSchedule(sched);
+              setCurrentScheduleID(sched.id);
+            });
+
+            
+
+          }
+        }
+      ).catch((error) => console.error(error));
+    }
 
     // check to see if there is a share URL
 
