@@ -22,6 +22,7 @@ function ControlPanel() {
                 opened={urlModal}
                 onClose={() => setUrlModal(false)}
                 title="Share Link"
+                removeScrollProps={{enabled: false}}
                 classNames={{ content: styles.urlModalRoot, header: styles.urlModalRoot, title: styles.urlModalTitle }}
             >
                 <LoadingOverlay visible={urlLoading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} loaderProps={{ color: "#fe4d4d" }} />
