@@ -28,7 +28,7 @@ function ControlPanel() {
                 
                 <Popover position="bottom" withArrow shadow="md">
                     <Popover.Target>
-                        <button className={styles.urlCopyBtn} onClick={async () => {await navigator.clipboard.writeText("test")}}>Copy</button>
+                        <button className={styles.urlCopyBtn} onClick={() => {navigator.clipboard.writeText("test").then()}}>Copy</button>
                     </Popover.Target>
                     <Popover.Dropdown>
                         Link Copied
