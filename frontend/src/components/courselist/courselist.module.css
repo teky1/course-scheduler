@@ -29,7 +29,6 @@
 .searchBox::placeholder {
   color: inherit;
 }
-
 .resultsContainer {
   overflow-y: scroll;
   scrollbar-width: auto;
@@ -61,6 +60,11 @@
   margin-bottom: 1em;
   overflow-y: hidden;
 }
+.linkable {
+  font-size: .7em;
+  transform: translateY(-.25em);
+  padding-left: .5em;
+}
 .courseInfo {
   padding: 1em;
   display: flex;
@@ -74,6 +78,14 @@
 .courseID {
   font-weight: bolder;
   font-size: 1.1em;
+  cursor: pointer;
+}
+.courseID a {
+  text-decoration: none;
+  color: inherit;
+}
+.courseID:hover, .courseID:active {
+  color: var(--mantine-color-gray-2);
 }
 .courseName {
   font-weight: 400;
@@ -145,6 +157,15 @@
   flex-direction: column;
   font-weight: bold;
   font-size: 1em;
+}
+.instructors a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.instructors a:hover {
+  color: white;
+  text-decoration: none;
 }
 .profRating {
   display: inline-block;

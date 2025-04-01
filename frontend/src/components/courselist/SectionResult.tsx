@@ -25,6 +25,7 @@ const SectionResult: SectionResultComponent = ({
 }) => {
   let [gpa, setGPA] = useState<number | null>(null);
   let [rating, setRatings] = useState<{ [prof: string]: number }>({});
+  let [slug, setSlug] = useState<{[prof: string]: string }>({});
   let appContext = useContext(AppContext);
 
   useEffect(() => {
@@ -44,13 +45,18 @@ const SectionResult: SectionResultComponent = ({
     );
 
     res.forEach((promise, i) =>
-      promise.then((res) =>
+      promise.then((res) => {
         setRatings((ratings) =>
           res.rating
             ? { ...ratings, [section.instructors[i]]: res.rating }
             : ratings
-        )
-      )
+        );
+        setSlug((slugs) => 
+          res.slug ?
+          {...slugs, [section.instructors[i]]: res.slug}
+          : slugs
+        );
+      })
     );
   }, [section.instructors, course]);
 
@@ -72,7 +78,12 @@ const SectionResult: SectionResultComponent = ({
         </div>
         <div className={styles.instructors}>
           {section.instructors.map((name) => (
-            <span key={name}>
+            <span key={name} title="Show on PlanetTerp">
+              <a
+                href={`https://planetterp.com/professor/${slug[name]}`}
+                target="_blank" rel="noopener noreferrer"
+                style={rating[name] ? {} : {pointerEvents: "none"}}
+              >
               {name}
               {rating[name] ? (
                 <span
@@ -87,6 +98,7 @@ const SectionResult: SectionResultComponent = ({
                   {rating[name].toFixed(2)}
                 </span>
               ) : null}
+              </a>
             </span>
           ))}
         </div>
@@ -176,7 +188,9 @@ const SectionResult: SectionResultComponent = ({
                 {type != "neutral" ? <img src={`/${type}.svg`} /> : null}
               </div>
               <span className={styles.meetingTime}>{meeting.time}</span>
-              <span className={styles.meetingLocation}>{meeting.location}</span>
+              <span className={styles.meetingLocation}>
+                {meeting.location}
+              </span>
             </div>
           );
         })}

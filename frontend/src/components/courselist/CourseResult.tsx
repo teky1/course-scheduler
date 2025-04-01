@@ -34,7 +34,15 @@ const CourseResult: CourseResultComponent = ({
     <div className={styles.course}>
       <div className={styles.courseInfo}>
         <div className={styles.courseHeader}>
-          <span className={styles.courseID}>{course._id}</span>
+          <span className={styles.courseID} title="View on Testudo">
+            <a href={`https://app.testudo.umd.edu/soc/search?courseId=${course._id}&sectionId=&termId=202508&_openSectionsOnly=on&creditCompare=&credits=&courseLevelFilter=ALL&instructor=&_facetoface=on&_blended=on&_online=on&courseStartCompare=&courseStartHour=&courseStartMin=&courseStartAM=&courseEndHour=&courseEndMin=&courseEndAM=&teachingCenter=ALL&_classDay1=on&_classDay2=on&_classDay3=on&_classDay4=on&_classDay5=on`}
+              target="_blank" rel="noopener noreferrer"
+            >
+              {course._id}
+              <i className={`${styles.linkable} fa-solid fa-arrow-up-right-from-square`}></i>
+            </a>
+          </span>
+          
           <span className={styles.courseCredits}>
             {course.min_credits}
             {course.max_credits ? "-" + course.max_credits : ""} credits
