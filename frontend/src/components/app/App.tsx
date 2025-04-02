@@ -13,7 +13,6 @@ import ControlPanel from "../controlpanel/ControlPanel";
 import { getActiveSchedule, getScheduleList, saveSchedule, setActiveSchedule } from "./storage";
 import axios from "axios";
 import { setupCache } from "axios-cache-interceptor";
-import { Helmet } from "react-helmet";
 
 const api = setupCache(axios.create(), {
   ttl: 1000 * 60 * 5,
@@ -168,12 +167,6 @@ function App() {
       }}
     >
       <MantineProvider forceColorScheme="dark">
-        {
-
-        }
-        <Helmet>
-
-        </Helmet>
         <div className={styles.toast}>
           <Toaster
             position="top-center"
