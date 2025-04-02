@@ -113,13 +113,12 @@ function ControlPanel() {
                 }
             </Collapse>
             <Divider my="sm" color="var(--mantine-color-gray-7)" />
-            <div>
-                <span>Credits: <span>12</span></span><br/>
-                <span>Avg. GPA: </span><br/>
-                <span>Avg. Prof. Rating: </span><br/>
-                <span>Total Walking Time: </span><br/>
-                <span>Average Day Length: </span><br/>
-            </div><div
+            {/* <div>
+                <span className={styles.schedData}>Credits: <span className={styles.creditNum}>12</span></span><br/>
+                <span className={styles.schedData}>Avg. GPA: <span className={styles.schedData}></span></span><br/>
+                <span className={styles.schedData}>Avg. Prof. Rating: </span><br/>
+                <span className={styles.schedData}>Total Walking Time: </span><br/>
+            </div> */}
             <div className={styles.sectionsContainer}>
                 {appContext?.selectedSections.map(section => <SectionComponent section={section} />)}
             </div>

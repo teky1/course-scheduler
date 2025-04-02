@@ -13,6 +13,7 @@ import ControlPanel from "../controlpanel/ControlPanel";
 import { getActiveSchedule, getScheduleList, saveSchedule, setActiveSchedule } from "./storage";
 import axios from "axios";
 import { setupCache } from "axios-cache-interceptor";
+import { Helmet } from "react-helmet";
 
 const api = setupCache(axios.create(), {
   ttl: 1000 * 60 * 5,
@@ -90,14 +91,21 @@ function App() {
               }
               console.log(sched)
               saveSchedule(sched);
-              setCurrentScheduleID(sched.id);
+              setActiveSchedule(sched.id);
+              window.location.href = window.location.href.replace("/share/"+id, "");
             });
 
             
 
+          } else {
+            console.log(response.data);
+            alert("Couldn't load that schedule.");
           }
         }
-      ).catch((error) => console.error(error));
+      ).catch((error) => {
+        console.error(error);
+        alert("Couldn't load that schedule.");
+      });
     }
 
     // check to see if there is a share URL
@@ -109,6 +117,7 @@ function App() {
     setCurrentScheduleID(schedule.id);
     setSchedulesList(scheduleList);
   }, []);
+
 
   useEffect(() => {
     
@@ -159,6 +168,12 @@ function App() {
       }}
     >
       <MantineProvider forceColorScheme="dark">
+        {
+
+        }
+        <Helmet>
+
+        </Helmet>
         <div className={styles.toast}>
           <Toaster
             position="top-center"
