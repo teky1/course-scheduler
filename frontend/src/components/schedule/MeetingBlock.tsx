@@ -58,9 +58,9 @@ let MeetingBlock: MeetingBlockComponent = ({
     }
   }, [sectionCode, appContext]);
 
-  if(!(appContext?.colorMap[sectionCode])) {
-    return null;
-  }
+  // if(!(appContext?.colorMap[sectionCode]) !== null) {
+  //   return null;
+  // }
   return (
     <div
       className={`${styles.meetingRoot} ${ghost ? styles.ghostBlock : ''}`}
