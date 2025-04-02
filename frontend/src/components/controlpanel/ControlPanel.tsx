@@ -16,6 +16,14 @@ function ControlPanel() {
     let [url, setUrl] = useState<string>("");
     let urlRef = useRef<HTMLTextAreaElement | null>(null);
 
+    let minCredits = 0;
+    let maxCredits = 0;
+
+    appContext?.selectedSections.forEach(([course]) => {
+        minCredits += course.min_credits ? course.min_credits : 0;
+        maxCredits += course.max_credits ? course.max_credits : (course.min_credits) ? course.min_credits : 0;
+    })
+
     return (
         <div className={`${styles.root} ${(appContext?.controlPanelToggled) ? styles.rootOpen : ""}`}>
             <Modal
@@ -113,12 +121,7 @@ function ControlPanel() {
                 }
             </Collapse>
             <Divider my="sm" color="var(--mantine-color-gray-7)" />
-            {/* <div>
-                <span className={styles.schedData}>Credits: <span className={styles.creditNum}>12</span></span><br/>
-                <span className={styles.schedData}>Avg. GPA: <span className={styles.schedData}></span></span><br/>
-                <span className={styles.schedData}>Avg. Prof. Rating: </span><br/>
-                <span className={styles.schedData}>Total Walking Time: </span><br/>
-            </div> */}
+            <span className={styles.credits}>Credits: {minCredits}{(maxCredits > minCredits) ? "-"+maxCredits : ""}</span>
             <div className={styles.sectionsContainer}>
                 {appContext?.selectedSections.map(section => <SectionComponent section={section} />)}
             </div>

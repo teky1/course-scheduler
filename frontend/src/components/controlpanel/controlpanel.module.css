@@ -120,7 +120,11 @@
 .otherScheduleTitle:hover {
   color: white;
 }
-
+.credits {
+  text-align: center;
+  font-weight: bold;
+  color: var(--mantine-color-gray-6)
+}
 .section {
   background-color: var(--mantine-color-gray-8);
   margin: .5em 0;
