@@ -3,6 +3,7 @@ import { Course, Section } from "../../types/api";
 import styles from "./controlpanel.module.css";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../app/App";
+import { unusedColors } from "../schedule/utils/colors";
 
 function SectionComponent({ section }: { section: [Course, Section] }) {
   let appContext = useContext(AppContext);
@@ -10,14 +11,34 @@ function SectionComponent({ section }: { section: [Course, Section] }) {
 
   let sectionCode = section[0]._id+"-"+section[1].section_id;
 
-  let [hue, setHue] = useState<number>((appContext && sectionCode in appContext.colorMap) ? appContext.colorMap[sectionCode] : 0);
+  let [hue, setHue] = useState<number>(0);
+  let [hueReady, setHueReady] = useState<boolean>(false);
   let [showSlider, setShowSlider] = useState<boolean>(false);
 
   useEffect(() => {
-    appContext?.setColorMap((last) => {
-      return ({ ...last, [sectionCode]: hue}); 
-    });
+    if((appContext && (sectionCode in appContext.colorMap) && hueReady)) {
+      appContext?.setColorMap((last) => {
+        return ({ ...last, [sectionCode]: hue}); 
+      });
+    }
   }, [hue])
+
+  useEffect(() => {
+    if(appContext && !(sectionCode in appContext.colorMap)) {
+      let newHue = appContext.nextColor;
+      appContext?.setColorMap((last) => {
+        return ({ ...last, [sectionCode]: newHue}); 
+      });
+      setHue(newHue);
+      setHueReady(true);
+      let colorOpts = unusedColors(appContext.selectedSections, {...appContext.colorMap, [sectionCode]: newHue});
+      appContext.setNextColor(colorOpts[Math.floor(Math.random()*colorOpts.length)]);
+    } else if(appContext && !hueReady) {
+      setHue(appContext.colorMap[sectionCode]);
+      setHueReady(true);
+    }
+  }, []);
+
 
   useEffect(() => {
     setShowSlider(false);

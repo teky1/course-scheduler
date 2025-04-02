@@ -1,3 +1,5 @@
+import { Course, Section } from "../../../types/api";
+
 // Converts a hex color (e.g. "#FF00CC" or "FF00CC") to an [R, G, B] tuple.
 function hexToRgb(hex: string): [number, number, number] {
   // Remove '#' if present
@@ -72,6 +74,25 @@ export function getGradientColor(
   const b = Math.round(rgb1[2] + (rgb2[2] - rgb1[2]) * t);
 
   return rgbToHex([r, g, b]);
+}
+
+export function unusedColors(selectedSections: [Course, Section][], colorMap: {[section: string]: number}) {
+  let colors = [1, 30, 60, 120, 180, 210, 230, 260, 300];
+  let used: number[] = [];
+  selectedSections.forEach(([course, section]) => {
+    let code = course._id+"-"+section.section_id;
+    if(code in colorMap && colors.find((x) => x == colorMap[code])) {
+      used.push(colorMap[code]);
+    }
+  });
+
+  let out: number[] = [];
+  for(let color of colors) {
+    if(!used.find((val) => val == color)) {
+      out.push(color);
+    }
+  }
+  return out.length ? out : colors;
 }
 
 export function remapHueEvenly(hue: number): number {

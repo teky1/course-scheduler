@@ -13,6 +13,7 @@ import ControlPanel from "../controlpanel/ControlPanel";
 import { getActiveSchedule, getScheduleList, saveSchedule, setActiveSchedule } from "./storage";
 import axios from "axios";
 import { setupCache } from "axios-cache-interceptor";
+import { unusedColors } from "../schedule/utils/colors";
 
 const api = setupCache(axios.create(), {
   ttl: 1000 * 60 * 5,
@@ -37,6 +38,8 @@ export type AppContextType = {
   setSearchVal: React.Dispatch<React.SetStateAction<string>>;
   colorMap: {[section: string]: number};
   setColorMap: React.Dispatch<React.SetStateAction<{[section: string]: number}>>;
+  nextColor: number;
+  setNextColor: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export const AppContext = createContext<AppContextType | null>(null);
@@ -53,6 +56,7 @@ function App() {
   let [schedulesList, setSchedulesList] = useState<Schedule[]>([]);
   let [searchVal, setSearchVal] = useState<string>("");
   let [colorMap, setColorMap] = useState<{[section: string]: number}>({});
+  let [nextColor, setNextColor] = useState<number>(0);
 
   useEffect(() => {
     // on first load
@@ -141,8 +145,9 @@ function App() {
     setColorMap(schedule.colorMap);
     setCurrentScheduleName(schedule.name);
     setSelectedSections(schedule.sections);
-
     setSchedulesList(getScheduleList());
+    let colorOpts = unusedColors(schedule.sections, schedule.colorMap);
+    setNextColor(colorOpts[Math.floor(Math.random()*colorOpts.length)]);
   }, [currentScheduleID]);
 
   return (
@@ -163,7 +168,9 @@ function App() {
         searchVal,
         setSearchVal,
         colorMap,
-        setColorMap
+        setColorMap,
+        nextColor,
+        setNextColor
       }}
     >
       <MantineProvider forceColorScheme="dark">
