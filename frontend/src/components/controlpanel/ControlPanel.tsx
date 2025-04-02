@@ -113,6 +113,13 @@ function ControlPanel() {
                 }
             </Collapse>
             <Divider my="sm" color="var(--mantine-color-gray-7)" />
+            <div>
+                <span>Credits: <span>12</span></span><br/>
+                <span>Avg. GPA: </span><br/>
+                <span>Avg. Prof. Rating: </span><br/>
+                <span>Total Walking Time: </span><br/>
+                <span>Average Day Length: </span><br/>
+            </div><div
             <div className={styles.sectionsContainer}>
                 {appContext?.selectedSections.map(section => <SectionComponent section={section} />)}
             </div>
