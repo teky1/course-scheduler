@@ -7,11 +7,11 @@ ScheduleTerp scrapes the [Testudo Schedule of Classes](https://app.testudo.umd.e
 In order to calculate the travel time between different classes ScheduleTerp uses open-sourced map data from [OpenStreetMap](https://www.openstreetmap.org/) and calculates routes using the [Graphhopper](https://github.com/graphhopper/graphhopper) routing engine.
 
 ## Features
-- ⚡ Dynamic indicators in the section list that show whether a section fits in your schedule (✅), intersects with another class (❌), or has a travel time conflict (⚠️) so you don't have to hover over every single one
+- ⚡ Dynamic indicators in the section list that show whether a section fits in your schedule (✅), intersects with another class (❌), or has a walking conflict (⚠️) so you don't have to hover over every single one
 
-- 🚶‍♂️🚴‍♀️ ScheduleTerp automatically calculates how long it takes to travel between classes—whether you're walking or biking—and flags any travel time conflicts
+- 🚶‍♂️ ScheduleTerp automatically calculates how long it takes to walk between classes and flags any walking conflicts
 
-- ⏱️ Travel time conflicts appear directly on your schedule, showing both the time between classes and the travel time ScheduleTerp calculates you’ll need
+- ⏱️ Walking conflicts appear directly on your schedule, showing both the time between classes and the travel time ScheduleTerp calculates you’ll need
 
 - 👀 Key section information (ratings, GPA, low seat count) is 🟢dynamically🟡colored🔴 so you can analyze a section with a single glance
 
@@ -19,8 +19,8 @@ In order to calculate the travel time between different classes ScheduleTerp use
 
 - 🌈 Customizable section colors so you personalize your schedule
 
-- 📅 Export schedules to your calendar (.ics file)
-
-- 🔗 Share your schedule with your friends by link!
+- 🔗 Share your schedule with your friends by link! As long as you have that link you can view your schedule anywhere
 
 - 📱 Mobile-friendly user interface!
+
+- ~~📅 Export schedules to your calendar (.ics file)~~ (Coming Soon)
