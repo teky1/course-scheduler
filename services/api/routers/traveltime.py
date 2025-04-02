@@ -20,10 +20,13 @@ async def traveltime(loc1: str, loc2: str, mode: str = "foot"):
     if cached:
         return orjson.loads(cached)
     
-    time_secs = await get_travel_time(location_map[loc1], location_map[loc2], mode)
-
+    try:
+        time_secs = await get_travel_time(location_map[loc1], location_map[loc2], mode)
+    except KeyError:
+        return {"success": False, "error": "Couldn't find locations", "time_mins": 0, "time_secs": 0}
+    
     time_mins = round(time_secs/60, 2)
-    out = {"time_mins": time_mins, "time_secs": time_secs}
+    out = {"success": True, "error": "", "time_mins": time_mins, "time_secs": time_secs}
 
     db.cache.setex(cache_key, 60*60*24*7, orjson.dumps(out))
 
