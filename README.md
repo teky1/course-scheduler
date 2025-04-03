@@ -9,9 +9,7 @@ In order to calculate the travel time between different classes ScheduleTerp use
 ## Features
 - ⚡ Dynamic indicators in the section list that show whether a section fits in your schedule (✅), intersects with another class (❌), or has a walking conflict (⚠️) so you don't have to hover over every single one
 
-- 🚶‍♂️ ScheduleTerp automatically calculates how long it takes to walk between classes and flags any walking conflicts
-
-- ⏱️ Walking conflicts appear directly on your schedule, showing both the time between classes and the travel time ScheduleTerp calculates you’ll need
+- 🚶‍♂️ ScheduleTerp automatically calculates how long it takes to walk between classes to identify walking conflicts
 
 - 👀 Key section information (ratings, GPA, low seat count) is 🟢dynamically🟡colored🔴 so you can analyze a section with a single glance
 
@@ -22,5 +20,7 @@ In order to calculate the travel time between different classes ScheduleTerp use
 - 🔗 Share your schedule with your friends by link! As long as you have that link you can view your schedule anywhere
 
 - 📱 Mobile-friendly user interface!
+
+- ~~⏱️ Walking conflicts appear directly on your schedule, showing both the time between classes and the travel time ScheduleTerp calculates you’ll need~~ (Coming Soon)
 
 - ~~📅 Export schedules to your calendar (.ics file)~~ (Coming Soon)
