@@ -1,13 +1,19 @@
+import { setupCache } from "axios-cache-interceptor";
 import { Course, Day, Meeting, Section, TimeBlock } from "../types/api";
+import axios from "axios";
+
+const api = setupCache(axios.create(), {
+  ttl: 1000 * 60 * 60 * 24,
+});
 
 export function sameSection(sec1: [Course, Section] | null, sec2: [Course, Section] | null) {
- 
+
   return sec1 != null && sec2 != null && sec1[0]._id == sec2[0]._id && sec1[1].section_id == sec2[1].section_id
 }
 
 export function sectionIncluded(sec: [Course, Section], lst: [Course, Section][]) {
-  for(let otherSection of lst) {
-    if(sameSection(sec, otherSection)) {
+  for (let otherSection of lst) {
+    if (sameSection(sec, otherSection)) {
       return true;
     }
   }
@@ -78,7 +84,7 @@ export function getDayPartOfTime(input: string): string {
   let rawParts = input.split(" ");
   let days: Day[] = ["M", "Tu", "W", "Th", "F"];
   days.forEach(day => {
-    if(rawParts[0].startsWith(day)) {
+    if (rawParts[0].startsWith(day)) {
       rawParts[0] = rawParts[0].slice(day.length);
     }
   })
@@ -104,9 +110,8 @@ export function minifyTimeCode(input: string): string {
   const needsStartPeriod =
     startPeriod.toLowerCase() !== endPeriod.toLowerCase();
 
-  return `${startTime}${
-    needsStartPeriod ? startPeriod : ""
-  }-${endTime}${endPeriod}`;
+  return `${startTime}${needsStartPeriod ? startPeriod : ""
+    }-${endTime}${endPeriod}`;
 }
 
 export function getMeetingTimeBlocks(
@@ -169,11 +174,38 @@ export function groupTimeBlocks(blocks: TimeBlock[]): TimeBlock[][] {
 }
 export type ConflictState = "check" | "warn" | "x" | "neutral";
 
-export function getConflict(
+export function timeBetween(t1: TimeBlock, t2: TimeBlock) {
+  return Math.min(Math.abs(t2.start - t1.end), Math.abs(t1.start - t2.end));
+}
+
+export async function getTravelTime(t1: TimeBlock, t2: TimeBlock): Promise<number | null> {
+  let first: TimeBlock;
+  let second: TimeBlock;
+  if (t1.start < t2.start) {
+    first = t1;
+    second = t2;
+  } else {
+    first = t1;
+    second = t2;
+  }
+
+  let loc1 = first.meeting.location.split(" ")[0];
+  let loc2 = second.meeting.location.split(" ")[0];
+
+  let res = await api.get(`https://api.scheduleterp.com/traveltime/${loc1}/${loc2}`);
+  if (res.data.success) {
+    return Math.floor(res.data.time_mins);
+  } else {
+    return null;
+  }
+
+}
+
+export async function getConflict(
   section: [Course, Section],
   meeting: Meeting,
   selected: [Course, Section][]
-): ConflictState {
+): Promise<ConflictState> {
   if (parseMeetingTime(meeting.time).days.includes("Other")) {
     return "neutral";
   }
@@ -183,16 +215,26 @@ export function getConflict(
 
   let out: ConflictState = "check";
 
-  otherBlocks.forEach((otherBlock) => {
-    meetingBlocks.forEach((meetingBlock) => {
+  for(let otherBlock of otherBlocks) {
+    for(let meetingBlock of meetingBlocks) {
       if (
         doesIntersect(meetingBlock, otherBlock) &&
         section[0]._id != otherBlock.course._id
       ) {
         out = "x";
+
+      } else if (section[0]._id != otherBlock.course._id &&
+        meetingBlock.day == otherBlock.day
+        && timeBetween(meetingBlock, otherBlock) <= 30) {
+          
+        let travel = await getTravelTime(meetingBlock, otherBlock);
+        console.log(section[0]._id, otherBlock.course._id, travel, timeBetween(meetingBlock, otherBlock))
+        if(travel && timeBetween(meetingBlock, otherBlock) <= travel) {
+          out = (out == "x") ? "x" : "warn";
+        }
       }
-    });
-  });
+    }
+  }
 
   return out;
 }

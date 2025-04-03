@@ -26,7 +26,14 @@ const SectionResult: SectionResultComponent = ({
   let [gpa, setGPA] = useState<number | null>(null);
   let [rating, setRatings] = useState<{ [prof: string]: number }>({});
   let [slug, setSlug] = useState<{[prof: string]: string }>({});
+  let [types, setTypes] = useState<ConflictState[]>(Array(section.meetings.length).fill("neutral"));
   let appContext = useContext(AppContext);
+
+  useEffect(() => {
+    Promise.all(types.map(async (_,i) => await getConflict([course, section], section.meetings[i], selectedSections))).then(
+      res => setTypes(res)
+    )
+  }, []);
 
   useEffect(() => {
     let res: Promise<ProfessorGPA>[] = section.instructors.map(
@@ -169,12 +176,8 @@ const SectionResult: SectionResultComponent = ({
 
       <div className={styles.meetingSection}>
         {/* TODO: HANDLE Contact department times */}
-        {section.meetings.map((meeting) => {
-          let type: ConflictState = getConflict(
-            [course, section],
-            meeting,
-            selectedSections
-          );
+        {section.meetings.map((meeting, i) => {
+          let type: ConflictState = types[i];
           return (
             <div
               className={styles.meeting}

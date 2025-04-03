@@ -130,7 +130,9 @@ function ControlPanel() {
                 <Divider my="sm" color="var(--mantine-color-gray-7)" />
                 <span className={styles.credits}>Credits: {minCredits}{(maxCredits > minCredits) ? "-" + maxCredits : ""}</span>
                 <div className={styles.sectionsContainer}>
-                    {appContext?.selectedSections.map(section => <SectionComponent section={section} />)}
+                    {appContext?.selectedSections.map(section =>
+                        <SectionComponent key={section[0]._id + section[1].section_id + appContext?.currentScheduleID}
+                            section={section} />)}
                 </div>
 
 
