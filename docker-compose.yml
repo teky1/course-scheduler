@@ -1,5 +1,6 @@
 services:
   graphhopper-service:  
+    restart: always
     image: israelhikingmap/graphhopper:9.1
     environment:
       - JAVA_OPTS=-Xmx100m -Xms100m
@@ -11,6 +12,7 @@ services:
     command: ["-i", "data/college-park.osm.pbf", "-c", "data/config.yml"]
   
   api-service:
+    restart: always
     build:
       context: ./services/api
       dockerfile: Dockerfile
@@ -22,6 +24,7 @@ services:
       - backend-network
 
   scraper-service:
+    restart: always
     environment:
     - TZ=America/New_York
     build:
